@@ -1,0 +1,18 @@
+
+#bg_container {
+    background-image: url("background.jpeg") !important;
+    height: 100vh;
+}
+
+.vertical_center{
+    min-height: 100%;
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#searchbox {
+    width: 65%;
+    align-self: center;
+}
