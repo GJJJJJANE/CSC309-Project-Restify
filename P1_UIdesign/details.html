@@ -18,9 +18,11 @@
           <a class="navbar-brand" href="#">
             Restify
           </a>
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- Will be collapsed -->
             <ul class="navbar-nav">
@@ -244,7 +246,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Property Overview</h5>
-                <div class="row row-cols-3 mt-2 g-2">
+                <div class="row row-cols-1 row-cols-md-3 mt-2 g-2">
                   <div class="col"><img src="bedroom.png" class="img-fluid" alt="..."></div>
                   <div class="col"><img src="bedroom.png" class="img-fluid" alt="..."></div>
                   <div class="col"><img src="bedroom2.jpeg" class="img-fluid" alt="..."></div>
@@ -258,7 +260,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Amenities</h5>
-              <div class="row row-cols-3 mt-2 g-3">
+              <div class="row row-cols-1 row-cols-md-3 mt-2 g-3">
                   <ul class="list-group text-start">
                     <li class="list-group-item">Outdoor</li>
                     <li class="list-group-item"><small>An item</small></li>
@@ -299,7 +301,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Things to know</h5>
-              <div class="row row-cols-3 mt-2 g-2">
+              <div class="row row-cols-1 row-cols-md-3 mt-2 g-2">
 
                 <div class="card">
                       <div class="card-body">
@@ -433,8 +435,9 @@
 
       <!-- Floating form -->
       <div class="col-md-4">
-        
-        <div class="card mt-2 p-2 sticky-md-top sticky-rel">
+
+        <!-- <div class="collapse navbar-collapse" id="BookingDetails">         -->
+          <div class="card p-2 sticky-md-top sticky-rel mb-5">
           <form class="row p-3">
             <h5> $233 per person per night </h5>
             <div class="col-md-6">
@@ -481,6 +484,9 @@
             </div>
           </form>
         </div>
+      <!-- </div> -->
+        
+
 
 
       </div>
@@ -493,6 +499,7 @@
 
 </div>
 
+<hr class="mt-5">
 <div class="footer p-5 text-center">
     Is there a footer? Like contact us, tel
 </div>
