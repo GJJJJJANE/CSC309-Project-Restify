@@ -21,3 +21,7 @@
 .sticky-rel {
     top: 4rem;
 }
+
+.offcanvas-wide {
+    height:75% !important;
+}
