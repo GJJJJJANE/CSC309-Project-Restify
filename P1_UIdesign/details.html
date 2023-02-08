@@ -18,9 +18,11 @@
           <a class="navbar-brand" href="#">
             Restify
           </a>
+
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- Will be collapsed -->
             <ul class="navbar-nav">
@@ -244,7 +246,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Property Overview</h5>
-                <div class="row row-cols-3 mt-2 g-2">
+                <div class="row row-cols-1 row-cols-md-3 mt-2 g-2">
                   <div class="col"><img src="bedroom.png" class="img-fluid" alt="..."></div>
                   <div class="col"><img src="bedroom.png" class="img-fluid" alt="..."></div>
                   <div class="col"><img src="bedroom2.jpeg" class="img-fluid" alt="..."></div>
@@ -258,7 +260,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Amenities</h5>
-              <div class="row row-cols-3 mt-2 g-3">
+              <div class="row row-cols-1 row-cols-md-3 mt-2 g-3">
                   <ul class="list-group text-start">
                     <li class="list-group-item">Outdoor</li>
                     <li class="list-group-item"><small>An item</small></li>
@@ -299,7 +301,7 @@
         <div class="row mt-3 p-2">
           <div class="container">
               <h5>Things to know</h5>
-              <div class="row row-cols-3 mt-2 g-2">
+              <div class="row row-cols-1 row-cols-md-3 mt-2 g-2">
 
                 <div class="card">
                       <div class="card-body">
@@ -376,12 +378,12 @@
                   <form class="row p-3">
                     <h5> A template not adjusted </h5>
                     <div class="col-md-6">
-                      <label for="inputEmail4" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4">
+                      <label for="inputArrival" class="form-label">Arrival</label>
+                      <input type="text" class="form-control" id="inputArrival">
                     </div>
                     <div class="col-md-6">
-                      <label for="inputPassword4" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="inputPassword4">
+                      <label for="inputDepart" class="form-label">Depart</label>
+                      <input type="text" class="form-control" id="inputDepart">
                     </div>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">Address</label>
@@ -414,6 +416,15 @@
                         </label>
                       </div>
                     </div>
+
+
+                    <div class="col-12">
+                      <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <button type="submit" class="btn btn-primary">Sign in</button>
                     </div>
@@ -433,54 +444,67 @@
 
       <!-- Floating form -->
       <div class="col-md-4">
-        
-        <div class="card mt-2 p-2 sticky-md-top sticky-rel">
+
+        <!-- <div class="collapse navbar-collapse" id="BookingDetails">         -->
+          <div class="card p-2 sticky-md-top sticky-rel mb-5">
           <form class="row p-3">
             <h5> $233 per person per night </h5>
             <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Email</label>
-              <input type="email" class="form-control" id="inputEmail4">
+              <label for="inputArrival" class="form-label">Arrival</label>
+              <input type="date" class="form-control" id="inputArrival">
             </div>
             <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Password</label>
-              <input type="password" class="form-control" id="inputPassword4">
+              <label for="inputDepart" class="form-label">Depart</label>
+              <input type="date" class="form-control" id="inputDepart">
             </div>
-            <div class="col-12">
-              <label for="inputAddress" class="form-label">Address</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="col-12">
-              <label for="inputAddress2" class="form-label">Address 2</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="col-md-6">
-              <label for="inputCity" class="form-label">City</label>
-              <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="col-md-4">
-              <label for="inputState" class="form-label">State</label>
+
+            <div class="col-12 mt-2">
+              <label for="inputState" class="form-label">Guests</label>
               <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
+                <option selected>Select number of guests...</option>
                 <option>...</option>
               </select>
             </div>
-            <div class="col-md-2">
-              <label for="inputZip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="inputZip">
-            </div>
-            <div class="col-12">
+
+            <div class="col-12 mt-2">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck">
                 <label class="form-check-label" for="gridCheck">
-                  Check me out
+                  Receive email contact
                 </label>
               </div>
             </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary">Sign in</button>
+
+            <div class="col-12 mt-2">
+              <button type="submit" class="btn btn-primary">Book Now</button>
             </div>
           </form>
+
+          <div class="row mt-2">
+              <div class="col-6">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Fee 1</li>
+                  <li class="list-group-item">Fee 2</li>
+                  <li class="list-group-item">Fee 3</li>
+                  <li class="list-group-item"><h5>Total</h5></li>
+                </ul>
+
+              </div>
+
+              <div class="col-6 text-end">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">$2,333</li>
+                  <li class="list-group-item">$100</li>
+                  <li class="list-group-item">$100</li>
+                  <li class="list-group-item"><h5>$2,533</h5></li>
+                </ul>
+              </div>
+
+
         </div>
+      <!-- </div> -->
+        
+
 
 
       </div>
@@ -493,6 +517,7 @@
 
 </div>
 
+<hr class="mt-5">
 <div class="footer p-5 text-center">
     Is there a footer? Like contact us, tel
 </div>
