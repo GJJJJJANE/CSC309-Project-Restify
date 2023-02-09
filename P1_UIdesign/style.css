@@ -16,3 +16,12 @@
     width: 65%;
     align-self: center;
 }
+
+/* Sticky relative to navbar */
+.sticky-rel {
+    top: 4rem;
+}
+
+.offcanvas-wide {
+    height:75% !important;
+}
