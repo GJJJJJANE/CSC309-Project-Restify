@@ -1,7 +1,7 @@
 
 #bg_container {
     background-image: url("background.jpeg") !important;
-    height: 100vh;
+    height: 100%;
 }
 
 .vertical_center{
