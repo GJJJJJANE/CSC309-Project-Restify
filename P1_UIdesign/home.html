@@ -26,25 +26,48 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Rentals</a>
+                <a class="nav-link" href="#">Reservations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
+                <a class="nav-link" href="#">My Listings</a>
               </li>
             </ul>
-
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Notification
                 </a>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><span class="dropdown-item-text">Message list</span></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Important</h5>
+                      There's some important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Less important</h5>
+                      There's some less important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Less important</h5>
+                      There's some less important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    Check all notifications
+                  </a></li>
                 </ul>
-            </li>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#">Log Out</a>
+              </li>
+
             </ul>
 
             <!-- <form class="d-flex" role="search">
@@ -73,18 +96,16 @@
                                 <div class="btn-group">
                                   <select id="Order" class="form-select">
                                     <option selected>Select Display Order</option>
-                                    <option>...</option>
+                                    <option>Recommendation</option>
+                                    <option>Distance</option>
+                                    <option>Score</option>
+                                    <option>Price decreasing</option>
+                                    <option>Price increasing</option>
                                   </select>
-
-                                    <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                    </ul>
                                   </div>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Enter address e.g. street, city and state or zip">
+                                <input type="text" class="form-control" placeholder="Search destination">
                             </div>
     
                             <div class="col-md-3">
@@ -125,16 +146,22 @@
                                   <label for="inputState" class="form-label">Guests</label>
                                   <select id="inputState" class="form-select">
                                     <option selected>Select number of guests...</option>
-                                    <option>...</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5 or more</option>
                                   </select>    
                                 </div>
                         
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Search by MAP">
+                                  <label for="Pricelow" class="form-label">Price range (min)</label>
+                                    <input type="text" id="Pricelow" class="form-control" placeholder="Enter minimum price (person/night)">
                                 </div>
                                 
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Search by Country">
+                                  <label for="Pricehigh" class="form-label">Price range (max)</label>
+                                    <input type="text" id="Pricehigh" class="form-control" placeholder="Enter maimum price (person/night)">
                                 </div>
 
                                 <div class="row g-2">
