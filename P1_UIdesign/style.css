@@ -103,3 +103,8 @@
     display: inline-block;
     border-style: dashed;
 }
+
+.listing_url {
+    text-decoration: none;
+    color:black
+}
