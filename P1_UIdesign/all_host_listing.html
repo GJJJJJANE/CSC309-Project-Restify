@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>All Listing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            Restify
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- Will be collapsed -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="u_ReservationView.html">Reservations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="all_host_listing.html">My Listings</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Notification
+                </a>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><span class="dropdown-item-text">Message list</span></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Important</h5>
+                      There's some important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Less important</h5>
+                      There's some less important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    <div class="card p-3">
+                      <h5>Less important</h5>
+                      There's some less important notification here.
+                    </div>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#">
+                    Check all notifications
+                  </a></li>
+                </ul>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" href="#">Log Out</a>
+              </li>
+    
+            </ul>
+    
+          </div>
+        </div>
+    </nav>
+    
+    
+    <div class="row my-5"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h3>6 Listings</h3>
+            </div>
+            <div class="col-md-6">
+                <h3> </h3>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-outline-dark btn-lg" href="create_listing.html" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                      </svg>   Create new listing   
+                </a>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search listings" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </form>
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-select">
+                    <option selected>Listing status</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-select">
+                    <option selected>More filters</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-2">
+                <p class="fs-6 text-primary fw-semibold font-monospace">cover</p>
+            </div>
+            <div class="col-md-4">
+                <p class="fs-6 text-primary fw-semibold font-monospace">title</p>
+            </div>
+            <div class="col-md-2">
+                <p class="fs-6 text-primary fw-semibold font-monospace">status</p>
+            </div>
+            <div class="col-md-4">
+                <p class="fs-6 text-primary fw-semibold font-monospace">action</p>
+            </div>
+            <hr class="mt-2">
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-4 my-4">
+                <h5>The Five-Star Property</h5>
+            </div>
+            <div class="col-md-2 my-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+                    <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+                  </svg> In stock
+            </div>
+            <div class="col-md-4 my-4">
+                <a class="btn btn-outline-dark" href="edit_listing.html" role="button">Edit</a>
+            </div>
+        </div>
+
+        <br>
+        <hr class="mt-2">
+        <div class="row">
+            <br>
+            <br>
+            <div class="col-md-2">
+                <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-4 my-4">
+                <h5>The Five-Star Property</h5>
+            </div>
+            <div class="col-md-2 my-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                  </svg> Receive reservation
+            </div>
+            <div class="col-md-4 my-4">
+                <a class="btn btn-outline-dark" href="#" role="button">Approve</a>
+                <a class="btn btn-outline-dark" href="#" role="button">Deny</a>
+            </div>
+        </div>
+
+        <br>
+        <hr class="mt-2">
+        <div class="row">
+            <br>
+            <br>
+            <div class="col-md-2">
+                <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-4 my-4">
+                <h5>A Five-Star Property</h5>
+            </div>
+            <div class="col-md-2 my-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+                  </svg> Reserved
+            </div>
+            <div class="col-md-4 my-4">
+                <a class="btn btn-outline-dark" href="#" role="button">Terminate</a>
+            </div>
+        </div>
+
+        <br>
+        <hr class="mt-2">
+        <div class="row">
+            <br>
+            <br>
+            <div class="col-md-2">
+                <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
+            </div>
+            <div class="col-md-4 my-4">
+                <h5>A Five-Star Property</h5>
+            </div>
+            <div class="col-md-2 my-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+                  </svg> Reserved
+            </div>
+            <div class="col-md-4 my-4">
+                <a class="btn btn-outline-dark" href="#" role="button">Terminate</a>
+            </div>
+        </div>
+        <div class="row my-4">
+            <hr class="mt-2">
+        </div>
+    </div>  
+    <div class="row my-5"></div>
+    <div class="row mt-5">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+<div class="footer p-5 text-center">
+  2023 Restify Inc.
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
