@@ -82,7 +82,7 @@
             <div class="col-md-3">
                 <h3>6 Listings</h3>
             </div>
-            <div class="col-md-6">
+            <div class="d-none d-md-block col-md-6">
                 <h3> </h3>
             </div>
             <div class="col-md-3">
@@ -106,9 +106,9 @@
             <div class="col-md-2">
                 <select class="form-select">
                     <option selected>Listing status</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">In stock</option>
+                    <option value="2">Reserved</option>
+                    <option value="3">Receive reservation</option>
                   </select>
             </div>
 
@@ -125,16 +125,16 @@
         <br>
         <br>
         <div class="row">
-            <div class="col-md-2">
+            <div class="d-none d-md-block col-md-2">
                 <p class="fs-6 text-primary fw-semibold font-monospace">cover</p>
             </div>
-            <div class="col-md-4">
+            <div class="d-none d-md-block col-md-4">
                 <p class="fs-6 text-primary fw-semibold font-monospace">title</p>
             </div>
-            <div class="col-md-2">
+            <div class="d-none d-md-block col-md-2">
                 <p class="fs-6 text-primary fw-semibold font-monospace">status</p>
             </div>
-            <div class="col-md-4">
+            <div class="d-none d-md-block col-md-4">
                 <p class="fs-6 text-primary fw-semibold font-monospace">action</p>
             </div>
             <hr class="mt-2">
@@ -144,7 +144,9 @@
                 <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
             </div>
             <div class="col-md-4 my-4">
-                <h5>The Five-Star Property</h5>
+                <a href="edit_listing.html" class="listing_url">
+                    <h5>The Five-Star Property</h5>
+                </a>
             </div>
             <div class="col-md-2 my-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
@@ -165,7 +167,9 @@
                 <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
             </div>
             <div class="col-md-4 my-4">
-                <h5>The Five-Star Property</h5>
+                <a href="edit_listing.html" class="listing_url">
+                    <h5>The Five-Star Property</h5>
+                </a>
             </div>
             <div class="col-md-2 my-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
@@ -173,9 +177,101 @@
                   </svg> Receive reservation
             </div>
             <div class="col-md-4 my-4">
-                <a class="btn btn-outline-dark" href="#" role="button">Approve</a>
-                <a class="btn btn-outline-dark" href="#" role="button">Deny</a>
+                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#details">View details</button>
+                
             </div>
+
+            <div class="modal fade" id="details" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-4">Reservation Details</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="avatar.jpg" class="img-fluid rounded" alt="...">
+                            </div>
+                            <div class="col">
+                                <!--div class="card-body"-->
+                                  <h5 class="card-title">Wannng</h5>
+                                  <br>
+                                  <div>
+                                    <!-- 5 stars -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <h5 class="fs-6">5.0/5.0</h5>  
+                                    <p class="card-text"><small class="text-muted">66 reviews</small></p>
+                                  </div>
+                                <!--/div-->
+                            </div>
+                        </div>
+                        <br>
+                        <div class="mb-3 row">
+                            <label for="staticRef" class="col col-form-label"><h6>Reference #:</h6> </label>
+                            <div class="col">
+                              <input type="text" readonly class="form-control-plaintext" id="staticRef" value="2023309765432">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col col-form-label"><h6>Email:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="6w6@mail.com">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticTel" class="col col-form-label"><h6>Telephone:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticTel" value="(309)100-0010">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticArrival" class="col col-form-label"><h6>Arrival:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticArrival" value="2023-02-17">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticDepart" class="col col-form-label"><h6>Depart:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticDepart" value="2023-02-28">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticGuests" class="col col-form-label"><h6>Number of Guests:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticGuests" value="8">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticNote" class="col col-form-label"><h6>Special Note:</h6></label>
+                            <div class="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticNote" value="None">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Deny</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
 
         <br>
@@ -187,7 +283,9 @@
                 <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
             </div>
             <div class="col-md-4 my-4">
-                <h5>A Five-Star Property</h5>
+                <a href="edit_listing.html" class="listing_url">
+                    <h5>The Five-Star Property</h5>
+                </a>
             </div>
             <div class="col-md-2 my-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
@@ -209,7 +307,9 @@
                 <img src="coverpage.jpeg" class="img-fluid img-thumbnail" alt="...">
             </div>
             <div class="col-md-4 my-4">
-                <h5>A Five-Star Property</h5>
+                <a href="edit_listing.html" class="listing_url">
+                    <h5>The Five-Star Property</h5>
+                </a>
             </div>
             <div class="col-md-2 my-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16">
