@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Reservations</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        Restify
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!-- Will be collapsed -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="u_ReservationView.html">Reservations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Listings</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Notification
+            </a>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-item-text">Message list</span></li>
+              <li><a class="dropdown-item" href="#">
+                <div class="card p-3">
+                  <h5>Important</h5>
+                  There's some important notification here.
+                </div>
+              </a></li>
+              <li><a class="dropdown-item" href="#">
+                <div class="card p-3">
+                  <h5>Less important</h5>
+                  There's some less important notification here.
+                </div>
+              </a></li>
+              <li><a class="dropdown-item" href="#">
+                <div class="card p-3">
+                  <h5>Less important</h5>
+                  There's some less important notification here.
+                </div>
+              </a></li>
+              <li><a class="dropdown-item" href="#">
+                Check all notifications
+              </a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Log Out</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container mt-10">
+    <div class="row mt-5"></div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <a class="btn btn-outline-primary btn-block" href="u_ReservationView.html" role="buttom">Back to all reservations</a>
+        </div>
+
+    </div>
+
+    <div class="row text-center mt-5">
+        <div class="col-md-12 text-center">
+            <img src="confirmed.png" class="img-thumbnail border-0 w-thumbnail" alt="...">
+        </div>
+    </div>
+
+    <div class="row text-center mt-5">
+        <div class="col-md-12 text-center"><h3>Your reservation is Confirmed.</h3></div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12"><h4>Booking Details</h4></div>
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="card mb-3 p-3 pb-0">
+            <div class="row g-0">
+              <div class="col-md-2">
+                <img src="coverpage.jpeg" class="img-fluid p-3" alt="...">
+              </div>
+
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Reservation at Five-Star Property</h5>
+
+                  <h4>$2,533</h4>
+                  <p class="card-text"><small>5 nights</small></p>
+                  <a class="btn btn-outline-secondary btn-block" href="details.html" role="buttom">Go to Property</a>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="row m-3 g-3">
+                    <a class="btn btn-outline-primary btn-block" href="u_ReservationEdit.html" role="buttom">Edit</a>
+                    <a class="btn btn-outline-secondary btn-block" href="#" role="buttom">Cancel Reservation</a>
+                </div>
+       
+              </div>
+
+            <div class="row mt-3 g-3">
+                <form>
+                    <div class="mb-3 row">
+                        <label for="staticRef" class="col-sm-2 col-form-label"><h6>Reference #:</h6> </label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticRef" value="2023309123456">
+                        </div>
+                      </div>
+
+                      <div class="mb-3 row">
+                        <label for="staticName" class="col-sm-2 col-form-label"><h6>Name:</h6> </label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly class="form-control-plaintext" id="staticName" value="User CSC">
+                        </div>
+                      </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label"><h6>Email:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@csc.com">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticTel" class="col-sm-2 col-form-label"><h6>Telephone:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticTel" value="(309)100-5140">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticArrival" class="col-sm-2 col-form-label"><h6>Arrival:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticArrival" value="2023-02-19">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticDepart" class="col-sm-2 col-form-label"><h6>Depart:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticDepart" value="2023-02-24">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticGuests" class="col-sm-2 col-form-label"><h6>Number of Guests:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticGuests" value="3">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticNote" class="col-sm-2 col-form-label"><h6>Special Note:</h6></label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticNote" value="None">
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+  <div class="footer p-5 text-center">
+    2023 Restify Inc.
+    </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
