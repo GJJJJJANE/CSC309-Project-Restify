@@ -45,3 +45,8 @@
 #coverphoto {
     height: 330px;
 }
+
+.w-thumbnail{
+    width: 150px !important;
+    height: 150px !important
+}
