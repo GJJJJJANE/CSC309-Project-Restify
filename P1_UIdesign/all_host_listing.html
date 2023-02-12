@@ -29,7 +29,10 @@
                 <a class="nav-link" href="u_ReservationView.html">Reservations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="all_host_listing.html">My Listings</a>
+                <a class="nav-link active" href="all_host_listing.html">My Listings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="property_history.html">Property History</a>
               </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -62,12 +65,23 @@
                     Check all notifications
                   </a></li>
                 </ul>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <img src="" id="avatar_sm" class="avatar_sm">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="" onclick="" id="button1">
+                      <div class="card p-3" id="login_text1">
+                      </div>
+                    </a></li>
+                    <li><a class="dropdown-item" href="" onclick="" id="button2">
+                      <div class="card p-3" id="login_text2">
+                      </div>
+                    </a></li>
+
               </li>
-    
-              <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
-              </li>
-    
+
             </ul>
     
           </div>
@@ -215,7 +229,7 @@
                                       <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                                     </svg>
                                     <h5 class="fs-6">5.0/5.0</h5>  
-                                    <p class="card-text"><small class="text-muted">66 reviews</small></p>
+                                    <a href="comments.html"><p class="card-text"><small class="text-muted">66 reviews</small></p></a>
                                   </div>
                                 <!--/div-->
                             </div>
@@ -318,7 +332,7 @@
                   </svg> Reserved
             </div>
             <div class="col-md-4 my-4">
-                <a class="btn btn-outline-dark" href="#" role="button">Terminate</a>
+              <a class="btn btn-outline-dark" href="#" role="button">Terminate</a>
             </div>
         </div>
         <div class="row my-4">
@@ -350,5 +364,27 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-</body>
+
+    <script type="text/javascript">
+      if (localStorage.getItem("login") == 1){
+        var item1 = "My Profile";
+        var item2 = "Log Out";
+        var item3 = "profile.html";
+        var item4 = "logout()";
+        document.getElementById("avatar_sm").src="avatar.jpg"
+        document.getElementById("button2").onclick=function(){localStorage.setItem("login", 0)};
+      } else {
+        var item1 = "Login";
+        var item2 = "Sign Up";
+        var item3 = "login.html";
+        var item4 = "signup.html"
+        document.getElementById("avatar_sm").src="default_avatar.jpg"
+        document.getElementById("button2").href=item4;
+      }
+      document.getElementById("login_text1").innerHTML=item1;
+      document.getElementById("login_text2").innerHTML=item2;
+      document.getElementById("button1").href=item3;
+    </script>
+
+  </body>
 </html>
