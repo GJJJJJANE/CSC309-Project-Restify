@@ -1,0 +1,23 @@
+.mycontainer{
+    width: 30%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 490px) {
+    .mycontainer{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 490px) and (max-width: 1080px) {
+    .mycontainer{
+        width: 70%;
+    }
+}
+
+.avatar{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
