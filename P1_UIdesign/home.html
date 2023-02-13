@@ -31,6 +31,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="all_host_listing.html">My Listings</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="property_history.html">Property History</a>
+              </li>
             </ul>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item dropdown">
@@ -62,10 +65,21 @@
                     Check all notifications
                   </a></li>
                 </ul>
-              </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <img src="" id="avatar_sm" class="avatar_sm">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="" onclick="" id="button1">
+                      <div class="card p-3" id="login_text1">
+                      </div>
+                    </a></li>
+                    <li><a class="dropdown-item" href="" onclick="" id="button2">
+                      <div class="card p-3" id="login_text2">
+                      </div>
+                    </a></li>
+
               </li>
 
             </ul>
@@ -204,5 +218,27 @@
       
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  if (localStorage.getItem("login") == 1){
+    var item1 = "My Profile";
+    var item2 = "Log Out";
+    var item3 = "profile.html";
+    var item4 = "logout()";
+    document.getElementById("avatar_sm").src="avatar.jpg"
+    document.getElementById("button2").onclick=function(){localStorage.setItem("login", 0)};
+  } else {
+    var item1 = "Login";
+    var item2 = "Sign Up";
+    var item3 = "login.html";
+    var item4 = "signup.html"
+    document.getElementById("avatar_sm").src="default_avatar.jpg"
+    document.getElementById("button2").href=item4;
+  }
+  document.getElementById("login_text1").innerHTML=item1;
+  document.getElementById("login_text2").innerHTML=item2;
+  document.getElementById("button1").href=item3;
+</script>
+
 </body>
 </html>
