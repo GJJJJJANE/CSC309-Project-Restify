@@ -17,11 +17,11 @@ pip install djangorestframework
 
 # # start new project
 # django-admin startproject restify . 
-cd restify
+# cd restify
 # django-admin startapp restifyapp
 
 # come back to the outer dir
-cd ..
+# cd ..
 
 # run migrations
 python3 manage.py makemigrations
@@ -34,5 +34,6 @@ echo 'venv' > .gitignore
 pip freeze > requirements.txt
 git add requirements.txt
 
-# activate it agiain
-source venv/bin/activate
+# # activate it again
+# cd ..
+# source restify/venv/bin/activate
