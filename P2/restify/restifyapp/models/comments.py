@@ -13,7 +13,7 @@ class GuestComment(models.Model):
 
     # FIELDS
     # id set to default
-    target = models.ForeignKey('User')
+    target = models.ForeignKey(User,on_delete=models.CASCADE)
     score = models.PositiveIntegerField()
     content = models.TextField()
     modified = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class GuestComment(models.Model):
 # be only one comment.
 class PropertyComment(models.Model):
         
-    target = models.OneToOneField("Reservation", 
+    target = models.OneToOneField(Reservation, 
                                   on_delete=models.CASCADE,
                                   related_name='comment_of') 
     # reservation will have an attribute called 'comment_of', raise RelatedObjectDoesNotExist if DNE
@@ -41,7 +41,7 @@ class PropertyComment(models.Model):
 # can respond once.
 class ReplyThread(models.Model):
     
-    target = models.OneToOneField("PropertyComment", 
+    target = models.OneToOneField(PropertyComment, 
                                   on_delete=models.CASCADE,
                                   related_name='reply_of')
     host_response = models.TextField()

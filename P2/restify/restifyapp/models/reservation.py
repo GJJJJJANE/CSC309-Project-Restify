@@ -29,8 +29,8 @@ class Reservation(models.Model):
     # FIELDS
     # id is set to default int pkey
     # Foreign keys
-    guest = models.ForeignKey('User', on_delete=models.CASCADE)
-    property = models.ForeignKey('Property',on_delete=models.CASCADE) # OR use number id?
+    guest = models.ForeignKey(User, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE) # OR use number id?
     # reservation state
     state = models.CharField(max_length=2, choices=STATUS_CHOICES)
     # reservation duration

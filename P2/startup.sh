@@ -33,3 +33,6 @@ git init
 echo 'venv' > .gitignore
 pip freeze > requirements.txt
 git add requirements.txt
+
+# activate it agiain
+source venv/bin/activate
