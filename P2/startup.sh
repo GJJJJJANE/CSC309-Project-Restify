@@ -16,9 +16,9 @@ pip install django
 pip install djangorestframework
 
 # # start new project
-django-admin startproject restify . 
+# django-admin startproject restify . 
 cd restify
-django-admin startapp restifyapp
+# django-admin startapp restifyapp
 
 # come back to the outer dir
 cd ..

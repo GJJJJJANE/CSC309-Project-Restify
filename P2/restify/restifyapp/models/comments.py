@@ -4,8 +4,8 @@
 from django.db import models
 
 # import other models
-from user import User
-from reservation import Reservation
+from .user import User
+from .reservation import Reservation
 
 
 # the comment to a guest. handout did not specify many restrictions here...

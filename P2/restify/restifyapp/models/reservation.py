@@ -2,8 +2,8 @@
 from django.db import models
 
 # import other models
-from user import User
-from property import Property
+from .user import User
+from .property import Property
 
 class Reservation(models.Model):
     # STATUS
