@@ -16,12 +16,12 @@ pip install django
 pip install djangorestframework
 
 # # start new project
-django-admin startproject restify . 
-cd restify
-django-admin startapp restifyapp
+# django-admin startproject restify . 
+# cd restify
+# django-admin startapp restifyapp
 
 # come back to the outer dir
-cd ..
+# cd ..
 
 # run migrations
 python3 manage.py makemigrations
@@ -33,3 +33,7 @@ git init
 echo 'venv' > .gitignore
 pip freeze > requirements.txt
 git add requirements.txt
+
+# # activate it again
+# cd ..
+# source restify/venv/bin/activate
