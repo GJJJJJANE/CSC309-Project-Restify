@@ -15,6 +15,10 @@ source venv/bin/activate
 pip install django
 pip install djangorestframework
 pip install django-multiselectfield
+pip3 install djangorestframework-simplejwt
+
+python3 -m pip install --upgrade pip
+python3 -m pip install --upgrade Pillow
 
 # # start new project
 # django-admin startproject restify . 
