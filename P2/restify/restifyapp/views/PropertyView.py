@@ -12,7 +12,7 @@ class ListingPagination(PageNumberPagination):
 
 
 #list all property for the host
-#endpoint:
+#endpoint: Listing_all/
 
 class All_host_listing(generics.ListAPIView):
 
@@ -26,8 +26,10 @@ class All_host_listing(generics.ListAPIView):
         return Property.objects.filter(owner=host)
     
 
+
 #search property results by guests
-#endpoint:
+#endpoint: SearchResult/
+
 class SearchProperty(generics.ListAPIView):
 
     serializer_class = PropertySerializer
@@ -64,7 +66,7 @@ class SearchProperty(generics.ListAPIView):
 
 
 # create property
-# endpoint: 
+# endpoint: Create/
 class CreateProperty(generics.CreateAPIView):
 
     serializer_class = Property
@@ -77,7 +79,7 @@ class CreateProperty(generics.CreateAPIView):
 
 
 #edit property<id>
-#endpoint
+#endpoint: property/<int:id>/edit
 
 class EditProperty(generics.RetrieveUpadteAPIView):
 
@@ -97,3 +99,14 @@ class EditProperty(generics.RetrieveUpadteAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
+
+
+#property<id> detail
+#endpoint: property/<int:id>/detail
+
+class DetailProperty(generics.RetrieveUpadteAPIView):
+
+    serializer_class = PropertySerializer
+    queryset = Property.objects.all()
+    lookup_field = 'id'
