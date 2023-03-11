@@ -3,7 +3,6 @@ from django.db import models
 from multiselectfield import MultiSelectField
 
 from .user import User
-from .reservation import Reservation
 
 
 ESSENTIAL = (('wi', 'Wifi'),
@@ -24,7 +23,7 @@ class Property(models.Model):
     # FIELDS
     # id is the primary key
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
-    title = models.CharField()
+    title = models.CharField(max_length=120)
     description = models.TextField()
     photos = models.ImageField(upload_to='Photos')
 
@@ -74,4 +73,4 @@ class Availability(models.Model):
     start = models.DateField()
     end = models.DateField()
     price = models.PositiveIntegerField()
-    reservation = models.ForeignKey(Reservation,on_delete=models.CASCADE, null=True)
+    reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE, null=True)
