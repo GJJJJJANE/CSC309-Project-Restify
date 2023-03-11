@@ -14,6 +14,7 @@ source venv/bin/activate
 # Install Django and Django REST framework into the virtual environment
 pip install django
 pip install djangorestframework
+pip install django-multiselectfield
 
 # # start new project
 # django-admin startproject restify . 
