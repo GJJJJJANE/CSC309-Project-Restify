@@ -41,6 +41,10 @@ class Property(models.Model):
     safety_rule = models.TextField()
     cancellation_policy = models.TextField()
 
+    start_date = models.DateField()
+    end_date = models.DateField()
+    price = models.PositiveIntegerField()
+
     modified = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -67,10 +71,10 @@ class Property(models.Model):
     #amenity = models.CharField(choices=AMENITY_CHOICES)
 
 
-class Availability(models.Model):
+#class Availability(models.Model):
 
-    property = models.ForeignKey(Property,on_delete=models.CASCADE)
-    start = models.DateField()
-    end = models.DateField()
-    price = models.PositiveIntegerField()
-    reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE, null=True)
+    #property = models.ForeignKey(Property,on_delete=models.CASCADE)
+    #start = models.DateField()
+    #end = models.DateField()
+    #price = models.PositiveIntegerField()
+    #reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE, null=True)

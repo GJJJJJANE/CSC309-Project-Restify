@@ -1,5 +1,5 @@
-from ..models import Property, User, Availability
-from ..serializers import PropertySerializer, PropertyAvailabilitySerializer
+from ..models import Property, User #, Availability
+from ..serializers import PropertySerializer#, PropertyAvailabilitySerializer
 from django.core.exceptions import ValidationError, PermissionDenied
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
@@ -54,7 +54,7 @@ class SearchProperty(generics.ListAPIView):
         order_by = self.request.query_params.get('order_by',None)
 
         if available_date is not None:
-            queryset = queryset.filter(availability__start =available_date)
+            queryset = queryset.filter(start_date =available_date)
         if num_guest is not None:
             queryset = queryset.filter(num_guest =num_guest)
         if num_bedroom is not None:
@@ -66,7 +66,7 @@ class SearchProperty(generics.ListAPIView):
             if order_by == 'time':
                 queryset = queryset.order_by('modified')
             elif order_by == 'price':
-                queryset = queryset.annotate('availability__price')
+                queryset = queryset.order_by('price')
 
         return queryset
 
@@ -76,7 +76,7 @@ class SearchProperty(generics.ListAPIView):
 # endpoint: Create/
 class CreateProperty(generics.CreateAPIView):
 
-    serializer_class = Property
+    serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
