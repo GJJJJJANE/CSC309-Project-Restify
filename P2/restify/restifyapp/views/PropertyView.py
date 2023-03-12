@@ -97,11 +97,13 @@ class EditProperty(generics.RetrieveUpdateAPIView):
     def get_object(self):
         user = self.request.user
         property_id = self.kwargs['id']
-        property = Property.objects.get(id=property_id, owner=user)
+        property = Property.objects.get(id=property_id)
         return property
     
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
+        if request.user.id != instance.owner.id:
+            raise PermissionDenied("You don't have permission")
         serializer = self.get_serializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
