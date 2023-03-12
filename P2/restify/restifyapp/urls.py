@@ -17,4 +17,5 @@ urlpatterns = [
     path('Create/', views.CreateProperty.as_view(), name="create_property"),
     path('property/<int:id>/edit', views.EditProperty.as_view(), name="edit_property"),
     path('property/<int:id>/detail', views.DetailProperty.as_view(), name="property_detail"),
+    path('property/<int:id>/delete', views.DeleteProperty.as_view(), name="delete_property"),
 ]
