@@ -6,3 +6,7 @@ class ReservationSerializer(ModelSerializer):
         model = Reservation
         fields = ['id', 'guest', 'property','state','start','end']
 
+class ActionSerializer(ModelSerializer):
+    class Meta:
+        model = Reservation
+        fields = ['id','state','active']

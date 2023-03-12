@@ -2,3 +2,4 @@
 
 from .CommentView import *
 from .PropertyView import *
+from .ReservationView import *
