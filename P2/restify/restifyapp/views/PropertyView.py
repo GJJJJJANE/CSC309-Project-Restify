@@ -81,7 +81,7 @@ class CreateProperty(generics.CreateAPIView):
 #edit property<id>
 #endpoint: property/<int:id>/edit
 
-class EditProperty(generics.RetrieveUpadteAPIView):
+class EditProperty(generics.RetrieveUpdateAPIView):
 
     serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated]
@@ -105,7 +105,7 @@ class EditProperty(generics.RetrieveUpadteAPIView):
 #property<id> detail
 #endpoint: property/<int:id>/detail
 
-class DetailProperty(generics.RetrieveUpadteAPIView):
+class DetailProperty(generics.RetrieveUpdateAPIView):
 
     serializer_class = PropertySerializer
     queryset = Property.objects.all()
