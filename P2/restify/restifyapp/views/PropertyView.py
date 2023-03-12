@@ -105,7 +105,7 @@ class EditProperty(generics.RetrieveUpdateAPIView):
 #property<id> detail
 #endpoint: property/<int:id>/detail
 
-class DetailProperty(generics.RetrieveUpadteAPIView):
+class DetailProperty(generics.RetrieveUpdateAPIView):
 
     serializer_class = PropertySerializer
     queryset = Property.objects.all()
