@@ -13,14 +13,9 @@ class LogoutView(APIView):
     def post(self, request):
         try:
             refresh_token = request.data["refresh_token"]
-            access_token = request.data["access_token"]
             refresh = RefreshToken(token=refresh_token)
-            access = AccessToken(token=access_token)
             refresh.blacklist()
-            access.blacklist()
             return Response('Logged out', status=status.HTTP_205_RESET_CONTENT)
-        except KeyError:
-            return Response('Key Error', status=400)
         except Exception as e:
             return Response('400 BAD REQUEST', status=status.HTTP_400_BAD_REQUEST)
     
