@@ -13,7 +13,7 @@ urlpatterns = [
     # reservation
     path('reservations/hostview/', views.HostReservation.as_view(), name="host_reservation"),
     path('reservations/guestview/', views.GuestReservation.as_view(), name="guest_reservation"),
-    path('reservations/reserve/', views.ReservationCreate.as_view(), name="reserve"),
+    path('reservations/reserve/<int:property_id>/', views.ReservationCreate.as_view(), name="reserve"),
     path('reservations/<int:reservation_id>/cancel/request/', views.ReservationCancel.as_view(), name="cancel_request"),
     path('reservations/<int:reservation_id>/pending/action/', views.PendingAction.as_view(), name="pending_action"),
     path('reservations/<int:reservation_id>/cancel/action/', views.CancellationAction.as_view(), name="cancel_action"),

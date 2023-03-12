@@ -27,7 +27,8 @@ class HostReservation(generics.ListAPIView):
     filterset_fields = ['state']
 
     def get_queryset(self):
-        return Reservation.objects.filter(property_in=self.request.user.property_set)
+
+        return Reservation.objects.filter(property__in=self.request.user.property_set.all())
 
 # list of reservation, where user view as guest
 # reservations/guestview/
@@ -40,13 +41,17 @@ class GuestReservation(generics.ListAPIView):
         return Reservation.objects.filter(guest=self.request.user)
 
 # Reserve as guest
-# reservation/reserve/
+# reservation/reserve/<int:property_id>/
 class ReservationCreate(generics.CreateAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
 
+    # add validation
     def perform_create(self, serializer):
-        serializer.save(guest=self.request.user, state=Reservation.PENDING)
+        target_property=property.objects.filter(id=self.kwargs['property_id'])
+        serializer.save(guest=self.request.user,
+                        property=target_property,
+                        state=Reservation.PENDING)
         return Response(serializer.data)
 
 # request cancel as guest
