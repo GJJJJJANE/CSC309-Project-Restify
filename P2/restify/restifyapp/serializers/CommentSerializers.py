@@ -18,3 +18,4 @@ class ReplySerializer(ModelSerializer):
     class Meta:
         model = ReplyThread
         fields = ['id','target','host_response','user_response','modified']
+        read_only_fields = ('target',)

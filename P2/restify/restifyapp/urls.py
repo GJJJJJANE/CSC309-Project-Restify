@@ -24,7 +24,7 @@ urlpatterns = [
     path('comments/<int:property_id>/Propertyview/', views.ListPropertyComment.as_view(), name="propertycomment_list"),
     path('comments/<int:guest_id>/writeGuestComment/', views.WriteGuestComment.as_view(), name="guestcomment_write"),
     path('comments/<int:reservation_id>/writePropertyComment/', views.WritePropertyComment.as_view(), name="propcomment_write"),
-    path('comments/<int:comment_id>/reply/create', views.ReplyCreate.as_view(), name="host_reply"),
+    path('comments/<int:comment_id>/reply/create/', views.ReplyCreate.as_view(), name="host_reply"),
     path('comments/<int:comment_id>/reply/', views.ReplyDetail.as_view(), name="user_reply"),
 
     #property

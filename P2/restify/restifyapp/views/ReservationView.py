@@ -112,7 +112,7 @@ class CancellationAction(generics.RetrieveUpdateAPIView):
     
     serializer_class = ActionSerializer
     permission_classes = [IsOwner]
-    lookup_field = 'reservation_id'
+    lookup_url_kwarg = 'reservation_id'
 
     def get_queryset(self):
         queryset=Reservation.objects.filter(id=self.kwargs['reservation_id'],
