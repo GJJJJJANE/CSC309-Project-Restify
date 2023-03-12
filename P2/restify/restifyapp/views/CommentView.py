@@ -4,13 +4,18 @@ from django.core.exceptions import ValidationError,PermissionDenied
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
+
+class ListingPagination(PageNumberPagination):
+    page_size = 6
     
 # comment view - guest
 # endpoint: comments/<guest_id>/Guestview
 class ListGuestComment(generics.ListCreateAPIView):
     
     serializer_class = GuestCommentSerializer
+    pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
         return GuestComment.objects.filter(
@@ -21,6 +26,7 @@ class ListGuestComment(generics.ListCreateAPIView):
 class ListPropertyComment(generics.ListCreateAPIView):
     
     serializer_class = PropertyCommentSerializer
+    pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
         targets=Property.objects.filter(id=self.kwargs['property_id'])

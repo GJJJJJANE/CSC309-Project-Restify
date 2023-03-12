@@ -5,7 +5,11 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
+
+class ListingPagination(PageNumberPagination):
+    page_size = 6
 
 class IsOwner(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
@@ -24,6 +28,7 @@ class IsGuest(IsAuthenticated):
 class HostReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = ListingPagination
     # filter_backends = [DjangoFilterBackend]
     filterset_fields = ['state']
 
@@ -37,6 +42,8 @@ class GuestReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
     filterset_fields = ['state']
+    pagination_class = ListingPagination
+
 
     def get_queryset(self):
         return Reservation.objects.filter(guest=self.request.user)
