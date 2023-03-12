@@ -1,6 +1,7 @@
-from ..models import ReplyThread, User, Reservation
+from ..models import ReplyThread, User, Reservation, Property
 from ..serializers import ReservationSerializer, ActionSerializer
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.http import HttpResponse, HttpResponseBadRequest
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -48,15 +49,17 @@ class ReservationCreate(generics.CreateAPIView):
 
     # add validation
     def perform_create(self, serializer):
-        target_property=property.objects.filter(id=self.kwargs['property_id'])
+        target_property=Property.objects.filter(id=self.kwargs['property_id'])
+        if not target_property.exists():
+            raise ValidationError('No such property')
         serializer.save(guest=self.request.user,
                         property=target_property,
                         state=Reservation.PENDING)
         return Response(serializer.data)
 
 # request cancel as guest
-# reservation/<int:reservation_id>/cancel/request/
-class ReservationCancel(generics.CreateAPIView):
+# reservations/<int:reservation_id>/cancel/request/
+class ReservationCancel(generics.RetrieveUpdateAPIView):
     serializer_class = ActionSerializer
     permission_classes = [IsGuest]
 
