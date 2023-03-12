@@ -14,6 +14,7 @@ class Reservation(models.Model):
     CANCELED = 'ca'
     TERMINATED = 'te'
     COMPLETED = 'co'
+    PENDING_CANCEL = 'pc'
 
     STATUS_CHOICES = [
         ('pe', 'Pending'),
@@ -23,7 +24,8 @@ class Reservation(models.Model):
         ('ca', 'Canceled'),
         ('te', 'Terminated'),
         ('co', 'Completed'),
-        (None, 'Reservation status')
+        ('pc', 'Waiting for cancellation to be confirmed'),
+        (None, 'Reservation status'),
     ]
 
     # FIELDS
@@ -36,6 +38,7 @@ class Reservation(models.Model):
     # reservation duration
     start = models.DateField()
     end = models.DateField()
+    active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['start']

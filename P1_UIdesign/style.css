@@ -180,3 +180,18 @@
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+#review {
+    text-decoration: none;
+}
+
+.dropdown-item:active{
+    color:#0d6efd
+}
+
+
+@media only screen and (max-width: 490px) {
+    span.position-absolute{
+        position: right 15px !important;
+    }
+}
