@@ -25,7 +25,7 @@ class Property(models.Model):
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     description = models.TextField()
-    photos = models.ImageField(upload_to='Photos')
+    photos = models.URLField()
 
     location = models.TextField()
     num_guest = models.PositiveIntegerField()
@@ -33,13 +33,23 @@ class Property(models.Model):
     num_bathroom = models.PositiveIntegerField()
     room_description = models.TextField()
 
-    amen_essential = MultiSelectField(choices=ESSENTIAL, max_choices=3, max_length=3)
-    amen_indoor = MultiSelectField(choices=INDOOR, max_choices=3, max_length=3)
-    amen_outdoor = MultiSelectField(choices=OUTDOOR, max_choices=3, max_length=3)
+    # multiplechoice field is hard to test in backend, so we simply use char in P2
+    #amen_essential = models.CharField(max_length=50, choices=ESSENTIAL)
+    #amen_indoor = models.CharField(max_length=50, choices=INDOOR)
+    #amen_outdoor = models.CharField(max_length=50, choices=OUTDOOR)
+
+    amen_essential = models.CharField(max_length=50)
+    amen_indoor = models.CharField(max_length=50)
+    amen_outdoor = models.CharField(max_length=50)
+
 
     house_rule = models.TextField()
     safety_rule = models.TextField()
     cancellation_policy = models.TextField()
+
+    start_date = models.DateField()
+    end_date = models.DateField()
+    price = models.PositiveIntegerField()
 
     modified = models.DateTimeField(auto_now_add=True)
 
@@ -67,10 +77,10 @@ class Property(models.Model):
     #amenity = models.CharField(choices=AMENITY_CHOICES)
 
 
-class Availability(models.Model):
+#class Availability(models.Model):
 
-    property = models.ForeignKey(Property,on_delete=models.CASCADE)
-    start = models.DateField()
-    end = models.DateField()
-    price = models.PositiveIntegerField()
-    reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE, null=True)
+    #property = models.ForeignKey(Property,on_delete=models.CASCADE)
+    #start = models.DateField()
+    #end = models.DateField()
+    #price = models.PositiveIntegerField()
+    #reservation = models.ForeignKey('Reservation',on_delete=models.CASCADE, null=True)
