@@ -44,7 +44,7 @@ urlpatterns = [
     path('password/edit/', views.PasswordEditView.as_view(), name='profile_edit'),
 
     #notification
-    path('notifications/all/<int:user_id>/', views.AllNotifView.as_view(), name='notification_list'),
+    path('notifications/all/', views.AllNotifView.as_view(), name='notification_list'),
     path('notifications/read/<int:notif_id>/', views.ReadNotifView.as_view(), name='notification_read'),
     path('notifications/delete/<int:notif_id>/', views.DeleteNotifView.as_view(), name='notification_delete'),
     path('notifications/recieve/<int:user_id>/', views.RecieveNotifView.as_view(), name='notification_recieve'),
