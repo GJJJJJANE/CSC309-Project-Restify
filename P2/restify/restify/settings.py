@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'restifyapp',
     'multiselectfield',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+AUTH_USER_MODEL = 'restifyapp.User'

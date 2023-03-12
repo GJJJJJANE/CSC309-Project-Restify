@@ -1,6 +1,7 @@
-from ..models import ReplyThread, User, Reservation
+from ..models import ReplyThread, User, Reservation, Property
 from ..serializers import ReservationSerializer, ActionSerializer
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.http import HttpResponse, HttpResponseBadRequest
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -27,7 +28,8 @@ class HostReservation(generics.ListAPIView):
     filterset_fields = ['state']
 
     def get_queryset(self):
-        return Reservation.objects.filter(property_in=self.request.user.property_set)
+
+        return Reservation.objects.filter(property__in=self.request.user.property_set.all())
 
 # list of reservation, where user view as guest
 # reservations/guestview/
@@ -40,20 +42,27 @@ class GuestReservation(generics.ListAPIView):
         return Reservation.objects.filter(guest=self.request.user)
 
 # Reserve as guest
-# reservation/reserve/
+# reservation/reserve/<int:property_id>/
 class ReservationCreate(generics.CreateAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
 
+    # add validation
     def perform_create(self, serializer):
-        serializer.save(guest=self.request.user, state=Reservation.PENDING)
+        target_property=Property.objects.filter(id=self.kwargs['property_id'])
+        if not target_property.exists():
+            raise ValidationError('No such property')
+        serializer.save(guest=self.request.user,
+                        property=target_property,
+                        state=Reservation.PENDING)
         return Response(serializer.data)
 
 # request cancel as guest
-# reservation/<int:reservation_id>/cancel/request/
-class ReservationCancel(generics.CreateAPIView):
+# reservations/<int:reservation_id>/cancel/request/
+class ReservationCancel(generics.RetrieveUpdateAPIView):
     serializer_class = ActionSerializer
     permission_classes = [IsGuest]
+    lookup_url_kwarg = 'reservation_id'
 
     def get_queryset(self):
         queryset = Reservation.objects.filter(id=self.kwargs['reservation_id'])
@@ -73,6 +82,7 @@ class PendingAction(generics.RetrieveUpdateAPIView):
     
     serializer_class = ActionSerializer
     permission_classes = [IsOwner]
+    lookup_url_kwarg = 'reservation_id'
 
     def get_queryset(self):
         queryset=Reservation.objects.filter(id=self.kwargs['reservation_id'],
@@ -102,6 +112,7 @@ class CancellationAction(generics.RetrieveUpdateAPIView):
     
     serializer_class = ActionSerializer
     permission_classes = [IsOwner]
+    lookup_url_kwarg = 'reservation_id'
 
     def get_queryset(self):
         queryset=Reservation.objects.filter(id=self.kwargs['reservation_id'],
@@ -133,6 +144,7 @@ class Terminate(generics.RetrieveUpdateAPIView):
     
     serializer_class = ActionSerializer
     permission_classes = [IsOwner]
+    lookup_url_kwarg = 'reservation_id'
 
     def get_queryset(self):
         queryset=Reservation.objects.filter(id=self.kwargs['reservation_id'])
