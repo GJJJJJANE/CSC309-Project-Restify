@@ -2,3 +2,4 @@
 
 from .CommentSerializers import *
 from .PropertySerializers import *
+from .ReservationSerializers import ReservationSerializer

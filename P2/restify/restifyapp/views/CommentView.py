@@ -1,4 +1,4 @@
-from ..models import GuestComment, PropertyComment, ReplyThread, User, Reservation
+from ..models import GuestComment, PropertyComment, ReplyThread, User, Reservation, Property
 from ..serializers import GuestCommentSerializer, PropertyCommentSerializer, ReplySerializer 
 from django.core.exceptions import ValidationError
 from rest_framework import status, generics, mixins
@@ -11,7 +11,8 @@ class ListGuestComment(generics.ListCreateAPIView):
     serializer_class = GuestCommentSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return GuestComment.objects.filter(target.id == self.kwargs['guest_id'])
+        return GuestComment.objects.filter(
+            target=User.objects.filter(id=self.kwargs['guest_id']))
 
 # comment view - property
 # endpoint: comments/<property_id>/Propertyview
@@ -20,7 +21,8 @@ class ListPropertyComment(generics.ListCreateAPIView):
     serializer_class = PropertyCommentSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return PropertyComment.objects.filter(target.property.id == self.kwargs['property_id'])
+        return PropertyComment.objects.filter(
+            target=Property.objects.filter(id=self.kwargs['property_id']))
     
 # create comment - guest
 # endpoint: comments/<guest_id>/writeGuestComment
@@ -29,7 +31,7 @@ class WriteGuestComment(generics.CreateAPIView):
     serializer_class = GuestCommentSerializer
     def perform_create(self, serializer):
         try:
-            serializer.save(target=User.objects.filter(id == self.kwargs['guest_id']))
+            serializer.save(target=User.objects.filter(id=self.kwargs['guest_id']))
         except:
             raise ValidationError('illegal user')
         
@@ -41,7 +43,7 @@ class WritePropertyComment(generics.CreateAPIView):
     def perform_create(self, serializer):
 
         target_reservation = Reservation.objects.filter(id=self.kwargs['reservation_id'])
-        queryset = PropertyComment.objects.filter(target == target_reservation)
+        queryset = PropertyComment.objects.filter(target=target_reservation)
         
         if queryset.exists():
             raise ValidationError('Comment to this order already exists')
@@ -59,7 +61,8 @@ class ReplyDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,generics.Ge
     serializer_class = ReplySerializer
 
     def get_queryset(self, *args, **kwargs):
-        return ReplyThread.objects.filter(target.id == self.kwargs['comment_id'])
+        target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])
+        return ReplyThread.objects.filter(target=target_comment)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
