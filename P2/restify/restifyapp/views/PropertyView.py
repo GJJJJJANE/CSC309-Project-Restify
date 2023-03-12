@@ -1,14 +1,21 @@
 from ..models import Property, User, Availability
 from ..serializers import PropertySerializer, PropertyAvailabilitySerializer
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
 
+
 class ListingPagination(PageNumberPagination):
     page_size = 6
+
+class IsOwner(IsAuthenticated):
+    def has_object_permission(self, request, view, obj):
+        if request.user != obj.owner:
+            raise PermissionDenied("You don't have permission")
+        return True
 
 
 #list all property for the host
@@ -84,7 +91,7 @@ class CreateProperty(generics.CreateAPIView):
 class EditProperty(generics.RetrieveUpdateAPIView):
 
     serializer_class = PropertySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwner]
 
 
     def get_object(self):
@@ -110,3 +117,15 @@ class DetailProperty(generics.RetrieveUpdateAPIView):
     serializer_class = PropertySerializer
     queryset = Property.objects.all()
     lookup_field = 'id'
+
+
+
+#property<id> delete
+#endpoint: property/<int:id>/delete
+
+class DeleteProperty(generics.DestroyAPIView):
+
+    serializer_class = PropertySerializer
+    queryset = Property.objects.all()
+    lookup_field = 'id'
+    permission_classes = [IsOwner]
