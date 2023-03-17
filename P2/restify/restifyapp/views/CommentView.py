@@ -12,28 +12,34 @@ class ListingPagination(PageNumberPagination):
     
 # comment view - guest
 # endpoint: comments/<guest_id>/Guestview
-class ListGuestComment(generics.ListCreateAPIView):
+class ListGuestComment(generics.ListAPIView):
     
     serializer_class = GuestCommentSerializer
     pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
-        return GuestComment.objects.filter(
-            target=User.objects.filter(id=self.kwargs['guest_id'])[0])
-
+        try:
+            queryset = GuestComment.objects.filter(target=User.objects.get(id=self.kwargs['guest_id']))
+            return queryset
+        except:
+            return []
+        
 # comment view - property
 # endpoint: comments/<property_id>/Propertyview
-class ListPropertyComment(generics.ListCreateAPIView):
+class ListPropertyComment(generics.ListAPIView):
     
     serializer_class = PropertyCommentSerializer
     pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
-        targets=Property.objects.filter(id=self.kwargs['property_id'])
-        if not targets.exists():
-            return Response("Property Not Found", status=404)
-        target_reservations=Reservation.objects.filter(property=targets[0])
-        return PropertyComment.objects.filter(target__in=target_reservations)
+        try:
+            targets=Property.objects.get(id=self.kwargs['property_id'])
+            # if not targets.exists():
+            #     return Response("Property Not Found", status=404)
+            target_reservations=Reservation.objects.filter(property=targets)
+            return PropertyComment.objects.filter(target__in=target_reservations)
+        except:
+            return []
     
 # create comment - guest
 # endpoint: comments/<guest_id>/writeGuestComment
