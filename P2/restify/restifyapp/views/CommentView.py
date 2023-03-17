@@ -30,9 +30,9 @@ class ListPropertyComment(generics.ListCreateAPIView):
 
     def get_queryset(self, *args, **kwargs):
         targets=Property.objects.filter(id=self.kwargs['property_id'])
-        target_reservations=Reservation.objects.filter(property=targets[0])
         if not targets.exists():
-            raise ValidationError("No such property")
+            return Response("Property Not Found", status=404)
+        target_reservations=Reservation.objects.filter(property=targets[0])
         return PropertyComment.objects.filter(target__in=target_reservations)
     
 # create comment - guest
@@ -42,11 +42,20 @@ class WriteGuestComment(generics.CreateAPIView):
     serializer_class = GuestCommentSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        return {
+            'guest_id': self.kwargs['guest_id']
+        }
+
     def perform_create(self, serializer):
-        try:
+        if serializer.is_valid():
             serializer.save(target=User.objects.filter(id=self.kwargs['guest_id'])[0])
-        except:
-            raise ValidationError('illegal user')
+            return Response(serializer.data)
+        return Response(serializer.errors)           
+
         
 # create comment - property
 # endpoint: comments/<reservation_id>/writePropertyComment
@@ -54,25 +63,22 @@ class WritePropertyComment(generics.CreateAPIView):
 
     serializer_class = PropertyCommentSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        return {
+            'reservation_id': self.kwargs['reservation_id'],
+            'guest': self.request.user,
+        }
     
     def perform_create(self, serializer):
-
-        target_reservation = Reservation.objects.filter(id=self.kwargs['reservation_id'])
-        if not target_reservation.exists():
-            raise ValidationError('No such reservation')
-
-        queryset = PropertyComment.objects.filter(target=target_reservation[0])
-        
-        if queryset.exists():
-            raise ValidationError('Comment to this order already exists')
-        if target_reservation[0].state != Reservation.COMPLETED and \
-            target_reservation[0].state != Reservation.TERMINATED:
-            raise ValidationError('Order not completed yet')
-        if target_reservation[0].guest != self.request.user:
-            raise ValidationError('Not your reservation')
-        
-        serializer.save(target=target_reservation[0])
-        return Response(serializer.data)
+        if serializer.is_valid():
+            target_reservation = Reservation.objects.filter(id=self.kwargs['reservation_id'])
+            serializer.save(target=target_reservation[0])
+            return Response(serializer.data)
+        return Response(serializer.errors)   
 
 # create a reply, done by host
 # endpoint: comments/<comment_id>/reply/create
@@ -81,13 +87,22 @@ class ReplyCreate(generics.CreateAPIView):
     serializer_class = ReplySerializer
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        return {
+            'action':'create',
+            'comment_id': self.kwargs['comment_id'],
+            'host': self.request.user,
+            }
+        
     def perform_create(self, serializer):
-        target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])
-        target_reservation = Reservation.objects.filter(comment_of=target_comment[0])
-        if self.request.user != target_reservation.property.owner:
-            raise ValidationError("You can't reply to this thread")
-        serializer.save(target=target_comment)
-        return Response(serializer.data)
+        if serializer.is_valid():
+            target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])
+            serializer.save(target=target_comment[0])
+            return Response(serializer.data)
+        return Response(serializer.errors)   
 
 # update and view replies detail for a property comment, done by user
 # endpoint: comments/<comment_id>/reply
@@ -97,17 +112,27 @@ class ReplyDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     lookup_url_kwarg = 'comment_id'
 
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        return {
+            'action':'update',
+            'comment_id': self.kwargs['comment_id'],
+            'guest': self.request.user,
+            }
+
     def get_queryset(self, *args, **kwargs):
-        target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])[0]
+        target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])
         return ReplyThread.objects.filter(target=target_comment)
 
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request, *args, **kwargs)
 
     def perform_update(self, serializer):
-        target_reservation = Reservation.objects.filter(
-            comment_of=PropertyComment.objects.filter(id=self.kwargs['comment_id'])[0])[0]
-        if self.request.user != target_reservation.guest:
-            raise ValidationError("You can't reply to this thread")
-        serializer.save()
-        return Response(serializer.data)
+        if serializer.is_valid():
+            # target_reservation = Reservation.objects.filter(
+            #     comment_of=PropertyComment.objects.filter(id=self.kwargs['comment_id'])[0])[0]
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors) 
