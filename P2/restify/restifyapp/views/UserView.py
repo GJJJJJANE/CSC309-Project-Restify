@@ -56,7 +56,7 @@ class PasswordEditView(APIView):
     permission_classes = [IsAuthenticated,]
     serializer_class = UserSerializer
 
-    def post(self, request, *args, **kwargs):
+    def patch(self, request, *args, **kwargs):
         user = self.request.user
         res = []
         if 'password' not in request.data:

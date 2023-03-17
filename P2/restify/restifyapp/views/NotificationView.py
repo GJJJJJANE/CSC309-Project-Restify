@@ -53,7 +53,7 @@ class DeleteNotifView(APIView):
             if self.request.user.id != notification.target.id:
                 return Response("Notification do not belong to you", status=403)
             notification.delete()
-            return Response("Notificaiton is cleared", status=200)
+            return Response("Notification is cleared", status=200)
         except Notification.DoesNotExist:
             return Response("Notification Not Found", status=404)
         except Exception as e:
@@ -91,7 +91,7 @@ class RecieveNotifView(CreateAPIView):
         except User.DoesNotExist:
             return Response("Target user can not be found", status=404)
         except Exception as e:
-            return Response("Some thing wrong with the request body", status=400)
+            return Response("Something wrong with the request body", status=400)
         request.data._mutable = True
         request.data["title"] = title
         request.data["content"] = description
