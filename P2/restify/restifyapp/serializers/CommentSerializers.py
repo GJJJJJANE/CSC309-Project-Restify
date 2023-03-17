@@ -46,7 +46,9 @@ class ReplySerializer(ModelSerializer):
             if not target_comment.exists():
                 raise ValidationError("comment does not exist")
             if self.context.get('host')!= target_reservation.property.owner:
-                    raise ValidationError("You can't reply to this thread")
+                raise ValidationError("You can't reply to this thread")
+            if target_comment[0].reply_of:
+                raise ValidationError("you have replied")
             
         if self.context.get('action')=='update':
             target_comment=PropertyComment.objects.filter(id=self.context.get('comment_id'))
