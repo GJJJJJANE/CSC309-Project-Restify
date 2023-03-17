@@ -85,7 +85,9 @@ class GuestReplySerializer(ModelSerializer):
             if not target_comment.exists():
                 raise ValidationError("comment does not exist")
             if self.context.get('guest')!= target_reservation.guest:
-                    raise ValidationError("You can't reply to this thread")
+                raise ValidationError("You can't reply to this thread")
+            if not self.instance.host_reply:
+                raise ValidationError("Host has not replied yet")
             
         return data
 
