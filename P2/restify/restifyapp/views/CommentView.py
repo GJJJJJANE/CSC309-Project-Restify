@@ -32,7 +32,7 @@ class ListPropertyComment(generics.ListCreateAPIView):
         targets=Property.objects.filter(id=self.kwargs['property_id'])
         target_reservations=Reservation.objects.filter(property=targets[0])
         if not targets.exists():
-            raise ValidationError("No such property")
+            return Response("Property Not Found", status=404)
         return PropertyComment.objects.filter(target__in=target_reservations)
     
 # create comment - guest
