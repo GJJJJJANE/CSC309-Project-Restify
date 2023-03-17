@@ -1,6 +1,7 @@
 from ..models import Property, User #, Availability
 from ..serializers import PropertySerializer#, PropertyAvailabilitySerializer
 from django.core.exceptions import ValidationError, PermissionDenied
+from rest_framework.exceptions import NotFound
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -101,7 +102,10 @@ class EditProperty(generics.RetrieveUpdateAPIView):
     def get_object(self):
         user = self.request.user
         property_id = self.kwargs['id']
-        property = Property.objects.get(id=property_id)
+        try:
+            property = Property.objects.get(id=property_id)
+        except:
+            raise NotFound(detail="Property not found", code=404)
         return property
     
     def update(self, request, *args, **kwargs):
