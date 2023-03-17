@@ -31,12 +31,15 @@ class HostReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = ListingPagination
-    # filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['state']
+
+
 
     def get_queryset(self):
 
-        return Reservation.objects.filter(property__in=self.request.user.property_set.all())
+        state = self.request.query_params.get('state',None)
+
+        return Reservation.objects.filter(property__in=self.request.user.property_set.all(),
+                                          state=state)
 
 # list of reservation, where user view as guest
 # reservations/guestview/
