@@ -60,9 +60,8 @@ class ActionSerializer(ModelSerializer):
             queryset=Reservation.objects.filter(id=self.context.get("reservation_id"))
             if not queryset.exists():
                 raise ValidationError('reservation does not exist')
-            
-
-
+            if data['state'] != Reservation.TERMINATED:
+                raise ValidationError('Can only terminate here')
 
         if not self.instance.active:
             raise ValidationError('The order is no longer active.')
