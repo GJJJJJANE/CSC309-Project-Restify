@@ -36,16 +36,16 @@ urlpatterns = [
     path('property/<int:id>/delete', views.DeleteProperty.as_view(), name="delete_property"),
 
     #user
-    path('login/', TokenObtainPairView.as_view(), name='login'),
-    path('login/refresh/', TokenRefreshView.as_view(), name='login_refresh'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('register/', views.RegisterView.as_view(), name='register'),
-    path('profile/', views.ProfileView.as_view(), name='profile_view'),
-    path('password/edit/', views.PasswordEditView.as_view(), name='profile_edit'),
+    path('accounts/login/', TokenObtainPairView.as_view(), name='login'),
+    path('accounts/login/refresh/', TokenRefreshView.as_view(), name='login_refresh'),
+    path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+    path('accounts/register/', views.RegisterView.as_view(), name='register'),
+    path('accounts/profile/', views.ProfileView.as_view(), name='profile_view'),
+    path('accounts/password/edit/', views.PasswordEditView.as_view(), name='profile_edit'),
 
     #notification
     path('notifications/all/', views.AllNotifView.as_view(), name='notification_list'),
     path('notifications/read/<int:notif_id>/', views.ReadNotifView.as_view(), name='notification_read'),
     path('notifications/delete/<int:notif_id>/', views.DeleteNotifView.as_view(), name='notification_delete'),
-    path('notifications/recieve/<int:user_id>/', views.RecieveNotifView.as_view(), name='notification_recieve'),
+    path('notifications/receive/<int:user_id>/', views.RecieveNotifView.as_view(), name='notification_recieve'),
 ]
