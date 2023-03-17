@@ -45,7 +45,7 @@ class ReplyThread(models.Model):
                                   on_delete=models.CASCADE,
                                   related_name='reply_of')
     host_response = models.TextField()
-    user_response = models.TimeField(null=True, blank=True, default='')
+    user_response = models.TextField(null=True, blank=True, default='')
     modified = models.DateTimeField(auto_now_add=True)
 
     class Meta:
