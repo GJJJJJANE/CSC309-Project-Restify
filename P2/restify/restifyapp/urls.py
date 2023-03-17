@@ -28,12 +28,12 @@ urlpatterns = [
     path('comments/<int:comment_id>/reply/', views.ReplyDetail.as_view(), name="user_reply"),
 
     #property
-    path('Listing_all/', views.All_host_listing.as_view(), name="all_host_listing"),
-    path('SearchResult/', views.SearchProperty.as_view(), name="search_property_result"),
-    path('Create/', views.CreateProperty.as_view(), name="create_property"),
-    path('property/<int:id>/edit', views.EditProperty.as_view(), name="edit_property"),
-    path('property/<int:id>/detail', views.DetailProperty.as_view(), name="property_detail"),
-    path('property/<int:id>/delete', views.DeleteProperty.as_view(), name="delete_property"),
+    path('listing_all/', views.All_host_listing.as_view(), name="all_host_listing"),
+    path('search_result/', views.SearchProperty.as_view(), name="search_property_result"),
+    path('create/', views.CreateProperty.as_view(), name="create_property"),
+    path('property/<int:id>/edit/', views.EditProperty.as_view(), name="edit_property"),
+    path('property/<int:id>/detail/', views.DetailProperty.as_view(), name="property_detail"),
+    path('property/<int:id>/delete/', views.DeleteProperty.as_view(), name="delete_property"),
 
     #user
     path('login/', TokenObtainPairView.as_view(), name='login'),
