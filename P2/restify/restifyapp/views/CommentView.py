@@ -1,5 +1,5 @@
 from ..models import GuestComment, PropertyComment, ReplyThread, User, Reservation, Property
-from ..serializers import GuestCommentSerializer, PropertyCommentSerializer, ReplySerializer 
+from ..serializers import GuestCommentSerializer, PropertyCommentSerializer, ReplySerializer,GuestReplySerializer
 from django.core.exceptions import ValidationError,PermissionDenied
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
@@ -114,7 +114,7 @@ class ReplyCreate(generics.CreateAPIView):
 # endpoint: comments/<comment_id>/reply
 class ReplyDetail(generics.RetrieveUpdateAPIView):
     
-    serializer_class = ReplySerializer
+    serializer_class = GuestReplySerializer
     permission_classes = [IsAuthenticated]
     lookup_url_kwarg = 'comment_id'
 
@@ -129,8 +129,11 @@ class ReplyDetail(generics.RetrieveUpdateAPIView):
             }
 
     def get_queryset(self, *args, **kwargs):
-        target_comment=PropertyComment.objects.filter(id=self.kwargs['comment_id'])
-        return ReplyThread.objects.filter(target=target_comment)
+        try:
+            target_comment=PropertyComment.objects.get(id=self.kwargs['comment_id'])
+            return ReplyThread.objects.filter(target=target_comment)
+        except:
+            return []
 
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request, *args, **kwargs)

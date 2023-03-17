@@ -50,13 +50,43 @@ class ReplySerializer(ModelSerializer):
             if target_comment[0].reply_of:
                 raise ValidationError("you have replied")
             
+        # if self.context.get('action')=='update':
+        #     target_comment=PropertyComment.objects.filter(id=self.context.get('comment_id'))
+        #     target_reservation = Reservation.objects.filter(
+        #          comment_of=PropertyComment.objects.filter(id=self.kwargs['comment_id'])[0])[0]
+        #     if not target_comment.exists():
+        #         raise ValidationError("comment does not exist")
+        #     if self.context.get('guest')!= target_reservation.guest:
+        #             raise ValidationError("You can't reply to this thread")
+            
+        return data
+
+class GuestReplySerializer(ModelSerializer):
+    class Meta:
+        model = ReplyThread
+        fields = ['id','target','host_response','user_response','modified']
+        read_only_fields = ('target','host_response')
+
+    def validate(self, data):
+        # if self.context.get('action')=='create':
+        #     target_comment=PropertyComment.objects.filter(id=self.context.get('comment_id'))
+        #     target_reservation = Reservation.objects.filter(comment_of=target_comment[0])[0]
+        #     if not target_comment.exists():
+        #         raise ValidationError("comment does not exist")
+        #     if self.context.get('host')!= target_reservation.property.owner:
+        #         raise ValidationError("You can't reply to this thread")
+        #     if target_comment[0].reply_of:
+        #         raise ValidationError("you have replied")
+            
         if self.context.get('action')=='update':
             target_comment=PropertyComment.objects.filter(id=self.context.get('comment_id'))
             target_reservation = Reservation.objects.filter(
-                 comment_of=PropertyComment.objects.filter(id=self.kwargs['comment_id'])[0])[0]
+                 comment_of=PropertyComment.objects.filter(id=self.context.get('comment_id'))[0])[0]
             if not target_comment.exists():
                 raise ValidationError("comment does not exist")
             if self.context.get('guest')!= target_reservation.guest:
                     raise ValidationError("You can't reply to this thread")
-
+            
         return data
+
+

@@ -44,7 +44,7 @@ class ReplyThread(models.Model):
     target = models.OneToOneField(PropertyComment, 
                                   on_delete=models.CASCADE,
                                   related_name='reply_of')
-    host_response = models.TextField()
+    host_response = models.TextField(null=True, blank=True, default='')
     user_response = models.TextField(null=True, blank=True, default='')
     modified = models.DateTimeField(auto_now_add=True)
 
