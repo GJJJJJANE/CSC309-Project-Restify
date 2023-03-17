@@ -4,13 +4,18 @@ from django.core.exceptions import ValidationError,PermissionDenied
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
+
+class ListingPagination(PageNumberPagination):
+    page_size = 6
     
 # comment view - guest
 # endpoint: comments/<guest_id>/Guestview
 class ListGuestComment(generics.ListCreateAPIView):
     
     serializer_class = GuestCommentSerializer
+    pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
         return GuestComment.objects.filter(
@@ -21,13 +26,14 @@ class ListGuestComment(generics.ListCreateAPIView):
 class ListPropertyComment(generics.ListCreateAPIView):
     
     serializer_class = PropertyCommentSerializer
+    pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
         targets=Property.objects.filter(id=self.kwargs['property_id'])
+        target_reservations=Reservation.objects.filter(property=targets[0])
         if not targets.exists():
             raise ValidationError("No such property")
-        return PropertyComment.objects.filter(
-            target=targets[0])
+        return PropertyComment.objects.filter(target__in=target_reservations)
     
 # create comment - guest
 # endpoint: comments/<guest_id>/writeGuestComment
@@ -59,12 +65,13 @@ class WritePropertyComment(generics.CreateAPIView):
         
         if queryset.exists():
             raise ValidationError('Comment to this order already exists')
-        if target_reservation.state != Reservation.COMPLETED:
+        if target_reservation[0].state != Reservation.COMPLETED and \
+            target_reservation[0].state != Reservation.TERMINATED:
             raise ValidationError('Order not completed yet')
-        if target_reservation.guest != self.request.user:
+        if target_reservation[0].guest != self.request.user:
             raise ValidationError('Not your reservation')
         
-        serializer.save(target=target_reservation)
+        serializer.save(target=target_reservation[0])
         return Response(serializer.data)
 
 # create a reply, done by host

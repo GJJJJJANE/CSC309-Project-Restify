@@ -5,7 +5,11 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
+
+class ListingPagination(PageNumberPagination):
+    page_size = 6
 
 class IsOwner(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
@@ -24,6 +28,7 @@ class IsGuest(IsAuthenticated):
 class HostReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = ListingPagination
     # filter_backends = [DjangoFilterBackend]
     filterset_fields = ['state']
 
@@ -37,6 +42,8 @@ class GuestReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
     filterset_fields = ['state']
+    pagination_class = ListingPagination
+
 
     def get_queryset(self):
         return Reservation.objects.filter(guest=self.request.user)
@@ -49,9 +56,10 @@ class ReservationCreate(generics.CreateAPIView):
 
     # add validation
     def perform_create(self, serializer):
-        target_property=Property.objects.filter(id=self.kwargs['property_id'])
-        if not target_property.exists():
+        target_propertys=Property.objects.filter(id=self.kwargs['property_id'])
+        if not target_propertys.exists():
             raise ValidationError('No such property')
+        target_property = target_propertys[0]
         serializer.save(guest=self.request.user,
                         property=target_property,
                         state=Reservation.PENDING)
@@ -69,12 +77,13 @@ class ReservationCancel(generics.RetrieveUpdateAPIView):
         return queryset
     
     def perform_update(self, serializer):
-        if not serializer.data['active']:
-            raise ValidationError('The order is no longer active.')
         
-        if serializer.data['state'] != Reservation.PENDING_CANCEL:
+        if self.request.data['state'] != Reservation.PENDING_CANCEL:
             raise ValidationError('Can only request cancel in this status')
-        serializer.save(state=Reservation.PENDING_CANCEL)
+        if serializer.is_valid():
+            serializer.save(state=Reservation.PENDING_CANCEL)
+            return Response(serializer.data)
+        return Response(serializer.errors)
         
 # Confirm pending as host
 # reservations/<int:reservation_id>/pending/action/
@@ -92,18 +101,18 @@ class PendingAction(generics.RetrieveUpdateAPIView):
         return queryset
     
     def perform_update(self, serializer):
-        if not serializer.data['active']:
-            raise ValidationError('The order is no longer active.')
         
-        if serializer.data['state'] != Reservation.APPROVED | serializer.data['state'] != Reservation.DENIED:
-            raise ValidationError('Can only approve or deny')
-        
-        if serializer.data['state'] == Reservation.APPROVED:
-            serializer.save(state=Reservation.APPROVED)
+        if self.request.data['state'] == Reservation.APPROVED:
+            serializer.save(state=Reservation.APPROVED,active=True)
             
-        if serializer.data['state'] == Reservation.DENIED:
+        if self.request.data['state'] == Reservation.DENIED:
             serializer.save(state=Reservation.DENIED,
                             active=False)
+        
+        if not (self.request.data['state'] == Reservation.APPROVED or \
+            self.request.data['state'] == Reservation.DENIED):
+            raise ValidationError('Can only approve or deny')
+        
         return Response(serializer.data)
 
 # Confirm cancellation as host
@@ -122,16 +131,15 @@ class CancellationAction(generics.RetrieveUpdateAPIView):
         return queryset
 
     def perform_update(self, serializer):
-        if not serializer.data['active']:
-            raise ValidationError('The order is no longer active.')
 
-        if serializer.data['state'] != Reservation.APPROVED | serializer.data['state'] != Reservation.CANCELED:
+        if self.request.data['state'] != Reservation.APPROVED and \
+            self.request.data['state'] != Reservation.CANCELED:
             raise ValidationError('Can only approve or deny cancellation')
         
-        if serializer.data['state'] == Reservation.APPROVED: # cancellation denied.
+        if self.request.data['state'] == Reservation.APPROVED: # cancellation denied.
             serializer.save(state=Reservation.APPROVED)
             
-        if serializer.data['state'] == Reservation.CANCELED: # cancellation approved
+        if self.request.data['state'] == Reservation.CANCELED: # cancellation approved
             serializer.save(state=Reservation.CANCELED,
                             active=False)
             
@@ -153,8 +161,6 @@ class Terminate(generics.RetrieveUpdateAPIView):
         return queryset
 
     def perform_update(self, serializer):
-        if not serializer.data['active']:
-            raise ValidationError('The order is no longer active.')
         serializer.save(state=Reservation.TERMINATED,
                         active=False)
         
