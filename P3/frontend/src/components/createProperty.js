@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-//import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+//import Multiselect from 'react-bootstrap-multiselect'
+
+
 
 const CreatePropertyForm = () => {
   
   return (
-    <>
     <div class="container px-5">
+    <form>
         <div class ="row">
             <div class="col-md-5 ms-5 mt-5">
                 <h1>   </h1>
@@ -108,17 +111,93 @@ const CreatePropertyForm = () => {
                     </div>
                     <br/>
                     <h5>Rooms</h5>
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-text" id="bed">bedrooms</span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-text" id="bath">bathrooms</span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="mb-3">
+                        <label for="roomdescription" class="form-label">More description for rooms</label>
+                        <textarea class="form-control" id="rromdescription" rows="6" placeholder="Describe your rooms..."></textarea>
+                    </div>
+
+                    <h4>Amenities</h4>
+                    <hr class="mt-2"/>
+                    <br/>
+                    <h5>Essentials</h5>
+                    <ToggleButtonGroup type="checkbox">
+                        <ToggleButton value={1}>Option 1</ToggleButton>
+                        <ToggleButton value={2}>Option 2</ToggleButton>
+                        <ToggleButton value={3}>Option 3</ToggleButton>
+                    </ToggleButtonGroup>
+                    <h5>Indoor</h5>
+                    <ToggleButtonGroup type="checkbox">
+                        <ToggleButton value={1}>Option 1</ToggleButton>
+                        <ToggleButton value={2}>Option 2</ToggleButton>
+                        <ToggleButton value={3}>Option 3</ToggleButton>
+                    </ToggleButtonGroup>
+                    <h5>Outdoor</h5>
+                    <ToggleButtonGroup type="checkbox">
+                        <ToggleButton value={1}>Option 1</ToggleButton>
+                        <ToggleButton value={2}>Option 2</ToggleButton>
+                        <ToggleButton value={3}>Option 3</ToggleButton>
+                    </ToggleButtonGroup>
                     <br/>
                     <br/>
-                    
-                    
+                    <br/>
+
+                    <h4>Pricing and Availability</h4>
+                    <hr class="mt-2"/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="price" class="form-label">Price   </label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" id="price"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="from" class="form-label">From</label>
+                            <input type="date" class="form-control" id="from"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="to" class="form-label">To</label>
+                            <input type="date" class="form-control" id="to"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <h4>Things to know</h4>
+                    <hr class="mt-2"/>
+                    <br/>
+                    <h5>House rules</h5>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="description" rows="5"></textarea>
+                    </div>
+                    <h5>Safety & Property</h5>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="description" rows="5"></textarea>
+                    </div>
+                    <h5>Cancellation policy</h5>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="description" rows="5"></textarea>
+                    </div>
             </div>
-
-
         </div>
-    </div>
+        <div class="row my-5"></div>
+        <input class="btn btn-primary" type="submit" />
+        <div class="row my-5"></div>
+    </form>
 
-    </>
+    </div>
   );
 };
 
