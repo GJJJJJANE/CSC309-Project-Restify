@@ -16,3 +16,5 @@ uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(
       
     });
 });
+
+//reference: https://codepen.io/MR_RooT/pen/RwPErrB
