@@ -6,7 +6,7 @@ import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } fr
 
 
 
-const CreatePropertyForm = () => {
+const EditPropertyForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [roomdes, setRoomdes] = useState("");
@@ -26,10 +26,25 @@ const CreatePropertyForm = () => {
     
 
     useEffect(() => {
-        // Fetch property data from API
+        // input property id
         axios.get('http://127.0.0.1:8000/property/5/detail/')
           .then(response => {
             setTitle(response.data.title);
+            setDescription(response.data.description);
+            setLocation(response.data.location);
+            setRoomdes(response.data.room_description);
+            setNumGuests(response.data.num_guest);
+            setNumBeds(response.data.num_bedroom);
+            setNumBaths(response.data.num_bathroom);
+            setAmen_e(response.data.amen_essential);
+            setAmen_i(response.data.amen_indoor);
+            setAmen_o(response.data.amen_outdoor);
+            setPrice(response.data.price);
+            setStart(response.data.start_date);
+            setEnd(response.data.end_date);
+            setHrule(response.data.house_rule);
+            setSrule(response.data.safety_rule);
+            setCpolicy(response.data.cancellation_policy);
           })
           .catch(error => {
             console.log(error);
@@ -63,7 +78,7 @@ const CreatePropertyForm = () => {
         
         //images.forEach((image) => formData.append("images", image));
         try {
-          const response = await axios.post("http://127.0.0.1:8000/create/", propertyData, {
+          const response = await axios.patch("http://localhost:8000/property/5/edit/", propertyData, {
             headers: {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
@@ -84,13 +99,13 @@ const CreatePropertyForm = () => {
             <div className ="col-md-5 ms-5 mt-5">
                 <h1>   </h1>
                 <h1>   </h1>
-                <h1>Create</h1>
-                <h1>Your New</h1>
+                <h1>Edit </h1>
+                <h1>Your </h1>
                 <h1>Property Listing</h1>
             </div>
 
             <div className ="col-md-6">
-            <img src={require('../images/housing.jpg')} className="img-fluid" alt="..."/>
+            <img src={require('../images/edit.jpg')} className="img-fluid" alt="..."/>
             </div>
         </div>
 
@@ -247,4 +262,4 @@ const CreatePropertyForm = () => {
   );
 };
 
-export default CreatePropertyForm;
+export default EditPropertyForm;
