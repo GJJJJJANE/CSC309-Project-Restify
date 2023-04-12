@@ -7,7 +7,7 @@ import { Col, Row} from "react-bootstrap";
 import CardProperty from "../components/searchCard";
 
 
-function SearchList() {
+function SearchList(props) {
     const [properties, setProperties] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -15,13 +15,19 @@ function SearchList() {
 
     useEffect(() => {
         axios
-        .get(`http://127.0.0.1:8000/search_result/?page=${currentPage}`)
+        .get(`http://127.0.0.1:8000/search_result/?page=${currentPage}`, 
+            {params: {keyword: props.keyword, 
+                available_date: props.date, 
+                num_bedroom: props.bed, 
+                num_bathroom: props.bath, 
+                num_guest: props.guest,
+                order_by: props.order}})
         .then(response => {
             setProperties(response.data.results);
             setTotalPages(Math.ceil(response.data.count / 6));
         })
         .catch(error => console.error(error));
-    }, [currentPage]);
+    }, [currentPage, props.keyword, props.date, props.bed, props.bath, props.guest, props.order]);
 
     function handlePageChange(pageNumber) {
         setCurrentPage(pageNumber);
@@ -39,8 +45,8 @@ function SearchList() {
 
     return (
         <div className="container">
-            
             <hr class="mt-2"/>
+            
             <div className="property-list">
                 <Row xs={2} md={3} className="g-4">
                     {properties.map(property => (<CardProperty key={property.id} property={property} />))}
