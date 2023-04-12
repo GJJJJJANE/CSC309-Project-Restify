@@ -1,77 +1,40 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import ReservationList from "../ReservationList";
 
 //  TODO: Notice, should get query parameter state to support search filter.
 
 const HostReservation = () => {
+
+    const view = 'host'
+
     const [reservations, setReservations] = useState([])
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState("")    
 
-    try {
-        const response = axios.get("http://127.0.0.1:8000/reservations/hostview", {
-          headers: {
-              "Access-Control-Allow-Origin": 'http://localhost:3000',
-              "Access-Control-Allow-Credentials": 'true',
-              "Content-Type": "multipart/form-data",
-              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjUyNzQ0LCJpYXQiOjE2ODEyNTI0NDQsImp0aSI6IjkzODRkZWNiODQ2MDRkZDU4Yjg0MGExNTE1YWNkM2E0IiwidXNlcl9pZCI6NX0.vE175Fdhiu4zX_E9USGci--3BGeneWyK8IRykhGnqXg`
-          },
-        })
-        .then(function(response){
-            setReservations(response.data)
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+      useEffect (() => {
+        try {
+            const response = axios.get(`http://127.0.0.1:8000/reservations/hostview?state=${search}`, {
+              headers: {
+                  "Access-Control-Allow-Origin": 'http://localhost:3000',
+                  "Access-Control-Allow-Credentials": 'true',
+                  "Content-Type": "multipart/form-data",
+                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY3NjI4LCJpYXQiOjE2ODEyNjczMjgsImp0aSI6ImVmNzY1OGQ1ZDY1YzQ4NjFiZDdkNzE4NjU5ZWFlNWRhIiwidXNlcl9pZCI6NX0.mPBbPQP5R-affyedSRrGLxTV-Z3sxkS06DydA1Nq21w`
+              },
+            })
+            .then(response =>{
+                setReservations(response.data.results)
+                // note next and previous for pagination support
+                console.log(response.data);
+            });
+          } catch (error) {
+            console.log(error);
+          }
+    }, [search]);
 
-
-
-    // /reservations/hostview?state=${state}
-
-return <>
-<label>
-    Reservations:
-    <input value={search} 
-     onChange={event => setSearch(event.target.value)}/>
-</label>
-<table>
-    <thead>
-        <tr><th>Test</th>
-        <th>Test</th>
-        <th>Test</th>
-        <th>Test</th>
-        <th>Test</th></tr>
-
-    </thead>
-    <tbody>
-        {
-            reservations.map(reservation => (
-                <tr key={reservation.id}>
-                    <td>{reservation.guest}</td>
-                    <td>{reservation.property}</td>
-                    <td>{reservation.state}</td>
-                    <td>{reservation.start}</td>
-                    <td>{reservation.end}</td>
-                </tr>
-            ))
-        }
-    </tbody>
-</table>
-{/* <p>
-    {   page > 1
-        ? <button onClick={()=> setPage(page-1)}>Previous</button>
-        : <></>
-    }
-    {   page < totalPages
-        ? <button onClick={()=> setPage(page+1)}>Next</button>
-        : <></>
-    }
-    
-</p> */}
-<p>Page out of .</p>
-</>
+return <ReservationList search={search} reservations = {reservations} 
+setSearch={setSearch} view = {view}/>
 
 }
+
 
 export default HostReservation
