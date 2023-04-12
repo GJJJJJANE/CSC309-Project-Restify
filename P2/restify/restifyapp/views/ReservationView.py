@@ -32,26 +32,29 @@ class HostReservation(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     pagination_class = ListingPagination
 
-
-
     def get_queryset(self):
-
-        state = self.request.query_params.get('state',None)
-
-        return Reservation.objects.filter(property__in=self.request.user.property_set.all(),
-                                          state=state)
+        state = self.request.query_params.get('state', None)
+        target_properties=Property.objects.filter(owner=self.request.user)
+        if state == '':
+            return Reservation.objects.filter(property__in=target_properties)
+        else:
+            return Reservation.objects.filter(property__in=target_properties, state=state)
 
 # list of reservation, where user view as guest
 # reservations/guestview/
 class GuestReservation(generics.ListAPIView):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
-    filterset_fields = ['state']
     pagination_class = ListingPagination
 
 
     def get_queryset(self):
-        return Reservation.objects.filter(guest=self.request.user)
+        state = self.request.query_params.get('state', None)
+        if state == '':
+            return Reservation.objects.filter(guest=self.request.user)
+        else:
+            return Reservation.objects.filter(guest=self.request.user,
+                                          state = state)
 
 # Reserve as guest
 # reservations/reserve/<int:property_id>/
