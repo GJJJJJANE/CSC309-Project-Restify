@@ -25,6 +25,7 @@ class Property(models.Model):
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     description = models.TextField()
+    #photos = models.ImageField(upload_to='property_images')
     photos = models.URLField()
 
     location = models.TextField()

@@ -9,6 +9,7 @@ import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } fr
 const CreatePropertyForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [photo, setPhoto] = useState("");
     const [roomdes, setRoomdes] = useState("");
     const [location, setLocation] = useState("");
     const [numGuests, setNumGuests] = useState(0);
@@ -25,16 +26,11 @@ const CreatePropertyForm = () => {
     const [cpolicy, setCpolicy] = useState("");
     
 
-    useEffect(() => {
-        // Fetch property data from API
-        axios.get('http://127.0.0.1:8000/property/5/detail/')
-          .then(response => {
-            setTitle(response.data.title);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-    }, []);
+    const handleImage = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setPhoto(URL.createObjectURL(event.target.files[0]));
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,7 +41,7 @@ const CreatePropertyForm = () => {
         const propertyData = new FormData();
         propertyData.append("title", title);
         propertyData.append("description", description);
-        propertyData.append("photos", 'https://www.google.com'); //change
+        propertyData.append("photos", photo); //change
         propertyData.append("location", location);
         propertyData.append("num_guest", numGuests);
         propertyData.append("num_bedroom", numBeds);
@@ -68,7 +64,7 @@ const CreatePropertyForm = () => {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMTkyODQwLCJpYXQiOjE2ODExOTI1NDAsImp0aSI6IjVkM2IyZjE5Y2YyYzQzMGE5ODlmM2EyN2RiYzY3NzAzIiwidXNlcl9pZCI6NX0.GnxUjUd3Ijx_x-rxTXc1mNwJatETslBP9iWG13IrMi4`
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjg2MzQ4LCJpYXQiOjE2ODEyODYwNDgsImp0aSI6ImI5MDY0MDFhYWQ0MjQwYjFhZThhZTRjM2U1YzA5ZWRlIiwidXNlcl9pZCI6NX0.12qMhe7fZPuFbv39xLCdA_-htCy8mKdddbIWc7gvh-Q`
             },
           });
           console.log(response.data);
@@ -120,7 +116,7 @@ const CreatePropertyForm = () => {
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
                             <div className ="imagePreview" id="coverphoto"></div>
-                            <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
+                            <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img" onChange={handleImage}/></label>
                         </div>
                     </div>
                   </div>
