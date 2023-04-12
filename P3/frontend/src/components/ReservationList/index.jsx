@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ActionButton from "../ActionButton";
 
-const ReservationList = ({ search, setSearch, reservations }) => {
+const ReservationList = ({ search, setSearch, reservations, view }) => {
 
     return <>
         <div class="container mt-10">
@@ -56,7 +56,7 @@ const ReservationList = ({ search, setSearch, reservations }) => {
                         </div>
 
                         <div class="col-md-2">
-                            <ActionButton id={reservation.id} state={reservation.state} />
+                            <ActionButton id={reservation.id} state={reservation.state} view = {view}/>
                         </div>
 
                         </div>

@@ -6,6 +6,8 @@ import ReservationList from "../ReservationList";
 
 const HostReservation = () => {
 
+    const view = 'host'
+
     const [reservations, setReservations] = useState([])
     const [search, setSearch] = useState("")    
 
@@ -16,7 +18,7 @@ const HostReservation = () => {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjYwOTE4LCJpYXQiOjE2ODEyNjA2MTgsImp0aSI6IjZlNmY0NmY5MzNiODQxZjU4ZWIxZDEyN2EzODE2ZjkzIiwidXNlcl9pZCI6NX0.btPAtC4vthzsWbNdfxkKCzCc4TpXX1m2wPc5pvLl2PI`
+                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY1MjE2LCJpYXQiOjE2ODEyNjQ5MTYsImp0aSI6IjdmZDFhNjc0MjBlZjQ5NWE4MTg0NGRhMDA5OThmNjJmIiwidXNlcl9pZCI6NX0.h3jA_7MEm46qvbMoLHYzUv19O9eV2lHg8IJynRq8mek`
               },
             })
             .then(response =>{
@@ -30,7 +32,8 @@ const HostReservation = () => {
           }
     }, [search]);
 
-return <ReservationList search={search} reservations = {reservations} setSearch={setSearch}/>
+return <ReservationList search={search} reservations = {reservations} 
+setSearch={setSearch} view = {view}/>
 
 }
 

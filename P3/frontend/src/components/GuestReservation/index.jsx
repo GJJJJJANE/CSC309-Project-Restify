@@ -5,6 +5,8 @@ import ReservationList from "../ReservationList";
 //  TODO: Notice, should get query parameter state to support search filter.
 
 const GuestReservation = () => {
+    const view = 'guest'
+
     const [reservations, setReservations] = useState([])
     const [search, setSearch] = useState("")    
 
@@ -15,7 +17,7 @@ const GuestReservation = () => {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjU1MjEyLCJpYXQiOjE2ODEyNTQ5MTIsImp0aSI6IjlmYjFhZDUxMzEyMjRhMGQ5YjQ2MmUyM2JhZDQzYWY4IiwidXNlcl9pZCI6Nn0.MFKj3Nyb6_3lf5NKpSKgeoZqk1H7bWtPyrK0jnM9tHY`
+                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjYyMzU2LCJpYXQiOjE2ODEyNjIwNTYsImp0aSI6ImE0MTA4YjBlMTU0ZDRjZjM5NWI5ZmM2MzAyMzc3MmYwIiwidXNlcl9pZCI6Nn0.3v-u07fgPSI7tNIbNRmT4mOYojtJjP11YX89CkHVgoo`
               },
             })
             .then(response =>{
@@ -30,7 +32,8 @@ const GuestReservation = () => {
     }, [search]);
 
 
-return <ReservationList search={search} reservations = {reservations} setSearch={setSearch}/>
+return <ReservationList search={search} reservations = {reservations} setSearch={setSearch}
+  view = {view}/>
 
 }
 
