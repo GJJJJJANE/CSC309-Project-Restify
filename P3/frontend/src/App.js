@@ -6,7 +6,7 @@ import Edit from './pages/editPage'
 import Reserve_Host from './pages/Reserve_Host';
 import Reserve_Guest from './pages/Reserve_Guest';
 import PropertyList from './pages/listing';
-import SearchList from './pages/searchList';
+import SearchPage from './pages/searchPage';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path="/reservations/hostview/" element={<Reserve_Host />} />
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
-        <Route path="/search" element={<SearchList />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   );

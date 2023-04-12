@@ -47,6 +47,7 @@ class SearchProperty(generics.ListAPIView):
     def get_queryset(self):
         queryset = Property.objects.all()
 
+        keyword = self.request.query_params.get('keyword',None)
         available_date = self.request.query_params.get('available_date',None)
         num_guest = self.request.query_params.get('num_guest',None)
         num_bedroom = self.request.query_params.get('num_bedroom',None)
@@ -54,14 +55,16 @@ class SearchProperty(generics.ListAPIView):
 
         order_by = self.request.query_params.get('order_by',None)
 
+        if keyword is not None:
+            queryset = queryset.filter(title__icontains=keyword)
         if available_date is not None:
             queryset = queryset.filter(start_date__lte=available_date,end_date__gte=available_date)
         if num_guest is not None:
-            queryset = queryset.filter(num_guest =num_guest)
+            queryset = queryset.filter(num_guest__gte=num_guest)
         if num_bedroom is not None:
-            queryset = queryset.filter(num_bedroom =num_bedroom)
+            queryset = queryset.filter(num_bedroom__gte =num_bedroom)
         if num_bathroom is not None:
-            queryset = queryset.filter(num_bathroom =num_bathroom)
+            queryset = queryset.filter(num_bathroom__gte =num_bathroom)
         
         if order_by is not None:
             if order_by == 'time_new':
