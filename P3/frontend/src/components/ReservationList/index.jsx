@@ -16,7 +16,7 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
             Showing 1 of 1
         </div>
     
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label>
         Filter by State:
         <input value={search} 
