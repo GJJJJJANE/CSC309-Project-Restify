@@ -27,7 +27,7 @@ const EditPropertyForm = () => {
 
     useEffect(() => {
         // input property id
-        axios.get('http://127.0.0.1:8000/property/5/detail/')
+        axios.get('http://127.0.0.1:8000/property/10/detail/')
           .then(response => {
             setTitle(response.data.title);
             setDescription(response.data.description);
@@ -78,12 +78,12 @@ const EditPropertyForm = () => {
         
         //images.forEach((image) => formData.append("images", image));
         try {
-          const response = await axios.patch("http://localhost:8000/property/5/edit/", propertyData, {
+          const response = await axios.patch("http://localhost:8000/property/10/edit/", propertyData, {
             headers: {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMTkyODQwLCJpYXQiOjE2ODExOTI1NDAsImp0aSI6IjVkM2IyZjE5Y2YyYzQzMGE5ODlmM2EyN2RiYzY3NzAzIiwidXNlcl9pZCI6NX0.GnxUjUd3Ijx_x-rxTXc1mNwJatETslBP9iWG13IrMi4`
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY3NTg1LCJpYXQiOjE2ODEyNjcyODUsImp0aSI6IjhlNGFlNzZhNjRjZDQ4ZThhYWE2NjM2ZDU5N2Y2MTUzIiwidXNlcl9pZCI6NX0.1Js0nMeef2IdhNKHgU-YNn2Ngu6ippavx7LQHwOMR5A`
             },
           });
           console.log(response.data);
