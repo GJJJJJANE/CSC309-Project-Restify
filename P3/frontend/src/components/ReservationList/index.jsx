@@ -56,7 +56,7 @@ const ReservationList = ({ search, setSearch, reservations }) => {
                         </div>
 
                         <div class="col-md-2">
-                            <ActionButton state={reservation.state} />
+                            <ActionButton id={reservation.id} state={reservation.state} />
                         </div>
 
                         </div>
@@ -99,5 +99,7 @@ const ReservationList = ({ search, setSearch, reservations }) => {
     </table> */}
     </>
 }
+
+
 
 export default ReservationList
