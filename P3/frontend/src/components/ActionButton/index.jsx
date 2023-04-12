@@ -4,10 +4,6 @@ import { useState } from "react"
 import axios from "axios";
 import { useCallback } from 'react';
 
-function Deny(e) {
-    alert("You denied this reservation!")
-}
-
 function CancelRequest(e){
     alert("You requested cancel!")
 }
@@ -27,18 +23,20 @@ const ActionButton = ({ reservation, view }) => {
 
     const [isSending, setIsSending] = useState(false)
 
+    var actiondata = new FormData();
+        actiondata.append("state", "ap");
+
     const sendRequest = useCallback(async () => {
         if (isSending) return
         setIsSending(true)
         try {
-        const response = await axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, {
+        const response = await axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, actiondata, {
           headers: {
               "Access-Control-Allow-Origin": 'http://localhost:3000',
               "Access-Control-Allow-Credentials": 'true',
               "Content-Type": "multipart/form-data",
-              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY2OTU4LCJpYXQiOjE2ODEyNjY2NTgsImp0aSI6IjQ1NTk5Nzk4NGVjZjRlOTRiNDc3ZDgyMTg2NzQyNzJhIiwidXNlcl9pZCI6NX0.kyEnwEW_7hDpdBJR_4y2jcwJfj7sw8mMu73jdwRhPAA`
+              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY3NjI4LCJpYXQiOjE2ODEyNjczMjgsImp0aSI6ImVmNzY1OGQ1ZDY1YzQ4NjFiZDdkNzE4NjU5ZWFlNWRhIiwidXNlcl9pZCI6NX0.mPBbPQP5R-affyedSRrGLxTV-Z3sxkS06DydA1Nq21w`
           },
-          data: {state: "ap"},
         })
         .then(response =>{
             console.log(response.data);
@@ -65,7 +63,17 @@ const ActionButton = ({ reservation, view }) => {
                 }
             }}>Approve</a>
         <a className="btn btn-outline-secondary btn-block" href="" role="buttom"
-        onClick={Deny}>Deny</a>
+        onClick={() => {
+            const confirmBox = window.confirm(
+                "You are going to approve this pending reservation. This action is irreversible! "
+                )
+                if (confirmBox === true) {  
+                    actiondata = new FormData()
+                    actiondata.append("state", "de")
+                    sendRequest()
+                    alert("Action confirmed!")
+                }
+            }}>Deny</a>
         </div>
     }
 
