@@ -17,7 +17,7 @@ const GuestReservation = () => {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjYyMzU2LCJpYXQiOjE2ODEyNjIwNTYsImp0aSI6ImE0MTA4YjBlMTU0ZDRjZjM5NWI5ZmM2MzAyMzc3MmYwIiwidXNlcl9pZCI6Nn0.3v-u07fgPSI7tNIbNRmT4mOYojtJjP11YX89CkHVgoo`
+                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjcwNDc1LCJpYXQiOjE2ODEyNzAxNzUsImp0aSI6IjFhMmQzODViMmExNjRmMzZiOWQ3MjNkYWQ0OTNhMDAyIiwidXNlcl9pZCI6Nn0.jlVlmVHjRpWbfWLUjfaJyZjs6I6fyHtMDjks2FdFulU`
               },
             })
             .then(response =>{
