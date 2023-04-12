@@ -56,7 +56,7 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
                         </div>
 
                         <div class="col-md-2">
-                            <ActionButton id={reservation.id} state={reservation.state} view = {view}/>
+                            <ActionButton reservation={reservation} view = {view}/>
                         </div>
 
                         </div>

@@ -2,11 +2,7 @@
 // npm install react-confirm-alert --save
 import { useState } from "react"
 import axios from "axios";
-
-
-function Approve(e,id) {}
-    
-
+import { useCallback } from 'react';
 
 function Deny(e) {
     alert("You denied this reservation!")
@@ -25,7 +21,35 @@ function CancelDeny(e){
 }
 
 
-const ActionButton = ({ id, state, view }) => {
+const ActionButton = ({ reservation, view }) => {
+    var id = reservation.id
+    var state = reservation.state
+
+    const [isSending, setIsSending] = useState(false)
+
+    const sendRequest = useCallback(async () => {
+        if (isSending) return
+        setIsSending(true)
+        try {
+        const response = await axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, {
+          headers: {
+              "Access-Control-Allow-Origin": 'http://localhost:3000',
+              "Access-Control-Allow-Credentials": 'true',
+              "Content-Type": "multipart/form-data",
+              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY2OTU4LCJpYXQiOjE2ODEyNjY2NTgsImp0aSI6IjQ1NTk5Nzk4NGVjZjRlOTRiNDc3ZDgyMTg2NzQyNzJhIiwidXNlcl9pZCI6NX0.kyEnwEW_7hDpdBJR_4y2jcwJfj7sw8mMu73jdwRhPAA`
+          },
+          data: {state: "ap"},
+        })
+        .then(response =>{
+            console.log(response.data);
+        });
+        } catch (error) {
+            console.log(error);
+        }
+        setIsSending(false)
+    }, [isSending])
+
+    console.log(state)
 
     // approve/deny pending
     if (state === 'pe' && view === 'host'){
@@ -36,22 +60,7 @@ const ActionButton = ({ id, state, view }) => {
                 "You are going to approve this pending reservation. This action is irreversible! "
                 )
                 if (confirmBox === true) {  
-                    try {
-                        const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, {
-                          headers: {
-                              "Access-Control-Allow-Origin": 'http://localhost:3000',
-                              "Access-Control-Allow-Credentials": 'true',
-                              "Content-Type": "multipart/form-data",
-                              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY0NzgzLCJpYXQiOjE2ODEyNjQ0ODMsImp0aSI6ImJkZTg3ZjA4NzRjNTRiNTc4M2ZkYTcxZTdhMGIyNDdkIiwidXNlcl9pZCI6NX0.SEZFY3-E18aC83B5y90TUfrLjL08Q7Wef4Uy_NGNdfw`
-                          },
-                          data: {"state": "ap"},
-                        })
-                        .then(response =>{
-                            console.log(response.data);
-                        });
-                      } catch (error) {
-                        console.log(error);
-                      }
+                    sendRequest()
                     alert("Action confirmed!")
                 }
             }}>Approve</a>

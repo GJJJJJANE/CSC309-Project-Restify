@@ -18,7 +18,7 @@ const HostReservation = () => {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY1MjE2LCJpYXQiOjE2ODEyNjQ5MTYsImp0aSI6IjdmZDFhNjc0MjBlZjQ5NWE4MTg0NGRhMDA5OThmNjJmIiwidXNlcl9pZCI6NX0.h3jA_7MEm46qvbMoLHYzUv19O9eV2lHg8IJynRq8mek`
+                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY2OTU4LCJpYXQiOjE2ODEyNjY2NTgsImp0aSI6IjQ1NTk5Nzk4NGVjZjRlOTRiNDc3ZDgyMTg2NzQyNzJhIiwidXNlcl9pZCI6NX0.kyEnwEW_7hDpdBJR_4y2jcwJfj7sw8mMu73jdwRhPAA`
               },
             })
             .then(response =>{
@@ -26,7 +26,6 @@ const HostReservation = () => {
                 // note next and previous for pagination support
                 console.log(response.data);
             });
-            
           } catch (error) {
             console.log(error);
           }
