@@ -18,11 +18,42 @@ class ListGuestComment(generics.ListAPIView):
     pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
-        try:
-            queryset = GuestComment.objects.filter(target=User.objects.get(id=self.kwargs['guest_id']))
-            return queryset
-        except:
-            return []
+        score_filter = self.request.query_params.get('score', '')
+        if score_filter == '':
+            try:
+                queryset = GuestComment.objects.filter(target=User.objects.get(id=self.kwargs['guest_id']))
+                return queryset
+            except:
+                return []
+        else:
+            try:
+                queryset = GuestComment.objects.filter(target=User.objects.get(id=self.kwargs['guest_id']),
+                                                       score=score_filter)
+                return queryset
+            except:
+                return []
+
+        
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            serializer_data = serializer.data
+            sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
+            for item in sorted_serializer_data:
+                newDict={"host_name": User.objects.get(id=item['host']).get_full_name()}
+                item.update(newDict)
+            return self.get_paginated_response(sorted_serializer_data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        serializer_data = serializer.data
+        sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
+        for item in sorted_serializer_data:
+                newDict={"host_name": User.objects.get(id=item['host']).get_full_name()}
+                item.update(newDict)
+        return Response(sorted_serializer_data)
         
 # comment view - property
 # endpoint: comments/<property_id>/Propertyview
@@ -32,14 +63,45 @@ class ListPropertyComment(generics.ListAPIView):
     pagination_class = ListingPagination
 
     def get_queryset(self, *args, **kwargs):
-        try:
-            targets=Property.objects.get(id=self.kwargs['property_id'])
-            # if not targets.exists():
-            #     return Response("Property Not Found", status=404)
-            target_reservations=Reservation.objects.filter(property=targets)
-            return PropertyComment.objects.filter(target__in=target_reservations)
-        except:
-            return []
+
+        score_filter = self.request.query_params.get('score', '')
+        if score_filter == '':
+            try:
+                targets=Property.objects.get(id=self.kwargs['property_id'])
+                # if not targets.exists():
+                #     return Response("Property Not Found", status=404)
+                target_reservations=Reservation.objects.filter(property=targets)
+                return PropertyComment.objects.filter(target__in=target_reservations)
+            except:
+                return []
+        else:
+            try:
+                targets=Property.objects.get(id=self.kwargs['property_id'])
+                # if not targets.exists():
+                #     return Response("Property Not Found", status=404)
+                target_reservations=Reservation.objects.filter(property=targets)
+                return PropertyComment.objects.filter(target__in=target_reservations)
+            except:
+                return []
+
+        
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            serializer_data = serializer.data
+            sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
+            for item in sorted_serializer_data:
+                newDict={"guest_name": User.objects.get(id=item['guest']).get_full_name()}
+                item.update(newDict)
+            return self.get_paginated_response(sorted_serializer_data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        serializer_data = serializer.data
+        sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
+        return Response(sorted_serializer_data)
     
 # create comment - guest
 # endpoint: comments/<guest_id>/writeGuestComment
@@ -53,7 +115,8 @@ class WriteGuestComment(generics.CreateAPIView):
         Extra context provided to the serializer class.
         """
         return {
-            'guest_id': self.kwargs['guest_id']
+            'guest_id': self.kwargs['guest_id'],
+            'host': self.request.user,
         }
 
     def perform_create(self, serializer):

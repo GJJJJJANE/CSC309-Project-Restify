@@ -5,19 +5,20 @@ from ..models import GuestComment, PropertyComment, ReplyThread, User, Reservati
 class GuestCommentSerializer(ModelSerializer):
     class Meta:
         model = GuestComment
-        fields = ['id','target','score','content','modified']
-        read_only_fields = ('target',)
+        fields = ['id','target','score','content','modified','host']
+        read_only_fields = ('target','host')
     
     def validate(self, data):
         if not User.objects.filter(id=self.context.get('guest_id')).exists():
             raise ValidationError('illegal user')
+        data['host']=self.context.get('host').get("id")
         return data
 
 class PropertyCommentSerializer(ModelSerializer):
     class Meta:
         model = PropertyComment
-        fields = ['id','target','score','content','modified']
-        read_only_fields = ('target',)
+        fields = ['id','target','score','content','modified','guest']
+        read_only_fields = ('target','guest')
         
     def validate(self, data):
         target_reservation = Reservation.objects.filter(id=self.context.get('reservation_id'))
@@ -31,6 +32,7 @@ class PropertyCommentSerializer(ModelSerializer):
             raise ValidationError('Order not completed yet')
         if target_reservation[0].guest != self.context.get('guest'):
             raise ValidationError('Not your reservation')
+        data['guest']=self.context.get('guest').get("id")
         return data
 
 class ReplySerializer(ModelSerializer):

@@ -7,6 +7,7 @@ import Reserve_Host from './pages/Reserve_Host';
 import Reserve_Guest from './pages/Reserve_Guest';
 import PropertyList from './pages/listing';
 import SearchPage from './pages/searchPage';
+import GuestCommentPage from './pages/GuestCommentList';
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
+
       </Routes>
     </BrowserRouter>
   );

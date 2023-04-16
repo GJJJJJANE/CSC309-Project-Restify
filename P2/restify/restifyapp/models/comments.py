@@ -17,6 +17,7 @@ class GuestComment(models.Model):
     score = models.PositiveIntegerField()
     content = models.TextField()
     modified = models.DateTimeField(auto_now_add=True)
+    host = models.PositiveIntegerField()  # host id
 
     class Meta:
         ordering = ['modified']
@@ -33,6 +34,7 @@ class PropertyComment(models.Model):
     content = models.TextField()
     score = models.PositiveIntegerField()
     modified = models.DateTimeField(auto_now_add=True)
+    guest = models.PositiveIntegerField()  # guest id
 
     class Meta:
         ordering = ['modified']
