@@ -7,9 +7,9 @@ import SearchList from "../pages/searchList";
 
 
 function SearchBar() {
-    const today = new Date().toISOString().substr(0, 10);
+    //const today = new Date().toISOString().substr(0, 10);
     const [key, setKey] = useState("");
-    const [date, setDate] = useState(today);
+    const [date, setDate] = useState('yyyy-mm-dd');
     const [n_guest, setGuest] = useState(0);
     const [n_bed, setBed] = useState(0);
     const [n_bath, setBath] = useState(0);
@@ -23,7 +23,13 @@ function SearchBar() {
         
     }
 
+    function dateornot() {
+        if(date == 'yyyy-mm-dd')
+           return <SearchList keyword={key} bed={n_bed} bath={n_bath} guest={n_guest} order={order}/>;
+        return <SearchList keyword={key} date={date} bed={n_bed} bath={n_bath} guest={n_guest} order={order}/>;
+     }     
 
+    
     return (
         
     <div>
