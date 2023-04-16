@@ -51,16 +51,16 @@ function SearchList(props) {
 
     return (
         <div className="container">
-            <hr class="mt-2"/>
+            <hr className="mt-2"/>
             
             <div className="property-list">
                 <Row xs={2} md={3} className="g-4">
                     {properties.map(property => (<CardProperty key={property.id} property={property} />))}
                 </Row>
-                <div class="row my-3"></div>
+                <div className="row my-3"></div>
                 <Pagination className="d-flex justify-content-center">{items}</Pagination>
             </div>
-            <div class="row my-3"> </div>
+            <div className="row my-3"> </div>
         </div>
   );
 }
