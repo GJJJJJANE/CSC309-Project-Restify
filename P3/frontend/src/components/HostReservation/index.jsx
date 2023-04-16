@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReservationList from "../ReservationList";
+import Pagination from 'react-bootstrap/Pagination';
 
 //  TODO: Notice, should get query parameter state to support search filter.
 
@@ -9,11 +10,13 @@ const HostReservation = () => {
     const view = 'host'
 
     const [reservations, setReservations] = useState([])
-    const [search, setSearch] = useState("")    
+    const [search, setSearch] = useState("")
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);      
 
       useEffect (() => {
         try {
-            const response = axios.get(`http://127.0.0.1:8000/reservations/hostview?state=${search}`, {
+            const response = axios.get(`http://127.0.0.1:8000/reservations/hostview?state=${search}&page=${currentPage}`, {
               headers: {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
@@ -29,10 +32,26 @@ const HostReservation = () => {
           } catch (error) {
             console.log(error);
           }
-    }, [search]);
+    }, [search, currentPage]);
 
-return <ReservationList search={search} reservations = {reservations} 
+  function handlePageChange(pageNumber) {
+      setCurrentPage(pageNumber);
+  }
+
+  let items = [];
+  for (let number = 1; number <= totalPages; number++) {
+      items.push(
+      <Pagination.Item key={number} onClick={() => handlePageChange(number)} className={number === currentPage ? "active" : ""}>
+          {number}
+      </Pagination.Item>,);
+  }
+
+return <>
+<ReservationList search={search} reservations = {reservations} 
 setSearch={setSearch} view = {view}/>
+<Pagination className="d-flex justify-content-center">{items}</Pagination>
+</>
+
 
 }
 
