@@ -43,7 +43,7 @@ class ListGuestComment(generics.ListAPIView):
             serializer_data = serializer.data
             sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
             for item in sorted_serializer_data:
-                newDict={"host_name": User.objects.get(id=item['target']).get_full_name()}
+                newDict={"host_name": User.objects.get(id=item['host']).get_full_name()}
                 item.update(newDict)
             return self.get_paginated_response(sorted_serializer_data)
 
@@ -51,7 +51,7 @@ class ListGuestComment(generics.ListAPIView):
         serializer_data = serializer.data
         sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
         for item in sorted_serializer_data:
-                newDict={"host_name": User.objects.get(id=item['target']).get_full_name()}
+                newDict={"host_name": User.objects.get(id=item['host']).get_full_name()}
                 item.update(newDict)
         return Response(sorted_serializer_data)
         
@@ -94,7 +94,7 @@ class ListPropertyComment(generics.ListAPIView):
             serializer_data = serializer.data
             sorted_serializer_data = sorted(serializer_data, key=lambda x: x['modified'], reverse=True)
             for item in sorted_serializer_data:
-                newDict={"property_name": Property.objects.get(id=item['target']).get("title")}
+                newDict={"guest_name": User.objects.get(id=item['guest']).get_full_name()}
                 item.update(newDict)
             return self.get_paginated_response(sorted_serializer_data)
 
@@ -115,7 +115,8 @@ class WriteGuestComment(generics.CreateAPIView):
         Extra context provided to the serializer class.
         """
         return {
-            'guest_id': self.kwargs['guest_id']
+            'guest_id': self.kwargs['guest_id'],
+            'host': self.request.user,
         }
 
     def perform_create(self, serializer):
