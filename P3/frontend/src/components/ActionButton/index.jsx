@@ -9,38 +9,6 @@ const ActionButton = ({ reservation, view }) => {
     var id = reservation.id
     var state = reservation.state
 
-    const [isSending, setIsSending] = useState(false)
-
-    var actiondata = new FormData();
-        actiondata.append("state", "ap");
-    var API = `http://127.0.0.1:8000/reservations/${id}/pending/action/`
-
-    const sendRequest = useCallback(
-        async ({actiondata, API}) => {
-        if (isSending) return
-        setIsSending(true)
-        try {
-            console.log(actiondata)
-            console.log(API)
-        const response = await axios.put(API, actiondata, {
-          headers: {
-              "Access-Control-Allow-Origin": 'http://localhost:3000',
-              "Access-Control-Allow-Credentials": 'true',
-              "Content-Type": "multipart/form-data",
-              "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjcxMTc1LCJpYXQiOjE2ODEyNzA4NzUsImp0aSI6ImVlOWZiMzY2MTExYzRkOTFhN2I0MjQ5MTlkZGRhMDVlIiwidXNlcl9pZCI6NX0.Md2hM1wnuPBQdRUajHktVzTe0Yt9Rcdg5JVZ6sBwRfY`
-          },
-        })
-        .then(response =>{
-            console.log(response.data);
-        });
-        } catch (error) {
-            console.log(error);
-        }
-        setIsSending(false)
-    }, [isSending])
-
-    console.log(state)
-
     // approve/deny pending
     if (state === 'pe' && view === 'host'){
         return <div className="row m-2 g-3">
@@ -50,10 +18,25 @@ const ActionButton = ({ reservation, view }) => {
                 "You are going to approve this pending reservation. This action is irreversible! "
                 )
                 if (confirmBox === true) {
-                    API = `http://127.0.0.1:8000/reservations/${id}/pending/action/`  
-                    actiondata = new FormData()
-                    actiondata.append("state", "ap")
-                    sendRequest({actiondata,API})
+                    try {
+                        var actiondata = new FormData()
+                        actiondata.append("state", "ap")
+                        console.log(actiondata.state)
+                        
+                    const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, actiondata, {
+                        headers: {
+                          "Access-Control-Allow-Origin": 'http://localhost:3000',
+                          "Access-Control-Allow-Credentials": 'true',
+                          "Content-Type": "multipart/form-data",
+                          "Authorization": 'Bearer '+localStorage.getItem('access')
+                      },
+                    })
+                        .then(response =>{
+                            console.log(response.data);
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                     alert("Action confirmed!")
                 }
             }}>Approve</a>
@@ -63,11 +46,27 @@ const ActionButton = ({ reservation, view }) => {
                 "You are going to deny this pending reservation. This action is irreversible! "
                 )
                 if (confirmBox === true) {
-                    API = `http://127.0.0.1:8000/reservations/${id}/pending/action/`  
-                    actiondata = new FormData()
-                    actiondata.append("state", "de")
-                    sendRequest({actiondata,API})
+                    try {
+                        var actiondata = new FormData()
+                        actiondata.append("state", "de")
+                        console.log(actiondata.state)
+                        
+                    const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/pending/action/`, actiondata, {
+                        headers: {
+                          "Access-Control-Allow-Origin": 'http://localhost:3000',
+                          "Access-Control-Allow-Credentials": 'true',
+                          "Content-Type": "multipart/form-data",
+                          "Authorization": 'Bearer '+localStorage.getItem('access')
+                      },
+                    })
+                        .then(response =>{
+                            console.log(response.data);
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                     alert("Action confirmed!")
+        
                 }
             }}>Deny</a>
         </div>
@@ -82,10 +81,25 @@ const ActionButton = ({ reservation, view }) => {
                 "You are going to approve this cancel request. The reservation will then be cancelled. This action is irreversible! "
                 )
                 if (confirmBox === true) {  
-                    API = `http://127.0.0.1:8000/reservations/${id}/cancel/action/`  
-                    actiondata = new FormData()
-                    actiondata.append("state", "ca")
-                    sendRequest({actiondata,API})
+                    try {
+                        var actiondata = new FormData()
+                        actiondata.append("state", "ca")
+                        console.log(actiondata.state)
+                        
+                    const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/cancel/action/`, actiondata, {
+                        headers: {
+                          "Access-Control-Allow-Origin": 'http://localhost:3000',
+                          "Access-Control-Allow-Credentials": 'true',
+                          "Content-Type": "multipart/form-data",
+                          "Authorization": 'Bearer '+localStorage.getItem('access')
+                      },
+                    })
+                        .then(response =>{
+                            console.log(response.data);
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                     alert("Action confirmed!")
                 }
             }}>Confirm Cancel</a>
@@ -94,13 +108,28 @@ const ActionButton = ({ reservation, view }) => {
             const confirmBox = window.confirm(
                 "You are going to deny this cancel request. The reservation will then be approved. This action is irreversible! "
                 )
-                if (confirmBox === true) {  
-                    API = `http://127.0.0.1:8000/reservations/${id}/cancel/action/` 
-                    actiondata = new FormData()
+                if (confirmBox === true) {
+                    try {
+                    var actiondata = new FormData()
                     actiondata.append("state", "ap")
-                    sendRequest({actiondata,API})
-                    alert("Action confirmed!")
+                    console.log(actiondata.state)
+                    
+                const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/cancel/action/`, actiondata, {
+                    headers: {
+                      "Access-Control-Allow-Origin": 'http://localhost:3000',
+                      "Access-Control-Allow-Credentials": 'true',
+                      "Content-Type": "multipart/form-data",
+                      "Authorization": 'Bearer '+localStorage.getItem('access')
+                  },
+                })
+                    .then(response =>{
+                        console.log(response.data);
+                    });
+                } catch (error) {
+                    console.log(error);
                 }
+                alert("Action confirmed!")
+            }
             }}>Deny Cancel</a>
         </div>
     }
@@ -116,10 +145,25 @@ const ActionButton = ({ reservation, view }) => {
                 "You are going to request to cancel this reservation. This action is irreversible! "
                 )
                 if (confirmBox === true) {
-                    API = `http://127.0.0.1:8000/reservations/${id}/cancel/request/`  
-                    actiondata = new FormData()
-                    actiondata.append("state", "pc")
-                    sendRequest({actiondata,API})
+                    try {
+                        var actiondata = new FormData()
+                        actiondata.append("state", "pc")
+                        console.log(actiondata.state)
+                        
+                    const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/cancel/request/`, actiondata, {
+                        headers: {
+                          "Access-Control-Allow-Origin": 'http://localhost:3000',
+                          "Access-Control-Allow-Credentials": 'true',
+                          "Content-Type": "multipart/form-data",
+                          "Authorization": 'Bearer '+localStorage.getItem('access')
+                      },
+                    })
+                        .then(response =>{
+                            console.log(response.data);
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                     alert("Action confirmed!")
                 }
             }}>Request Cancel</a>
@@ -140,11 +184,26 @@ const ActionButton = ({ reservation, view }) => {
             const confirmBox = window.confirm(
                 "You are going to terminate this reservation. This action is irreversible! "
                 )
-                if (confirmBox === true) {  
-                    API = `http://127.0.0.1:8000/reservations/${id}/terminate/`  
-                    actiondata = new FormData()
-                    actiondata.append("state", "te")
-                    sendRequest({actiondata,API})
+                if (confirmBox === true) {
+                    try {
+                        var actiondata = new FormData()
+                        actiondata.append("state", "te")
+                        console.log(actiondata.state)
+                        
+                    const response = axios.put(`http://127.0.0.1:8000/reservations/${id}/terminate/`, actiondata, {
+                        headers: {
+                          "Access-Control-Allow-Origin": 'http://localhost:3000',
+                          "Access-Control-Allow-Credentials": 'true',
+                          "Content-Type": "multipart/form-data",
+                          "Authorization": 'Bearer '+localStorage.getItem('access')
+                      },
+                    })
+                        .then(response =>{
+                            console.log(response.data);
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
                     alert("Action confirmed!")
                 }
             }}>terminate</a>
