@@ -25,8 +25,10 @@ class Property(models.Model):
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     description = models.TextField()
-    #photos = models.ImageField(upload_to='property_images')
-    photos = models.URLField()
+    photos = models.ImageField(upload_to='property_images')
+    #photo2 = models.ImageField(upload_to='property_images')
+    #photo3 = models.ImageField(upload_to='property_images')
+    #photos = models.URLField()
 
     location = models.TextField()
     num_guest = models.PositiveIntegerField()
@@ -57,6 +59,10 @@ class Property(models.Model):
     class Meta:
         ordering = ['modified']
 
+
+class Image(models.Model):
+    property_id = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='photo')
+    photos = models.ImageField(upload_to='property_images')
 
 #class Amenities(models.Model):
 

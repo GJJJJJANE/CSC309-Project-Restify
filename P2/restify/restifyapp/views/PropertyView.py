@@ -1,12 +1,15 @@
-from ..models import Property, User #, Availability
-from ..serializers import PropertySerializer#, PropertyAvailabilitySerializer
+from ..models import Property, User, Image #, Availability
+from ..serializers import PropertySerializer, ImageSerializer#, PropertyAvailabilitySerializer
 from django.core.exceptions import ValidationError, PermissionDenied
 from rest_framework.exceptions import NotFound
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.http import JsonResponse
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 class ListingPagination(PageNumberPagination):
@@ -86,6 +89,7 @@ class CreateProperty(generics.CreateAPIView):
 
     serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated]
+    #serializer_class = PropertySerializer
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
