@@ -9,7 +9,7 @@ function CardProperty({ property }) {
     return (
         <Col>
         <Card>
-            <Card.Img variant="top" src={require('../images/coverpage.jpeg')} />
+            <Card.Img variant="top" height={250} src={property.photos} />
             <Card.Body>
                 <Card.Title>{property.title}</Card.Title>
                 <Card.Text>{property.description} </Card.Text>

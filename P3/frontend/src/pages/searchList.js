@@ -14,14 +14,20 @@ function SearchList(props) {
     
 
     useEffect(() => {
+        let parameters = {
+            keyword: props.keyword,
+            num_bedroom: props.bed,
+            num_bathroom: props.bath,
+            num_guest: props.guest,
+            order_by: props.order
+        };
+      
+        if (props.date !== 'yyyy-mm-dd') {
+            parameters.available_date = props.date;
+        }
         axios
         .get(`http://127.0.0.1:8000/search_result/?page=${currentPage}`, 
-            {params: {keyword: props.keyword, 
-                available_date: props.date, 
-                num_bedroom: props.bed, 
-                num_bathroom: props.bath, 
-                num_guest: props.guest,
-                order_by: props.order}})
+            {params: parameters})
         .then(response => {
             setProperties(response.data.results);
             setTotalPages(Math.ceil(response.data.count / 6));

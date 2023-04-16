@@ -141,4 +141,4 @@ CORS_ALLOW_HEADERS = ['*']
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
 
 # URL used to access the media
-MEDIA_URL = '/media/'
+MEDIA_URL = '/mediafiles/'
