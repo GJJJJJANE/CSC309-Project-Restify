@@ -18,7 +18,7 @@ const HostReservation = () => {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjcxMTc1LCJpYXQiOjE2ODEyNzA4NzUsImp0aSI6ImVlOWZiMzY2MTExYzRkOTFhN2I0MjQ5MTlkZGRhMDVlIiwidXNlcl9pZCI6NX0.Md2hM1wnuPBQdRUajHktVzTe0Yt9Rcdg5JVZ6sBwRfY`
+                  "Authorization": 'Bearer '+localStorage.getItem('access'),
               },
             })
             .then(response =>{
