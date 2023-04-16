@@ -28,7 +28,9 @@ const CreatePropertyForm = () => {
 
     const handleImage = (event) => {
         if (event.target.files && event.target.files[0]) {
-            setPhoto(URL.createObjectURL(event.target.files[0]));
+            //setPhoto(URL.createObjectURL(event.target.files[0]));
+            setPhoto(event.target.files[0]);
+
         }
     };
 
@@ -64,7 +66,7 @@ const CreatePropertyForm = () => {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjg2MzQ4LCJpYXQiOjE2ODEyODYwNDgsImp0aSI6ImI5MDY0MDFhYWQ0MjQwYjFhZThhZTRjM2U1YzA5ZWRlIiwidXNlcl9pZCI6NX0.12qMhe7fZPuFbv39xLCdA_-htCy8mKdddbIWc7gvh-Q`
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNTk4NzUzLCJpYXQiOjE2ODE1OTg0NTMsImp0aSI6ImQyNjY0OWU4ZDk3NjQ3ZTVhYTMzYzc2MGE1Y2QxMTFhIiwidXNlcl9pZCI6NX0.2IvSt6b719YcjGf_fT86DTcJzMT-ENb4T4XIFjOukzM`
             },
           });
           console.log(response.data);
