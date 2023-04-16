@@ -34,20 +34,20 @@ function SearchBar() {
         
     <div>
     <form onSubmit={handleSubmit}>
-        <div class="container mt-10">
-            <div class="row my-5"></div>
+        <div className="container mt-10">
+            <div className="row my-5"></div>
             
-            <div class="row">
-                <div class="row mt-2 g-4">
-                    <div class="col-md-6">
-                        <input class="form-control" placeholder="Quick search again" value={key} onChange={(event) => setKey(event.target.value)} />
+            <div className="row">
+                <div className="row mt-2 g-4">
+                    <div className="col-md-6">
+                        <input className="form-control" placeholder="Quick search again" value={key} onChange={(event) => setKey(event.target.value)} />
                     </div>
-                    <div class="col-md-3">
+                    <div className="col-md-3">
                         <input className="btn btn-outline-secondary" type="submit" />
                     </div>
                     
-                    <div class="col-md-3">
-                        <select id="inputState" class="form-select" value={order} onChange={(event) => setOrder(event.target.value)}>
+                    <div className="col-md-3">
+                        <select id="inputState" className="form-select" value={order} onChange={(event) => setOrder(event.target.value)}>
                             <option selected>Order by</option>
                             <option>time_new</option>
                             <option>time_old</option>
@@ -58,26 +58,26 @@ function SearchBar() {
                 </div>
             </div>
 
-            <div class="row">
-                    <div class="row mt-2 g-4">
-                        <div class="col-md-3">
-                            <label for="inputArrival" class="form-label">Arrival</label>
-                            <input type="date" class="form-control" id="inputArrival" value={date} onChange={(event) => setDate(event.target.value)} />
+            <div className="row">
+                    <div className="row mt-2 g-4">
+                        <div className="col-md-3">
+                            <label for="inputArrival" className="form-label">Arrival</label>
+                            <input type="date" className="form-control" id="inputArrival" value={date} onChange={(event) => setDate(event.target.value)} />
                         </div>
 
-                        <div class="col-md-3">
-                            <label for="inputState" class="form-label">Guests</label>
-                            <input type="text" class="form-control" id="guest" value={n_guest} onChange={(event) => setGuest(event.target.value)} />    
+                        <div className="col-md-3">
+                            <label for="inputState" className="form-label">Guests</label>
+                            <input type="text" className="form-control" id="guest" value={n_guest} onChange={(event) => setGuest(event.target.value)} />    
                         </div>
             
-                        <div class="col-md-3">
-                            <label for="Pricelow" class="form-label">Bedrooms</label>
-                            <input type="text" id="Pricelow" class="form-control" value={n_bed} onChange={(event) => setBed(event.target.value)} />
+                        <div className="col-md-3">
+                            <label for="Pricelow" className="form-label">Bedrooms</label>
+                            <input type="text" id="Pricelow" className="form-control" value={n_bed} onChange={(event) => setBed(event.target.value)} />
                         </div>
                     
-                        <div class="col-md-3">
-                            <label for="Pricehigh" class="form-label">Bathrooms</label>
-                            <input type="text" id="Pricehigh" class="form-control" value={n_bath} onChange={(event) => setBath(event.target.value)} />
+                        <div className="col-md-3">
+                            <label for="Pricehigh" className="form-label">Bathrooms</label>
+                            <input type="text" id="Pricehigh" className="form-control" value={n_bath} onChange={(event) => setBath(event.target.value)} />
                         </div>
                     </div>
                     
