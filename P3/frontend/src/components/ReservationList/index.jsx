@@ -69,9 +69,9 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
         </div>
         
   
-      <div class="footer p-5 text-center">
+      {/* <div class="footer p-5 text-center">
           2023 Restify Inc.
-      </div>
+      </div> */}
 
 
     {/* <table>
