@@ -28,12 +28,9 @@ const Reserve = ({ id }) => {
           });
           } catch (error) {
             if (error.response.status === 401){alert("Please login first")}
-            if (error.response.status === 400){alert("Some field is invalid. Please check the reservation detail!")}
+            if (error.response.status === 400){alert("Some field is invalid. Please check the reservation detail and property available time!")}
             console.log(error);
           }
-
-        const propertyData = new FormData();
-
     }
 
     return <>

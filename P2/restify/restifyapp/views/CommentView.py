@@ -121,7 +121,7 @@ class WriteGuestComment(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         if serializer.is_valid():
-            serializer.save(target=User.objects.filter(id=self.kwargs['guest_id'])[0])
+            serializer.save(target=User.objects.filter(id=self.kwargs['guest_id'])[0],)
             return Response(serializer.data)
         return Response(serializer.errors)           
 

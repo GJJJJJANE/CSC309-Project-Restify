@@ -43,7 +43,7 @@ function handlePageChange(pageNumber) {
   }
 
     return <main>
-    <GuestComment context={context} search={search} setSearch={setSearch}/>
+    <GuestComment context={context} search={search} setSearch={setSearch} id={id}/>
     <Pagination className="d-flex justify-content-center">{items}</Pagination>
     </main>;
 }
