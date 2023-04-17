@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {useParams} from "react-router-dom"
 import Carousel from 'react-bootstrap/Carousel';
-
+import Reserve from '../components/MakeReservation';
 
 const PropertyDetailPage = () => {
     const {id} = useParams()
@@ -75,7 +75,7 @@ const PropertyDetailPage = () => {
             </div>
 
             <div className="col-md-6 text-end g-4">
-                <a className="btn btn-primary btn-block" href="#" role="buttom">Book Now</a>
+                <Reserve id={id}/>
             </div>
             <hr className="mt-3"></hr> 
         </div>

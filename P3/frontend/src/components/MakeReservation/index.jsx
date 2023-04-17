@@ -9,20 +9,26 @@ const Reserve = ({ id }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        bookData = new FormData()
-        bookData.append('start', start)
-        bookData.append('end', end)
+        var bookData = new FormData();
+        bookData.append("start", start);
+        bookData.append("end", end);
+
         try {
-            const response = await axios.post(`http://127.0.0.1:8000/reservations/reserve/${id}`, bookData, {
+            const response = await axios.post(`http://127.0.0.1:8000/reservations/reserve/${id}/`, bookData, {
               headers: {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
                   "Content-Type": "multipart/form-data",
-                  "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMTkyODQwLCJpYXQiOjE2ODExOTI1NDAsImp0aSI6IjVkM2IyZjE5Y2YyYzQzMGE5ODlmM2EyN2RiYzY3NzAzIiwidXNlcl9pZCI6NX0.GnxUjUd3Ijx_x-rxTXc1mNwJatETslBP9iWG13IrMi4`
+                  "Authorization": 'Bearer '+localStorage.getItem('access'),
               },
-            });
-            console.log(response.data);
+            })
+            .then(response =>{
+              alert("You have submitted reservation. Please check in reservation list.")
+              console.log(response.data);
+          });
           } catch (error) {
+            if (error.response.status === 401){alert("Please login first")}
+            if (error.response.status === 400){alert("Some field is invalid. Please check the reservation detail!")}
             console.log(error);
           }
 
@@ -31,6 +37,7 @@ const Reserve = ({ id }) => {
     }
 
     return <>
+    <div class="card p-2 sticky-md-top sticky-rel mb-5">
     <form class="row p-3" onSubmit={handleSubmit}>
             <h5> Confirm your reservation </h5>
             <div class="col-md-6">
@@ -47,6 +54,9 @@ const Reserve = ({ id }) => {
               <button type="submit" class="btn btn-primary">Book Now</button>
             </div>
           </form>
+
+          </div>
           </>
 }
 
+export default Reserve

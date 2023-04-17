@@ -13,8 +13,8 @@ class ReservationSerializer(ModelSerializer):
             raise ValidationError('No such property')
         
         target_property = target_properties[0]
-        if not (data['start'] > target_property.start_date and \
-                data['end'] < target_property.end_date):
+        if not (data['start'] >= target_property.start_date and \
+                data['end'] <= target_property.end_date):
             raise ValidationError('Property not available')
 
         if not data.get('start') < data.get('end'):
