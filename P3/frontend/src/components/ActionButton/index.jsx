@@ -8,6 +8,8 @@ import { useCallback } from 'react';
 const ActionButton = ({ reservation, view }) => {
     var id = reservation.id
     var state = reservation.state
+    var guestid = reservation.guest
+    var property = reservation.property
 
     // approve/deny pending
     if (state === 'pe' && view === 'host'){
@@ -204,7 +206,7 @@ const ActionButton = ({ reservation, view }) => {
                     } catch (error) {
                         console.log(error);
                     }
-                    alert("Action confirmed!")
+                    alert("Action confirmed!")  
                 }
             }}>terminate</a>
         </div>
@@ -214,6 +216,18 @@ const ActionButton = ({ reservation, view }) => {
         return    <div className="row m-2 g-3">
     <p>No further action.</p>
     </div>
+    }
+
+    if (state === 'te' && view === 'host'){
+        return <div className="row m-2 g-3">
+            <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${guestid}/`} role="buttom">View Guest</a>
+        </div>
+    }
+
+    if (state === 'te' && view === 'host'){
+        return <div className="row m-2 g-3">
+            <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${guestid}/`} role="buttom">View Guest</a>
+        </div>
     }
 
     return    <div className="row m-2 g-3">
