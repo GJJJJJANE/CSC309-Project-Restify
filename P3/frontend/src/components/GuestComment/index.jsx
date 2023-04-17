@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import CommentCard from "../CommentCard";
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import GuestCommentForm from "../GuestCommentForm";
 
-const GuestComment = ({ context, search, setSearch }) => {
+const GuestComment = ({ context, search, setSearch, id }) => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     return <>
         <div class="container mt-10">
@@ -40,6 +48,26 @@ const GuestComment = ({ context, search, setSearch }) => {
             )}
               
         </div>
+
+      <button class="btn btn-primary mt-5" 
+      type="button" 
+      onClick={handleShow}>
+                Write My Own Review</button>
+
+      <Offcanvas show={show} onHide={handleClose}
+      placement={'bottom'} style={{height:"200%"}}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>My review for this guest</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          
+        <GuestCommentForm id={id} />
+
+        </Offcanvas.Body>
+      </Offcanvas>
+
+
+
         </div>        
         </div>
         </div>
