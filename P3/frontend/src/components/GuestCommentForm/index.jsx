@@ -3,15 +3,16 @@ import axios from "axios";
 
 
 const GuestCommentForm = ( {id} ) => {
-
+    const [score, setScore] = useState("");
+    const [content, setContent] = useState("");
     
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         var guestid = id.guestid
         var commentData = new FormData();
-
-
+        commentData.append("score", score)
+        commentData.append("content", content)
         try {
             const response = await axios.post(`http://127.0.0.1:8000/comments/${guestid}/writeGuestComment/`, commentData, {
               headers: {
@@ -37,24 +38,26 @@ return <>
 
         <div class="col-md-2">
             <label for="inputscore" class="form-label">Enter Score (1-5)</label>
-            <input type="text" class="form-control" id="inputscore"></input>
+            <input value={score} onChange={event => setScore(event.target.value)}
+            type="text" class="form-control" id="inputscore"></input>
         </div>
 
         <div class="col-12">
             <div class="mb-3 mt-3">
             <label for="exampleFormControlTextarea1" class="form-label">Provide my Review</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea value={content} onChange={event => setContent(event.target.value)}
+            class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
 
-        <div class="col-12">
+        {/* <div class="col-12">
             <div class="form-check m-2">
             <input class="form-check-input" type="checkbox" id="gridCheck"></input>
             <label class="form-check-label" for="gridCheck">
                 Allow others to view my profile
             </label>
             </div>
-        </div>
+        </div> */}
 
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit my review</button>
