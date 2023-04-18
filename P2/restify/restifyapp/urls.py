@@ -42,6 +42,7 @@ urlpatterns = [
     path('accounts/register/', views.RegisterView.as_view(), name='register'),
     path('accounts/profile/', views.ProfileView.as_view(), name='profile_view'),
     path('accounts/password/edit/', views.PasswordEditView.as_view(), name='profile_edit'),
+    path('accounts/checkEmail/', views.checkEmailView.as_view(), name='check_email'),
 
     #notification
     path('notifications/all/', views.AllNotifView.as_view(), name='notification_list'),
