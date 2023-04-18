@@ -74,3 +74,16 @@ class PasswordEditView(APIView):
         user.set_password(request.data['password'])
         user.save()
         return Response({f"Successfully Edit Password for {user.username}"}, status=200)    
+    
+class checkEmailView(APIView):
+
+    def post(self, request):
+        try:
+            user = User.objects.get(email = request.data['email'])
+        except User.DoesNotExist:
+            return Response({"true"}, status=200)
+        except Exception as e:
+            return Response({"bad"}, status=200)
+        return Response({"false"}, status=200)
+        
+
