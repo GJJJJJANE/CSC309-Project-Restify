@@ -10,7 +10,7 @@ const WriteHostReply = ({id}) => {
     const handleShow = () => setShow(true);
 
 
-    const handleReply = () =>  async (event) => {
+    const handleSubmit = () =>  async (event) => {
         event.preventDefault();
         var commentData = new FormData();
         commentData.append("host_response", content)
@@ -28,6 +28,7 @@ const WriteHostReply = ({id}) => {
               console.log(response.data);
           });
           } catch (error) {
+            alert("error")
             if (error.response.status === 401){alert("Please login first")}
             if (error.response.status === 400){alert("Reply exists!")}
             console.log(error);
@@ -47,7 +48,7 @@ return <>
         </Offcanvas.Header>
         <Offcanvas.Body>
           
-        <form class="row p-3" onSubmit={handleReply}>
+        <form class="row p-3" onSubmit={handleSubmit}>
       <div class="col-12">
           <div class="mb-3 mt-3">
           <label for="replyarea" class="form-label">Reply to this comment</label>
