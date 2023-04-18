@@ -15,15 +15,17 @@ const CreatePropertyForm = () => {
     const [numGuests, setNumGuests] = useState(0);
     const [numBeds, setNumBeds] = useState(0);
     const [numBaths, setNumBaths] = useState(0);
-    const [amen_e, setAmen_e] = useState("");        /////
-    const [amen_i, setAmen_i] = useState("");    /////
-    const [amen_o, setAmen_o] = useState("");    /////
+    const [amen_e, setAmen_e] = useState("");        
+    const [amen_i, setAmen_i] = useState("");    
+    const [amen_o, setAmen_o] = useState("");    
     const [price, setPrice] = useState(0);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [hrule, setHrule] = useState("");
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
+
+    const token = localStorage.getItem("access");
     
 
     const handleImage = (event) => {
@@ -66,11 +68,15 @@ const CreatePropertyForm = () => {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNjA4ODkzLCJpYXQiOjE2ODE2MDg1OTMsImp0aSI6Ijg1YmRmOTM3YzM5YzQwMWM5ZjkyZjAxZTMzZmFmM2M3IiwidXNlcl9pZCI6MX0.4NgKMuXmY4GnsewOmSuacCgpPUMYdICZx2vm8wZOAsA`
+                "Authorization": `Bearer ${token}`
             },
-          });
-          console.log(response.data);
+          }).then(response =>{
+            alert("You have created a new property listing.")
+            console.log(response.data);
+        });
         } catch (error) {
+          if (error.response.status === 401){alert("Please login first")}
+          if (error.response.status === 400){alert("Some field is invalid. Please check the details!")}
           console.log(error);
         }
     };

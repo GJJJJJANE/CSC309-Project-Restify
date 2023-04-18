@@ -11,11 +11,13 @@ function PropertyList() {
     const [properties, setProperties] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+
+    const token = localStorage.getItem("access")
     
 
     useEffect(() => {
         axios
-        .get(`http://127.0.0.1:8000/search_result/?page=${currentPage}`)
+        .get(`http://127.0.0.1:8000/listing_all/?page=${currentPage}`, {headers : {Authorization : `Bearer ${token}`}})
         .then(response => {
             setProperties(response.data.results);
             setTotalPages(Math.ceil(response.data.count / 6));
