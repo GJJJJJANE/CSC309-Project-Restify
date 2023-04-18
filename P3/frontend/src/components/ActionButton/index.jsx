@@ -3,9 +3,12 @@
 import { useState } from "react"
 import axios from "axios";
 import { useCallback } from 'react';
-
+import WriteGuestComment from "../WriteGuestComment";
+import WritePropertyComment from "../WritePropertyComment";
 
 const ActionButton = ({ reservation, view }) => {
+    const [commented, setCommented] = useState(false)
+
     var id = reservation.id
     var state = reservation.state
     var guestid = reservation.guest
@@ -178,7 +181,7 @@ const ActionButton = ({ reservation, view }) => {
         </div>
     }
 
-
+    // host can terminate
     if (state === 'ap' && view === 'host'){
         return <div className="row m-2 g-3">
         <a className="btn btn-outline-primary btn-block" href="" role="buttom"
@@ -218,16 +221,26 @@ const ActionButton = ({ reservation, view }) => {
     </div>
     }
 
+    // Comment system after termination
+    // Comment guest
     if (state === 'te' && view === 'host'){
         return <div className="row m-2 g-3">
             <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${guestid}/`} role="buttom">View Guest</a>
+            <WriteGuestComment id = {guestid} />
         </div>
     }
 
-    if (state === 'te' && view === 'host'){
+    // Comment property
+    if (state === 'te' && view === 'guest'){
+        if (!commented) {
         return <div className="row m-2 g-3">
-            <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${guestid}/`} role="buttom">View Guest</a>
+            <WritePropertyComment id = {id} setCommented = {setCommented} />
         </div>
+        } else {
+            return <div className="row m-2 g-3">
+                <a className="btn btn-outline-primary btn-block" href={`/comments/property/${property}/`} role="buttom">View Comments</a>
+                </div>
+        }
     }
 
     return    <div className="row m-2 g-3">
