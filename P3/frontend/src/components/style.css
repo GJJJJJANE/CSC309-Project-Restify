@@ -1,0 +1,139 @@
+
+
+.vertical_center{
+    min-height: 100%;
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#searchbox {
+    width: 65%;
+    align-self: center;
+}
+
+/* Sticky relative to navbar */
+.sticky-rel {
+    top: 4rem;
+}
+
+.offcanvas-wide {
+    height:75% !important;
+}
+
+.imagePreview {
+    width: 100%;
+    height: 230px;
+    background-position: center center;
+    background-color:#fff;
+    background-size: cover;
+    background-repeat:no-repeat;
+    display: inline-block;
+    border-style: dashed;
+}
+
+.imgUp
+{
+  margin-bottom:15px;
+}
+
+#coverphoto {
+    height: 400px;
+}
+
+.w-thumbnail{
+    width: 150px !important;
+    height: 150px !important
+}
+
+.imagePreview img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.listing_url {
+    text-decoration: none;
+    color:black
+}
+
+.mycontainer{
+    width: 30%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 490px) {
+    .mycontainer{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 490px) and (max-width: 1080px) {
+    .mycontainer{
+        width: 70%;
+    }
+}
+
+.avatar{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.avatar_sm{
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.avatar_lg{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float: right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+#review {
+    text-decoration: none;
+}
+
+.dropdown-item:active {
+    background-color: #fff;
+    color:#0d6efd;
+}
