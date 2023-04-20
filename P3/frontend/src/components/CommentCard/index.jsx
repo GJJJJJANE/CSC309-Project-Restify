@@ -42,7 +42,7 @@ const CommentCard = ({ comment, reply }) => {
                             <img src="avatar.jpg" class="img-fluid p-3" alt="...">
                         </div> */}
         
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card-body">
                             <h5 class="card-title">{title}</h5>
                             <small class="text-muted">{identity}</small><br></br>
@@ -51,7 +51,7 @@ const CommentCard = ({ comment, reply }) => {
                             <span>{comment.content}</span><br></br>
                             <p class="card-text"><small class="text-muted"> {dt} </small></p>
                             
-                        <div class="col-md-8"><small>{replythread}</small> 
+                        <div class="col-md-10"><small>{replythread}</small> 
                         </div>
 
                         </div>
