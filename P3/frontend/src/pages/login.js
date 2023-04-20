@@ -45,6 +45,17 @@ function Login() {
                 notif.innerHTML = "Email and password do not match!";
             }
         });
+        // await axios.get(`${endpoint}reservations/guestview/`, {headers : {Authorization : `Bearer ${localStorage.getItem("access")}`}})
+        // .then(response => {
+            
+        //     if (response.status == 200){
+        //         today = today.getfullyear()
+        //     }
+            
+        // })
+        // .catch(function (error) {
+        //     console.log(error)
+        // });
     };
 
 
