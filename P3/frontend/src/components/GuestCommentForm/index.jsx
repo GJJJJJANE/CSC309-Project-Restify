@@ -24,6 +24,14 @@ const GuestCommentForm = ( {id} ) => {
             })
             .then(response =>{
               alert("You have submitted a comment")
+              var notificationForm = new FormData();
+                notificationForm.append("type_id", "5");
+                notificationForm.append("start", "");
+                notificationForm.append("end", "");
+                notificationForm.append("property", "");
+                notificationForm.append("title", "New comment");
+                notificationForm.append("description", `You received a new comment.`);
+                axios.post(`http://127.0.0.1:8000/notifications/receive/${guestid}/`, notificationForm, {headers : {Authorization : `Bearer ${localStorage.getItem('access')}`}})
               console.log(response.data);
           });
           } catch (error) {
