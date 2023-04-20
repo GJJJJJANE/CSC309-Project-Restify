@@ -63,7 +63,7 @@ function Logout() {
             <div></div>
 
             <div className="text-center">
-                <button type="button" className="btn btn-block btn-primary" onClick={login_nav} id="edit_btn" style={{"width" : "20%"}}>Login Again</button>
+                <button type="button" className="btn btn-block btn-primary" onClick={login_nav} id="edit_btn" style={{"width" : "40%"}}>Login Again</button>
             </div>
 
 

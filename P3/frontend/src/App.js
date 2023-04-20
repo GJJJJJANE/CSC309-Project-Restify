@@ -8,6 +8,7 @@ import Reserve_Guest from './pages/Reserve_Guest';
 import PropertyList from './pages/listing';
 import SearchPage from './pages/searchPage';
 import GuestCommentPage from './pages/GuestCommentList';
+import PropertyCommentPage from './pages/PropertyCommentList';
 import PropertyDetailPage from './pages/propertyDetail';
 import Login from './pages/login';
 import Register from './pages/register';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/properties/:id" element={<PropertyDetailPage />} />
         <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
+        <Route path="/comments/property/:propertyid" element={<PropertyCommentPage />} />
         {/* User URL */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
