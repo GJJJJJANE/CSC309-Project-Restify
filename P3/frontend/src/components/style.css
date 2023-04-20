@@ -1,4 +1,7 @@
-
+#bg_container {
+    background-image: url("../images/background.jpeg") !important;
+    height: 90%;
+}
 
 .vertical_center{
     min-height: 100%;
