@@ -27,7 +27,7 @@ const ReplyForm = ( {id} ) => {
           });
           } catch (error) {
             if (error.response.status === 401){alert("Please login first")}
-            if (error.response.status === 400){alert("Some field is invalid. Please check!")}
+            if (error.response.status === 400){alert("Only the host of property can reply to this comment!")}
             console.log(error);
           }
     }
