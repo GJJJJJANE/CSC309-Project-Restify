@@ -27,7 +27,7 @@ const ReplyFollowUp = ( {id, submitted, setSubmitted } ) => {
           });
           } catch (error) {
             if (error.response.status === 401){alert("Please login first")}
-            if (error.response.status === 400){alert("Some field is invalid. Please check!")}
+            if (error.response.status === 400){alert("Only the guest in this thread can reply!")}
             console.log(error);
           }
     }
