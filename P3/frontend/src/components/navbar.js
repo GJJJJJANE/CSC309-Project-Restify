@@ -24,16 +24,16 @@ function Navigationbar() {
     const [pre_status, setPre_status] = useState(false);
     const [next_status, setNext_status] = useState(false);
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState({});
+    
 
-    const handleClose = () => {
-        setShow(false);
+    const handleClose = (id) => {
+        setShow(show => ({...show, [id]: false}));
     };
 
     const handleDelete = async (event) => {
-        event.preventDefault();
-        setShow(false);
         var id = event.target.id;
+        setShow(show => ({...show, [id]: false}));
         await axios.delete(`${endpoint}notifications/delete/${id}/`, {headers : {Authorization : `Bearer ${access}`}})
         .then(response => {
             if (response.status == 200){
@@ -61,9 +61,8 @@ function Navigationbar() {
 
 
     const handleShow = async (event) => {
-        event.preventDefault();
-        setShow(true);
         var id = event.target.id;
+        setShow(show => ({...show, [id]: true}));
         await axios.patch(`${endpoint}notifications/read/${id}/`, {}, {headers : {Authorization : `Bearer ${access}`}})
         .then(response => {
             if (response.status == 200){
@@ -95,15 +94,19 @@ function Navigationbar() {
             
             await axios.get(`${endpoint}notifications/all/?page=${page-1}`, {headers : {Authorization : `Bearer ${access}`}})
             .then(response => {
-            if (response.status == 200){
-                var origin = [];
-                for (const index in response.data.results){
-                    origin.push(response.data.results[index]);
-                };
-                setNotifications(origin);
-                setPre_status(response.data.previous != null);
-                setNext_status(response.data.next != null);
-            }
+                if (response.status == 200){
+                    var origin = [];
+                    var initial = {};
+                    for (const index in response.data.results){
+                        var id = response.data.results[index].id;
+                        initial = {...initial, [id]: false};
+                        origin.push(response.data.results[index]);
+                    };
+                    setShow(initial);
+                    setNotifications(origin);
+                    setPre_status(response.data.previous != null);
+                    setNext_status(response.data.next != null);
+                }
             })
             .catch(function (error) {
                 console.log(error)
@@ -120,15 +123,19 @@ function Navigationbar() {
 
             await axios.get(`${endpoint}notifications/all/?page=${page+1}`, {headers : {Authorization : `Bearer ${access}`}})
             .then(response => {
-            if (response.status == 200){
-                var origin = [];
-                for (const index in response.data.results){
-                    origin.push(response.data.results[index]);
-                };
-                setNotifications(origin);
-                setPre_status(response.data.previous != null);
-                setNext_status(response.data.next != null);
-            }
+                if (response.status == 200){
+                    var origin = [];
+                    var initial = {};
+                    for (const index in response.data.results){
+                        var id = response.data.results[index].id;
+                        initial = {...initial, [id]: false};
+                        origin.push(response.data.results[index]);
+                    };
+                    setShow(initial);
+                    setNotifications(origin);
+                    setPre_status(response.data.previous != null);
+                    setNext_status(response.data.next != null);
+                }
             })
             .catch(function (error) {
                 console.log(error)
@@ -170,9 +177,13 @@ function Navigationbar() {
             .then(response => {
             if (response.status == 200){
                 var origin = [];
+                var initial = {};
                 for (const index in response.data.results){
+                    var id = response.data.results[index].id;
+                    initial = {...initial, [id]: false};
                     origin.push(response.data.results[index]);
                 };
+                setShow(initial);
                 setNotifications(origin);
                 setPre_status(response.data.previous != null);
                 setNext_status(response.data.next != null);
@@ -239,8 +250,8 @@ function Navigationbar() {
                                         <NavDropdown.Item onClick={handleShow} id={item.id}>{item.title}</NavDropdown.Item> :
                                         <NavDropdown.Item onClick={handleShow} id={item.id}>{item.title}*</NavDropdown.Item>}
 
-                                    <Modal show={show} onHide={handleClose} animation={false}>
-                                    <Modal.Header closeButton>
+                                    <Modal show={show[item.id]} onHide={() => handleClose(item.id)} id={item.id} animation={false}>
+                                    <Modal.Header closeButton id={item.id}>
                                     <Modal.Title>{item.title}</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>{item.content}</Modal.Body>
@@ -248,7 +259,7 @@ function Navigationbar() {
                                     <Button variant="secondary" onClick={handleDelete} id={item.id}>
                                         Delete
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose}>
+                                    <Button variant="primary" onClick={() => handleClose(item.id)} id={item.id}>
                                         Close
                                     </Button>
                                     </Modal.Footer>
@@ -291,16 +302,6 @@ function Navigationbar() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <NavDropdown 
-                            align="end"
-                            title="Reservation"
-                            id={`offcanvasNavbarDropdown-expand-lg`}
-                        >
-                            <NavDropdown.Item href="/reservations/guestview/">As Guest</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="/reservations/hostview/">As Host</NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link href="/list">Listing</Nav.Link>
                     </Nav>
                     <Nav>
                         <NavDropdown 
