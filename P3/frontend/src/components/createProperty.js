@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-//import Multiselect from 'react-bootstrap-multiselect'
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import PropertyList from "../pages/listing";
 
 
 
@@ -250,7 +250,12 @@ const CreatePropertyForm = () => {
             </div>
         </div>
         <div className="row my-5"></div>
-        <input className="btn btn-primary" type="submit" />
+        <div className="d-flex justify-content-center">
+            <input className="btn btn-primary" type="submit" />
+            <Link to={`/list`}>
+                <Button variant="outline-dark">Cancel</Button>
+            </Link>
+        </div>
         <div className="row my-5"></div>
     </form>
         <div className="footer p-5 text-center">

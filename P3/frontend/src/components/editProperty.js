@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom"
-
-import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-//import Multiselect from 'react-bootstrap-multiselect'
-
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 const EditPropertyForm = () => {
@@ -35,6 +33,7 @@ const EditPropertyForm = () => {
           .then(response => {
             setTitle(response.data.title);
             setDescription(response.data.description);
+            setPhoto(response.data.photos);
             setLocation(response.data.location);
             setRoomdes(response.data.room_description);
             setNumGuests(response.data.num_guest);
@@ -64,7 +63,7 @@ const EditPropertyForm = () => {
         const propertyData = new FormData();
         propertyData.append("title", title);
         propertyData.append("description", description);
-        propertyData.append("photos", 'https://www.google.com'); //change
+        propertyData.append("photos", photo); //change
         propertyData.append("location", location);
         propertyData.append("num_guest", numGuests);
         propertyData.append("num_bedroom", numBeds);
@@ -138,11 +137,15 @@ const EditPropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
-                            <div className ="imagePreview" id="coverphoto"></div>
+                            <img src={photo} style={{"width" : "100%", "height" : "480px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                     </div>
                   </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
                   <br/>
                   <br/>
                   <br/>
@@ -258,7 +261,12 @@ const EditPropertyForm = () => {
             </div>
         </div>
         <div className="row my-5"></div>
-        <input className="btn btn-primary" type="submit" />
+        <div className="d-flex justify-content-center">
+            <input className="btn btn-primary" type="submit" />
+            <Link to={`/list`}>
+                <Button variant="outline-dark">Cancel</Button>
+            </Link>
+        </div>
         <div className="row my-5"></div>
     </form>
         <div className="footer p-5 text-center">

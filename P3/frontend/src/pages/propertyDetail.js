@@ -24,9 +24,9 @@ const PropertyDetailPage = () => {
     
     
     return (
+    <div>
+        <Navbar />
     <div className="container mt-10">
-
-        
 
         <div className="row my-5"></div>
 
@@ -167,7 +167,7 @@ const PropertyDetailPage = () => {
             </div>
         </div>
 
-        <button className="btn btn-primary mt-5" type="button">Write My Own Review</button>
+        <Button className="btn btn-primary mt-5" type="button">Write My Own Review</Button>
 
         <div className="footer p-5 text-center">
             2023 Restify Inc.
@@ -175,7 +175,6 @@ const PropertyDetailPage = () => {
 
     </div>
     </div>
-    </>
   );
 };
 
