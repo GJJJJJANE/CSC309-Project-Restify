@@ -3,6 +3,7 @@ import GuestComment from '../../components/GuestComment';
 import { useParams } from "react-router-dom";
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios";
+import Navbar from "../../components/navbar";
 
 const GuestCommentPage = () => {
     const id = useParams();
@@ -43,6 +44,7 @@ function handlePageChange(pageNumber) {
   }
 
     return <main>
+    <Navbar />
     <GuestComment context={context} search={search} setSearch={setSearch} id={id}/>
     <Pagination className="d-flex justify-content-center">{items}</Pagination>
     </main>;

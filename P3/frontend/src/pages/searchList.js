@@ -5,6 +5,7 @@ import { CardDeck } from 'reactstrap';
 import { Col, Row} from "react-bootstrap";
 //import ListProperty from "../components/listItem";
 import CardProperty from "../components/searchCard";
+import Navbar from "../components/navbar";
 
 
 function SearchList(props) {
@@ -50,6 +51,7 @@ function SearchList(props) {
   
 
     return (
+
         <div className="container">
             <hr className="mt-2"/>
             
@@ -62,6 +64,7 @@ function SearchList(props) {
             </div>
             <div className="row my-3"> </div>
         </div>
+
   );
 }
 
