@@ -3,6 +3,18 @@ import ActionButton from "../ActionButton";
 
 const ReservationList = ({ search, setSearch, reservations, view }) => {
 
+    // const [option, setOption] = useState("");
+    
+    // function selectState(option) {
+    //     if (option === "Pending"){
+    //         console.log("pe")
+    //         return "pe"
+    //     }
+    // }
+
+    // useEffect (() => {
+    //     search = selectState(option)
+    // }, [option]);
 
     return <>
         <div class="container mt-10">
@@ -19,26 +31,31 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
         <input value={search} 
         onChange={event => setSearch(event.target.value)}/>
         </label>
-          {/* <select id="Order" class="form-select">
-            <option selected>Filter</option>
-            <option>All</option>
-            <option>Confirmed</option>
-            <option>In progress</option>
-            <option>Unpaid</option>
-            <option>Completed</option>
-          </select> */}
         </div>
-    
+
+        {/* <div className="col-md-3">
+        <select id="inputState" className="form-select" value={option} onChange={(event) => setOption(event.target.value)}>
+            <option selected>Filter Reservation State</option>
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Denied</option>
+            <option>Cancelled</option>
+            <option>Requested Cancel</option>
+            <option>Terminated</option>
+        </select>    
+        </div>   */}
+
+
         <hr class="mt-2"></hr>
 
             {
                 reservations.map(reservation => (
                 <div class="row mt-3" key={reservation.id}>
 
-                    <div class="card mb-3">
+                    <div class="card mb-3 p-2">
                         <div class="row g-0">
 
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="card-body">
                             <h5 class="card-title">Reservation</h5>
                             {/* <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
@@ -49,9 +66,12 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <ActionButton reservation={reservation} view = {view}/>
-                            <div className="row m-2 g-3"><a className="btn btn-outline-primary btn-block" href={`/comments/property/${reservation.property}/`} role="buttom">View Property Comments</a></div>
+                            <div className="row m-2 g-2">
+                            <a className="btn btn-outline-primary btn-block" href={`/properties/${reservation.property}/`} role="buttom">View Property</a>
+                            <a className="btn btn-outline-primary btn-block" href={`/comments/property/${reservation.property}/`} role="buttom">View Property Comments</a>
+                            </div>
                         </div>
 
                         </div>
