@@ -45,7 +45,12 @@ const GenerateComments = async ({ id, type }) => {
     });
 
     if (type == 1){
-        return (<></>);
+        var notificationForm = new FormData();
+        notificationForm.append("type_id", "1");
+        notificationForm.append("start", start);
+        notificationForm.append("end", end);
+        notificationForm.append("property", property);
+        await axios.post(`http://127.0.0.1:8000/notifications/receive/${host}/`, notificationForm, {headers : {Authorization : `Bearer ${localStorage.getItem('access')}`}})
 
     } else if(type == 2){
         var notificationForm = new FormData();
