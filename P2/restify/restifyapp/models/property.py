@@ -26,9 +26,9 @@ class Property(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
     photos = models.ImageField(upload_to='property_images')
-    #photo2 = models.ImageField(upload_to='property_images')
-    #photo3 = models.ImageField(upload_to='property_images')
-    #photos = models.URLField()
+    photo2 = models.ImageField(upload_to='property_images')
+    photo3 = models.ImageField(upload_to='property_images')
+    
 
     location = models.TextField()
     num_guest = models.PositiveIntegerField()

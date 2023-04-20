@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-//import Multiselect from 'react-bootstrap-multiselect'
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import PropertyList from "../pages/listing";
 
 
 
@@ -15,22 +15,26 @@ const CreatePropertyForm = () => {
     const [numGuests, setNumGuests] = useState(0);
     const [numBeds, setNumBeds] = useState(0);
     const [numBaths, setNumBaths] = useState(0);
-    const [amen_e, setAmen_e] = useState("");        /////
-    const [amen_i, setAmen_i] = useState("");    /////
-    const [amen_o, setAmen_o] = useState("");    /////
+    const [amen_e, setAmen_e] = useState("");        
+    const [amen_i, setAmen_i] = useState("");    
+    const [amen_o, setAmen_o] = useState("");    
     const [price, setPrice] = useState(0);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [hrule, setHrule] = useState("");
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
+
+    const [previewUrl, setPreviewUrl] = useState(null);
+
+    const token = localStorage.getItem("access");
     
 
     const handleImage = (event) => {
         if (event.target.files && event.target.files[0]) {
             //setPhoto(URL.createObjectURL(event.target.files[0]));
             setPhoto(event.target.files[0]);
-
+            setPreviewUrl(URL.createObjectURL(event.target.files[0]));
         }
     };
 
@@ -66,11 +70,15 @@ const CreatePropertyForm = () => {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNjA4ODkzLCJpYXQiOjE2ODE2MDg1OTMsImp0aSI6Ijg1YmRmOTM3YzM5YzQwMWM5ZjkyZjAxZTMzZmFmM2M3IiwidXNlcl9pZCI6MX0.4NgKMuXmY4GnsewOmSuacCgpPUMYdICZx2vm8wZOAsA`
+                "Authorization": `Bearer ${token}`
             },
-          });
-          console.log(response.data);
+          }).then(response =>{
+            alert("You have created a new property listing.")
+            console.log(response.data);
+        });
         } catch (error) {
+          if (error.response.status === 401){alert("Please login first")}
+          if (error.response.status === 400){alert("Some field is invalid. Please check the details!")}
           console.log(error);
         }
     };
@@ -117,11 +125,16 @@ const CreatePropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
-                            <div className ="imagePreview" id="coverphoto"></div>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "480px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img" onChange={handleImage}/></label>
+                            <div className="row my-5">  </div>
                         </div>
                     </div>
                   </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
                   <br/>
                   <br/>
                   <br/>
@@ -131,11 +144,11 @@ const CreatePropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "250px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "250px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                     </div>
@@ -237,10 +250,17 @@ const CreatePropertyForm = () => {
             </div>
         </div>
         <div className="row my-5"></div>
-        <input className="btn btn-primary" type="submit" />
+        <div className="d-flex justify-content-center">
+            <input className="btn btn-primary" type="submit" />
+            <Link to={`/list`}>
+                <Button variant="outline-dark">Cancel</Button>
+            </Link>
+        </div>
         <div className="row my-5"></div>
     </form>
-
+        <div className="footer p-5 text-center">
+            2023 Restify Inc.
+        </div>
     </div>
   );
 };

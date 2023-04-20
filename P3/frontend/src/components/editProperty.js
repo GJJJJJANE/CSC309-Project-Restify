@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
-//import Multiselect from 'react-bootstrap-multiselect'
-
+import {useParams} from "react-router-dom"
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 const EditPropertyForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [photo, setPhoto] = useState("");
     const [roomdes, setRoomdes] = useState("");
     const [location, setLocation] = useState("");
     const [numGuests, setNumGuests] = useState(0);
     const [numBeds, setNumBeds] = useState(0);
     const [numBaths, setNumBaths] = useState(0);
-    const [amen_e, setAmen_e] = useState("");        /////
-    const [amen_i, setAmen_i] = useState("");    /////
-    const [amen_o, setAmen_o] = useState("");    /////
+    const [amen_e, setAmen_e] = useState("");        
+    const [amen_i, setAmen_i] = useState("");    
+    const [amen_o, setAmen_o] = useState("");    
     const [price, setPrice] = useState(0);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
@@ -24,13 +24,16 @@ const EditPropertyForm = () => {
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
     
+    const {id} = useParams()
+    const token = localStorage.getItem("access");
 
     useEffect(() => {
         // input property id
-        axios.get('http://127.0.0.1:8000/property/10/detail/')
+        axios.get(`http://127.0.0.1:8000/property/${id}/detail/`)
           .then(response => {
             setTitle(response.data.title);
             setDescription(response.data.description);
+            setPhoto(response.data.photos);
             setLocation(response.data.location);
             setRoomdes(response.data.room_description);
             setNumGuests(response.data.num_guest);
@@ -60,7 +63,7 @@ const EditPropertyForm = () => {
         const propertyData = new FormData();
         propertyData.append("title", title);
         propertyData.append("description", description);
-        propertyData.append("photos", 'https://www.google.com'); //change
+        propertyData.append("photos", photo); //change
         propertyData.append("location", location);
         propertyData.append("num_guest", numGuests);
         propertyData.append("num_bedroom", numBeds);
@@ -76,14 +79,14 @@ const EditPropertyForm = () => {
         propertyData.append("end_date", end);
         propertyData.append("price", price);
         
-        //images.forEach((image) => formData.append("images", image));
+        
         try {
-          const response = await axios.patch("http://localhost:8000/property/10/edit/", propertyData, {
+          const response = await axios.patch(`http://localhost:8000/property/${id}/edit/`, propertyData, {
             headers: {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY3NTg1LCJpYXQiOjE2ODEyNjcyODUsImp0aSI6IjhlNGFlNzZhNjRjZDQ4ZThhYWE2NjM2ZDU5N2Y2MTUzIiwidXNlcl9pZCI6NX0.1Js0nMeef2IdhNKHgU-YNn2Ngu6ippavx7LQHwOMR5A`
+                "Authorization": `Bearer ${token}`
             },
           });
           console.log(response.data);
@@ -134,11 +137,15 @@ const EditPropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
-                            <div className ="imagePreview" id="coverphoto"></div>
+                            <img src={photo} style={{"width" : "100%", "height" : "480px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                     </div>
                   </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
                   <br/>
                   <br/>
                   <br/>
@@ -254,10 +261,17 @@ const EditPropertyForm = () => {
             </div>
         </div>
         <div className="row my-5"></div>
-        <input className="btn btn-primary" type="submit" />
+        <div className="d-flex justify-content-center">
+            <input className="btn btn-primary" type="submit" />
+            <Link to={`/list`}>
+                <Button variant="outline-dark">Cancel</Button>
+            </Link>
+        </div>
         <div className="row my-5"></div>
     </form>
-
+        <div className="footer p-5 text-center">
+            2023 Restify Inc.
+        </div>
     </div>
   );
 };

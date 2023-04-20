@@ -8,6 +8,7 @@ import Reserve_Guest from './pages/Reserve_Guest';
 import PropertyList from './pages/listing';
 import SearchPage from './pages/searchPage';
 import GuestCommentPage from './pages/GuestCommentList';
+import PropertyCommentPage from './pages/PropertyCommentList';
 import PropertyDetailPage from './pages/propertyDetail';
 import Login from './pages/login';
 import Register from './pages/register';
@@ -24,13 +25,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/create" element={<Create />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/reservations/hostview/" element={<Reserve_Host />} />
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
         <Route path="/" element={<SearchPage />} />
         <Route path="/properties/:id" element={<PropertyDetailPage />} />
         <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
+        <Route path="/comments/property/:propertyid" element={<PropertyCommentPage />} />
         {/* User URL */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

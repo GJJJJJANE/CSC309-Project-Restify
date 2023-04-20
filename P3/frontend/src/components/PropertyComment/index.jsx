@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import CommentCard from "../CommentCard";
 import Button from 'react-bootstrap/Button';
 
-const GuestComment = ({ context, search, setSearch }) => {
-    const reply = false
+
+const PropertyComment = ({ context, search, setSearch }) => {
+    const reply = true
 
     return <>
         <div class="container mt-10">
@@ -11,7 +12,7 @@ const GuestComment = ({ context, search, setSearch }) => {
 
         <div class="row mt-5">
         <div class="col-md-6">
-        <h3>Comment for this user</h3>
+        <h3>Comment for this property</h3>
         </div>
     
         <div class="col-md-2">
@@ -33,12 +34,13 @@ const GuestComment = ({ context, search, setSearch }) => {
             {
                     context.map(comment => (
                         <CommentCard key={comment.id}
-                        comment={comment}
+                        comment={comment} 
                         reply={reply}/>
                     )       
             )}
               
         </div>
+
 
         </div>        
         </div>
@@ -48,4 +50,4 @@ const GuestComment = ({ context, search, setSearch }) => {
     
 }
 
-export default GuestComment
+export default PropertyComment

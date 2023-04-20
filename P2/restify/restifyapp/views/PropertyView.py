@@ -15,6 +15,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 class ListingPagination(PageNumberPagination):
     page_size = 6
 
+class ListingPagination2(PageNumberPagination):
+    page_size = 4
+
 class IsOwner(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         if request.user != obj.owner:
@@ -29,7 +32,7 @@ class All_host_listing(generics.ListAPIView):
 
     serializer_class = PropertySerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = ListingPagination
+    pagination_class = ListingPagination2
 
 
     def get_queryset(self):

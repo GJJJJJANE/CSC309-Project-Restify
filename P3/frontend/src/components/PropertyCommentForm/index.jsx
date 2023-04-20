@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const GuestCommentForm = ( {id} ) => {
+const PropertyCommentForm = ( {id, setCommented} ) => {
     const [score, setScore] = useState("");
     const [content, setContent] = useState("");
     
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        var guestid = id["id"]
+        var reservation = id
         var commentData = new FormData();
         commentData.append("score", score)
         commentData.append("content", content)
         try {
-            const response = await axios.post(`http://127.0.0.1:8000/comments/${guestid}/writeGuestComment/`, commentData, {
+            const response = await axios.post(`http://127.0.0.1:8000/comments/${reservation}/writePropertyComment/`, commentData, {
               headers: {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',
@@ -24,11 +24,12 @@ const GuestCommentForm = ( {id} ) => {
             })
             .then(response =>{
               alert("You have submitted a comment")
+              setCommented(true)
               console.log(response.data);
           });
           } catch (error) {
             if (error.response.status === 401){alert("Please login first")}
-            if (error.response.status === 400){alert("Some field is invalid. Please check!")}
+            if (error.response.status === 400){alert("Comment exists!")}
             console.log(error);
           }
     }
@@ -50,15 +51,6 @@ return <>
             </div>
         </div>
 
-        {/* <div class="col-12">
-            <div class="form-check m-2">
-            <input class="form-check-input" type="checkbox" id="gridCheck"></input>
-            <label class="form-check-label" for="gridCheck">
-                Allow others to view my profile
-            </label>
-            </div>
-        </div> */}
-
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit my review</button>
         </div>
@@ -69,4 +61,4 @@ return <>
 
 }
 
-export default GuestCommentForm
+export default PropertyCommentForm
