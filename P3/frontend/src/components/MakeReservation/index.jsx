@@ -1,10 +1,48 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import GenerateComments from "../generateComments";
 
 // using prop drill to get id for current property
 const Reserve = ({ id }) => {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
+
+    const token = localStorage.getItem("access");
+    const endpoint = "http://localhost:8000/";
+    const [guest, setGuest] = useState(0);
+    const [host, setHost] = useState(0);
+    const [property, setProperty] = useState("");
+    const [property_id, setProperty_id] = useState("");
+
+    const handleComment = async () => {
+      await axios.get(`${endpoint}reservations/${id}/detail`, {headers : {Authorization : `Bearer ${token}`}})
+      .then(response => {        
+          if (response.status == 200){
+              setGuest(response.data.guest);
+              setProperty_id(response.data.property);
+              setStart(response.data.start);
+              setEnd(response.data.end);
+          }
+      })
+      .catch(function (error) {
+          console.log(error)
+      });
+  
+      await axios.get(`http://127.0.0.1:8000/property/${property_id}/detail/`)
+      .then(response => {
+          if (response.status == 200){
+              setProperty(response.data.title);
+              setHost(response.data.owner.id);
+          }
+      });
+
+      var notificationForm = new FormData();
+      notificationForm.append("type_id", "1");
+      notificationForm.append("start", start);
+      notificationForm.append("end", end);
+      notificationForm.append("property", property);
+      await axios.post(`http://127.0.0.1:8000/notifications/receive/${host}/`, notificationForm, {headers : {Authorization : `Bearer ${localStorage.getItem('access')}`}})
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -23,7 +61,8 @@ const Reserve = ({ id }) => {
               },
             })
             .then(response =>{
-              alert("You have submitted reservation. Please check in reservation list.")
+              alert("You have submitted reservation. Please check in reservation list.");
+              handleComment();
               console.log(response.data);
           });
           } catch (error) {
