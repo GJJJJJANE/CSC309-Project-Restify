@@ -208,7 +208,11 @@ class Terminate(generics.RetrieveUpdateAPIView):
         
 # complete and expire - should this be automatic?
         
+class Detail(generics.RetrieveUpdateAPIView):
 
+    serializer_class = ReservationSerializer
+    queryset = Reservation.objects.all()
+    lookup_field = 'id'
         
         
 
