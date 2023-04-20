@@ -9,6 +9,8 @@ const EditPropertyForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [photo, setPhoto] = useState("");
+    const [photo2, setPhoto2] = useState("");
+    const [photo3, setPhoto3] = useState("");
     const [roomdes, setRoomdes] = useState("");
     const [location, setLocation] = useState("");
     const [numGuests, setNumGuests] = useState(0);
@@ -23,9 +25,32 @@ const EditPropertyForm = () => {
     const [hrule, setHrule] = useState("");
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
+
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewUrl2, setPreviewUrl2] = useState(null);
+    const [previewUrl3, setPreviewUrl3] = useState(null);
     
     const {id} = useParams()
     const token = localStorage.getItem("access");
+
+    const handleImage = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setPhoto(event.target.files[0]);
+            setPreviewUrl(URL.createObjectURL(event.target.files[0]));
+        }
+    };
+    const handleImage2 = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setPhoto2(event.target.files[0]);
+            setPreviewUrl2(URL.createObjectURL(event.target.files[0]));
+        }
+    };
+    const handleImage3 = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setPhoto3(event.target.files[0]);
+            setPreviewUrl3(URL.createObjectURL(event.target.files[0]));
+        }
+    };
 
     useEffect(() => {
         // input property id
@@ -33,7 +58,12 @@ const EditPropertyForm = () => {
           .then(response => {
             setTitle(response.data.title);
             setDescription(response.data.description);
-            setPhoto(response.data.photos);
+            //setPhoto(response.data.photos);
+            //setPhoto2(response.data.photo2);
+            //setPhoto3(response.data.photo3);
+            setPreviewUrl(response.data.photos);
+            setPreviewUrl2(response.data.photo2);
+            setPreviewUrl3(response.data.photo3);
             setLocation(response.data.location);
             setRoomdes(response.data.room_description);
             setNumGuests(response.data.num_guest);
@@ -63,7 +93,15 @@ const EditPropertyForm = () => {
         const propertyData = new FormData();
         propertyData.append("title", title);
         propertyData.append("description", description);
-        propertyData.append("photos", photo); //change
+        if (photo != "") {
+            propertyData.append("photos", photo);
+        }
+        if (photo2 != "") {
+            propertyData.append("photo2", photo2);
+        }
+        if (photo3 != "") {
+            propertyData.append("photo3", photo3);
+        }
         propertyData.append("location", location);
         propertyData.append("num_guest", numGuests);
         propertyData.append("num_bedroom", numBeds);
@@ -88,9 +126,13 @@ const EditPropertyForm = () => {
                 "Content-Type": "multipart/form-data",
                 "Authorization": `Bearer ${token}`
             },
-          });
-          console.log(response.data);
+          }).then(response =>{
+            alert("You have updated the property listing information.")
+            console.log(response.data);
+        });
         } catch (error) {
+          if (error.response.status === 401){alert("Please login first")}
+          if (error.response.status === 400){alert("Some field is invalid. Please check the details!")}
           console.log(error);
         }
     };
@@ -137,8 +179,8 @@ const EditPropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
-                            <img src={photo} style={{"width" : "100%", "height" : "480px"}} />
-                            <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "480px"}} />
+                            <label className ="btn btn-outline-secondary">Upload<input type="file" accept="image/*" onChange={handleImage}/></label>
                         </div>
                     </div>
                   </div>
@@ -155,12 +197,12 @@ const EditPropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
-                            <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
+                            <img src={previewUrl2} style={{"width" : "100%", "height" : "250px"}} />
+                            <label className ="btn btn-outline-secondary">Upload<input type="file" accept="image/*" onChange={handleImage2}/></label>
                         </div>
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
-                            <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
+                            <img src={previewUrl3} style={{"width" : "100%", "height" : "250px"}} />
+                            <label className ="btn btn-outline-secondary">Upload<input type="file" accept="image/*" onChange={handleImage3}/></label>
                         </div>
                     </div>
                   </div>

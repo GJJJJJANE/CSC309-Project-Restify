@@ -122,7 +122,7 @@ class EditProperty(generics.RetrieveUpdateAPIView):
         instance = self.get_object()
         if request.user.id != instance.owner.id:
             raise PermissionDenied("You don't have permission")
-        serializer = self.get_serializer(instance, data=request.data)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

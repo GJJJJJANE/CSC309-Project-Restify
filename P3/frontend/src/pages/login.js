@@ -31,7 +31,7 @@ function Login() {
                 notif.innerHTML = "";
                 localStorage.setItem("access", response.data.access)
                 localStorage.setItem("refresh", response.data.refresh)
-                navigate("/");
+                navigate("/viewProfile");
             }
             
         })

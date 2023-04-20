@@ -6,9 +6,6 @@ const Reserve = ({ id }) => {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
 
-    const [property, setProperty] = useState("");
-    const [owner, setOwner] = useState("");
-
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -29,23 +26,6 @@ const Reserve = ({ id }) => {
               alert("You have submitted reservation. Please check in reservation list.")
               console.log(response.data);
           });
-
-          await axios.get(`http://127.0.0.1:8000/property/${id}/detail/`)
-          .then(response => {
-            if (response.status == 200){
-              setProperty(response.data.title);
-              setOwner(response.data.owner);
-            }
-          });
-
-          var notificationForm = new FormData();
-          notificationForm.append("type_id", "1");
-          notificationForm.append("start", start);
-          notificationForm.append("end", end);
-          notificationForm.append("property", property);
-
-          await axios.post(`http://127.0.0.1:8000/notifications/receive/${owner}/`, notificationForm, {headers : {Authorization : `Bearer ${localStorage.getItem('access')}`}})
-
           } catch (error) {
             if (error.response.status === 401){alert("Please login first")}
             if (error.response.status === 400){alert("Some field is invalid. Please check the reservation detail and property available time!")}

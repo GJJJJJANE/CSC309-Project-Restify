@@ -17,6 +17,7 @@ import ViewProfile from './pages/profile';
 import EditProfile from './pages/editProfile';
 import EditPassword from './pages/editPassword';
 import Logout from './pages/logout';
+import HomePage from './pages/homePage';
 
 
 
@@ -29,7 +30,8 @@ function App() {
         <Route path="/reservations/hostview/" element={<Reserve_Host />} />
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
-        <Route path="/" element={<SearchPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/properties/:id" element={<PropertyDetailPage />} />
         <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
         <Route path="/comments/property/:propertyid" element={<PropertyCommentPage />} />

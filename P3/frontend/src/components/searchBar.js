@@ -40,10 +40,10 @@ function SearchBar() {
             <div className="row">
                 <div className="row mt-2 g-4">
                     <div className="col-md-6">
-                        <input className="form-control" placeholder="Quick search again" value={key} onChange={(event) => setKey(event.target.value)} />
+                        <input className="form-control" placeholder="Quick search by enter keyword" value={key} onChange={(event) => setKey(event.target.value)} />
                     </div>
                     <div className="col-md-3">
-                        <input className="btn btn-outline-secondary" type="submit" />
+                        
                     </div>
                     
                     <div className="col-md-3">

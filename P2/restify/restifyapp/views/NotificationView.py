@@ -74,7 +74,7 @@ class RecieveNotifView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         try:
             user = User.objects.get(id=kwargs['user_id'])
-            if request.data["type_id"] not in ['1','2','3','4','5']:
+            if request.data["type_id"] not in ['1','2','3','4']:
                 return Response("Notification type not valid", status=400)
             if request.data["property"] == '' or request.data["start"] == '' or request.data['end'] == '':
                 return Response("Notification body should not be empty", status=400)
@@ -90,9 +90,6 @@ class RecieveNotifView(CreateAPIView):
             elif request.data["type_id"] == '4':
                 title = f"Cancellation request"
                 description = f"Cancellation is requested on reservation of {request.data['property']} from {request.data['start']} to {request.data['end']}."
-            elif request.data["type_id"] == '5':
-                title = request.data["title"]
-                description = request.data["description"]
         except User.DoesNotExist:
             return Response("Target user can not be found", status=404)
         except Exception as e:
