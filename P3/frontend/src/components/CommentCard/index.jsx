@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReplyThread from "../ReplyThread";
 
 const CommentCard = ({ comment, reply }) => {
-
+    console.log(comment)
     var stars = [];
     for (var i = 0; i < comment.score; i++) {
         stars.push(<svg key={comment.id+i} xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -12,18 +12,18 @@ const CommentCard = ({ comment, reply }) => {
     }
 
     var title = "Anonymous"
-    if (comment.host_name !== ""){
+    if (comment.host_name !== undefined){
         title = comment.host_name
     }
-    if (comment.guest_name !== ""){
+    if (comment.guest_name !== undefined){
         title = comment.guest_name
     }
 
-    var identity = "ananymous"
-    if (comment.host_name !== ""){
+    var identity = "anonymous"
+    if (comment.host_name !== undefined){
         identity = "Previous host"
     }
-    if (comment.guest_name !== ""){
+    if (comment.guest_name !== undefined){
         identity = "Previous guest"
     }
 
