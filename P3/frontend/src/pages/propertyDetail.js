@@ -171,7 +171,7 @@ const PropertyDetailPage = () => {
             </div>
         </div>
 
-        <Button className="btn btn-primary mt-5" type="button">Write My Own Review</Button>
+        <Button className="btn btn-primary mt-5" type="button" href={`/comments/property/${id}`}>View property comments</Button>
 
         <div className="footer p-5 text-center">
             2023 Restify Inc.

@@ -24,17 +24,17 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
         <div class="col-md-6">
         <h3>My Reservations</h3>
         </div>
-    
+{/*     
         <div class="col-md-2">
             <label>
         Filter by State:
         <input value={search} 
         onChange={event => setSearch(event.target.value)}/>
         </label>
-        </div>
+        </div> */}
 
-        {/* <div className="col-md-3">
-        <select id="inputState" className="form-select" value={option} onChange={(event) => setOption(event.target.value)}>
+        <div className="col-md-3">
+        <select id="inputState" className="form-select" value={search} onChange={(event) => setSearch(event.target.value)}>
             <option selected>Filter Reservation State</option>
             <option>Pending</option>
             <option>Approved</option>
@@ -43,7 +43,7 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
             <option>Requested Cancel</option>
             <option>Terminated</option>
         </select>    
-        </div>   */}
+        </div>  
 
 
         <hr class="mt-2"></hr>
@@ -67,8 +67,11 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
                         </div>
 
                         <div class="col-md-2">
+                            
                             <ActionButton reservation={reservation} view = {view}/>
+                           
                             <div className="row m-2 g-2">
+                            <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${reservation.guest}/`} role="buttom">View Guest</a>
                             <a className="btn btn-outline-primary btn-block" href={`/properties/${reservation.property}/`} role="buttom">View Property</a>
                             <a className="btn btn-outline-primary btn-block" href={`/comments/property/${reservation.property}/`} role="buttom">View Property Comments</a>
                             </div>
