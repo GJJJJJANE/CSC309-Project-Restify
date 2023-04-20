@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import {useParams} from "react-router-dom"
 import Carousel from 'react-bootstrap/Carousel';
 import Reserve from '../components/MakeReservation';
+import Navbar from "../components/navbar";
 
 const PropertyDetailPage = () => {
     const {id} = useParams()
@@ -23,7 +24,10 @@ const PropertyDetailPage = () => {
     
     
     return (
+    <div>
+        <Navbar />
     <div className="container mt-10">
+
         <div className="row my-5"></div>
 
         <div className="card mb-3">
@@ -31,8 +35,8 @@ const PropertyDetailPage = () => {
                 <div className="col-md-8">
                     <div className="card-body">
                         <h2 className="card-title">{property.title}</h2>
-                        <p className="card-text">Place Location details here.</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        <p className="card-text">{property.location}</p>
+                        <p className="card-text"><small className="text-muted">Last updated at {Date(property.modified)}</small></p>
                     </div>
                 </div>
             </div>
@@ -42,26 +46,14 @@ const PropertyDetailPage = () => {
             <Carousel>
                 <Carousel.Item>
                     <img className="d-block w-100" src={property.photos} alt="First slide"/>
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img className="d-block w-100" src={require('../images/coverpage.jpeg')} alt="Second slide"/>
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
+                    <img className="d-block w-100" src={property.photo2} alt="Second slide"/>
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img className="d-block w-100" src={require('../images/coverpage.jpeg')} alt="Third slide"/>
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
+                    <img className="d-block w-100" src={property.photo3} alt="Third slide"/>
                 </Carousel.Item>
             </Carousel>
         </div>
@@ -74,23 +66,25 @@ const PropertyDetailPage = () => {
                 <h1>{property.title}</h1>
             </div>
 
-            <div className="col-md-6 text-end g-4">
-                <Reserve id={id}/>
+            
+            <div className="col-md-2">
+                <h5>{property.num_guest} guests</h5>  
+            </div>
+            <div className="col-md-2">
+                <h5>{property.num_bedroom} bedrooms</h5>
+            </div>
+            <div className="col-md-2">
+                <h5>{property.num_bathroom} baths</h5>
             </div>
             <hr className="mt-3"></hr> 
         </div>
 
         <div className="row">
-            <div className="col-md-3">
-                <h4>    {property.num_guest} guests   </h4>  
+            <div className="col-md-8 text-end">
+                <Reserve id={id}/>
             </div>
-            <div className="col-md-3">
-                <h4>  {property.num_bedroom} bedrooms   </h4>
-            </div>
-            <div className="col-md-3">
-                <h4>  {property.num_bathroom} baths    </h4>
-            </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
+                <br />
                 <h1>$ {property.price}</h1> /person/night
                 <h3>Available from </h3>
                 <input type="date" className="form-control" value={property.start_date} />
@@ -136,37 +130,40 @@ const PropertyDetailPage = () => {
 
         <div className="row mt-3 p-2">
             <div className="container">
-                <h5>Location</h5>
+                <h3>Location</h3>
                 <div className="row p-2">{property.location}</div>
             </div>
         </div> 
 
         <div className="row mt-3 p-2">
             <div className="container">
-                <h5>Things to know</h5>
+                <h3>Things to know</h3>
                 <div className="row row-cols-1 row-cols-md-3 mt-2 g-2">
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">House rules</h5>
+                        <br />
                         <p className="card-text">{property.house_rule}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Safety&Property</h5>
+                        <br />
                         <p className="card-text">{property.safety_rule}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Cancellation policy</h5>
+                        <br />
                         <p className="card-text">{property.cancellation_policy}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 
@@ -174,8 +171,13 @@ const PropertyDetailPage = () => {
             </div>
         </div>
 
-        <button className="btn btn-primary mt-5" type="button">Write My Own Review</button>
+        <Button className="btn btn-primary mt-5" type="button">Write My Own Review</Button>
 
+        <div className="footer p-5 text-center">
+            2023 Restify Inc.
+        </div>
+
+    </div>
     </div>
   );
 };
