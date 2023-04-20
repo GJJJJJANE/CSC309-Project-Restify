@@ -3,6 +3,7 @@ import ActionButton from "../ActionButton";
 
 const ReservationList = ({ search, setSearch, reservations, view }) => {
 
+
     return <>
         <div class="container mt-10">
         <div class="row mt-5"></div>
@@ -36,9 +37,6 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
 
                     <div class="card mb-3">
                         <div class="row g-0">
-                        <div class="col-md-2">
-                            {/* <img src="coverpage.jpeg" class="img-fluid p-3" alt="..."> */}
-                        </div>
 
                         <div class="col-md-8">
                             <div class="card-body">
@@ -51,8 +49,9 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <ActionButton reservation={reservation} view = {view}/>
+                            <div className="row m-2 g-3"><a className="btn btn-outline-primary btn-block" href={`/comments/property/${reservation.property}/`} role="buttom">View Property Comments</a></div>
                         </div>
 
                         </div>
