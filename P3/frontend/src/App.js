@@ -18,6 +18,7 @@ import EditProfile from './pages/editProfile';
 import EditPassword from './pages/editPassword';
 import Logout from './pages/logout';
 import HomePage from './pages/homePage';
+import CommentDetailPage from './pages/CommentDetailReply';
 
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/properties/:id" element={<PropertyDetailPage />} />
         <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
         <Route path="/comments/property/:propertyid" element={<PropertyCommentPage />} />
+        <Route path="/comments/reply/:replyid" element={<CommentDetailPage />}/>
         {/* User URL */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

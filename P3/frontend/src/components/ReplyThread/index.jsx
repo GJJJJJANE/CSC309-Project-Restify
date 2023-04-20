@@ -8,6 +8,7 @@ const ReplyThread = ({commentid}) => {
     const [content, setContent] = useState("");
     const [unlogin, setUnlogin] = useState(false)
     const [dt, setDt] = useState("");
+    const [replyid, setReplyid] = useState("")
     
     useEffect(() => {
     try {
@@ -21,6 +22,7 @@ const ReplyThread = ({commentid}) => {
         .then(response =>{
             setReplied(true)
             setContent(response.data.host_response);
+            setReplyid(response.data.id)
             setDt(new Date(response.data.modified).toLocaleString('en-US', {hour12: false}))
             console.log(response.data);
         });
@@ -47,10 +49,15 @@ const ReplyThread = ({commentid}) => {
           </>
     } else {
         return <>
+        <div class="row">
         <div class="col-12">
             <h6>Reply from host</h6>
             <p><small class="text-muted"> {dt} </small></p>
             <p><small>{content}</small></p>
+        </div>
+        <div class="col-4">
+        <a className="btn btn-outline-primary btn-block" href={`/comments/reply/${replyid}`} role="buttom">Reply Detail</a>
+        </div>
         </div>
         </>
     }

@@ -3,6 +3,7 @@ import PropertyComment from '../../components/PropertyComment';
 import { useParams } from "react-router-dom";
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios";
+import Navbar from "../../components/navbar";
 
 const PropertyCommentPage = () => {
     const id = useParams();
@@ -43,6 +44,7 @@ function handlePageChange(pageNumber) {
   }
 
     return <main>
+    <Navbar />
     <PropertyComment context={context} search={search} setSearch={setSearch} id={id}/>
     <Pagination className="d-flex justify-content-center">{items}</Pagination>
     </main>;

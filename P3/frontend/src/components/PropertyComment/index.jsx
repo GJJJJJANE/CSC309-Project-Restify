@@ -6,6 +6,16 @@ import Button from 'react-bootstrap/Button';
 const PropertyComment = ({ context, search, setSearch }) => {
     const reply = true
 
+
+//     <div class="col-md-2">
+//     <label>
+// Filter by Score:
+// <input value={search} 
+// onChange={event => setSearch(event.target.value)}/>
+// </label>
+
+// </div>
+
     return <>
         <div class="container mt-10">
         <div class="row mt-5"></div>
@@ -15,14 +25,7 @@ const PropertyComment = ({ context, search, setSearch }) => {
         <h3>Comment for this property</h3>
         </div>
     
-        <div class="col-md-2">
-            <label>
-        Filter by Score:
-        <input value={search} 
-        onChange={event => setSearch(event.target.value)}/>
-        </label>
 
-        </div>
     
         <hr class="mt-2"></hr>
 
@@ -38,6 +41,8 @@ const PropertyComment = ({ context, search, setSearch }) => {
                         reply={reply}/>
                     )       
             )}
+
+        <div><p>No more comments to be shown.</p></div >
               
         </div>
 

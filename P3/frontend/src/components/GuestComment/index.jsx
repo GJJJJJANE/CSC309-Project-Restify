@@ -37,6 +37,8 @@ const GuestComment = ({ context, search, setSearch }) => {
                         reply={reply}/>
                     )       
             )}
+
+    <div><p>No more comments to be shown.</p></div >
               
         </div>
 
