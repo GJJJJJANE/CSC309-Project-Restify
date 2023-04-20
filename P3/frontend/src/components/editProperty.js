@@ -261,7 +261,9 @@ const EditPropertyForm = () => {
         <input className="btn btn-primary" type="submit" />
         <div className="row my-5"></div>
     </form>
-
+        <div className="footer p-5 text-center">
+            2023 Restify Inc.
+        </div>
     </div>
   );
 };

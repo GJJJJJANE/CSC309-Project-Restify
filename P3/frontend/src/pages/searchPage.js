@@ -12,10 +12,9 @@ class SearchPage extends Component {
           <>
             <Navbar />
 
-            <>
-              <SearchBar />
-            </>
-            </>
+            <SearchBar />
+          </>
+            
       );
     }
 }

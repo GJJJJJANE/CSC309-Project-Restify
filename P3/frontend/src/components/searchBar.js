@@ -86,6 +86,10 @@ function SearchBar() {
             
     </form>
     <SearchList keyword={key} date={date} bed={n_bed} bath={n_bath} guest={n_guest} order={order}/>
+
+    <div className="footer p-5 text-center">
+            2023 Restify Inc.
+    </div>
     </div>
   )
 }

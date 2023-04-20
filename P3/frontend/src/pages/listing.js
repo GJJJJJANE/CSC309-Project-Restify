@@ -68,6 +68,8 @@ function PropertyList() {
                 <Pagination className="d-flex justify-content-center">{items}</Pagination>
             </div>
         </div>
+
+        
         </>
   );
 }

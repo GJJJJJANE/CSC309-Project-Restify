@@ -125,12 +125,16 @@ const CreatePropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
-                            <div className ="imagePreview" id="coverphoto"></div>
-                            {previewUrl && <img src={previewUrl} height={100} />}
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "480px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img" onChange={handleImage}/></label>
+                            <div className="row my-5">  </div>
                         </div>
                     </div>
                   </div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
                   <br/>
                   <br/>
                   <br/>
@@ -140,11 +144,11 @@ const CreatePropertyForm = () => {
                   <div className ="container">
                     <div className ="row">
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "250px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                         <div className ="col-md-6 imgUp">
-                            <div className ="imagePreview"></div>
+                            <img src={previewUrl} style={{"width" : "100%", "height" : "250px"}} />
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img"/></label>
                         </div>
                     </div>
@@ -249,7 +253,9 @@ const CreatePropertyForm = () => {
         <input className="btn btn-primary" type="submit" />
         <div className="row my-5"></div>
     </form>
-
+        <div className="footer p-5 text-center">
+            2023 Restify Inc.
+        </div>
     </div>
   );
 };
