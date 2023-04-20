@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import SearchBar from '../components/searchBar';
 import SearchList from './searchList';
 import Navbar from "../components/navbar";
+import Homebox from '../components/homebox';
 
 
-class SearchPage extends Component {
+class HomePage extends Component {
 
 
     render() {
@@ -12,11 +13,11 @@ class SearchPage extends Component {
           <>
             <Navbar />
 
-            <SearchBar />
+            <Homebox />
           </>
             
       );
     }
 }
 
-export default SearchPage;
+export default HomePage;

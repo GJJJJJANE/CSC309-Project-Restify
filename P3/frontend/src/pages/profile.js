@@ -22,9 +22,10 @@ function ViewProfile() {
     const [phone, setPhone] = useState("");
     const [avatar, setAvatar] = useState("");
 
-    axios.get(`${endpoint}accounts/profile/`, {headers : {Authorization : `Bearer ${token}`}})
-    .then(response => {
-            
+    useEffect(() => {
+
+        axios.get(`${endpoint}accounts/profile/`, {headers : {Authorization : `Bearer ${token}`}})
+        .then(response => {   
         if (response.status == 200){
             setUsername(response.data.username);
             setFirstName(response.data.first_name);
@@ -32,11 +33,11 @@ function ViewProfile() {
             setPhone(response.data.phone_number);
             setAvatar(response.data.avatar);
         }
-        
-    })
-    .catch(function (error) {
-        console.log(error)
-    });
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+    }, [])
 
     const edit_profile = (event) => {
         event.preventDefault();
