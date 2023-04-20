@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import {useParams} from "react-router-dom"
 import Carousel from 'react-bootstrap/Carousel';
 import Reserve from '../components/MakeReservation';
+import Navbar from "../components/navbar";
 
 const PropertyDetailPage = () => {
     const {id} = useParams()
@@ -24,6 +25,9 @@ const PropertyDetailPage = () => {
     
     return (
     <div className="container mt-10">
+
+        <Navbar />
+
         <div className="row my-5"></div>
 
         <div className="card mb-3">
