@@ -55,8 +55,8 @@ const CreatePropertyForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!title ) {
-          alert("Please fill in all fields.");
+        if (!title || !description || !photo || !photo2 || !photo3 || !roomdes || !location || !amen_e || !amen_i || !amen_o || !start || !end || !hrule || !srule || !cpolicy) {
+          alert("Please fill in all fields and submit three pictures of your property.");
           return;
         }
         const propertyData = new FormData();
