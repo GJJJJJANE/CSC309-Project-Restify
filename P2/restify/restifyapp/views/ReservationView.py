@@ -207,6 +207,11 @@ class Terminate(generics.RetrieveUpdateAPIView):
         return Response(serializer.data)
         
 # complete and expire - should this be automatic?
+
+class Detail(generics.RetrieveUpdateAPIView):
+    serializer_class = ReservationSerializer
+    queryset = Property.objects.all()
+    lookup_field = 'id'
         
 
         

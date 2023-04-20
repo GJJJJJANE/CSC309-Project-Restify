@@ -3,6 +3,7 @@
 import { useState } from "react"
 import axios from "axios";
 import { useCallback } from 'react';
+import GenerateComments from "../generateComments";
 
 
 const ActionButton = ({ reservation, view }) => {
@@ -10,7 +11,7 @@ const ActionButton = ({ reservation, view }) => {
     var state = reservation.state
     var guestid = reservation.guest
     var property = reservation.property
-
+    
     // approve/deny pending
     if (state === 'pe' && view === 'host'){
         return <div className="row m-2 g-3">
@@ -40,6 +41,8 @@ const ActionButton = ({ reservation, view }) => {
                         console.log(error);
                     }
                     alert("Action confirmed!")
+                    GenerateComments(id, 3);
+
                 }
             }}>Approve</a>
         <a className="btn btn-outline-secondary btn-block" href="" role="buttom"
@@ -68,7 +71,7 @@ const ActionButton = ({ reservation, view }) => {
                         console.log(error);
                     }
                     alert("Action confirmed!")
-        
+                    GenerateComments(id, 10);
                 }
             }}>Deny</a>
         </div>
@@ -103,6 +106,7 @@ const ActionButton = ({ reservation, view }) => {
                         console.log(error);
                     }
                     alert("Action confirmed!")
+                    GenerateComments(id, 4);
                 }
             }}>Confirm Cancel</a>
         <a className="btn btn-outline-secondary btn-block" href="" role="buttom"
@@ -131,6 +135,7 @@ const ActionButton = ({ reservation, view }) => {
                     console.log(error);
                 }
                 alert("Action confirmed!")
+                GenerateComments(id, 9);
             }
             }}>Deny Cancel</a>
         </div>
@@ -167,6 +172,7 @@ const ActionButton = ({ reservation, view }) => {
                         console.log(error);
                     }
                     alert("Action confirmed!")
+                    GenerateComments(id, 2);
                 }
             }}>Request Cancel</a>
         </div>
@@ -207,6 +213,7 @@ const ActionButton = ({ reservation, view }) => {
                         console.log(error);
                     }
                     alert("Action confirmed!")  
+                    GenerateComments(id, 5);
                 }
             }}>terminate</a>
         </div>
