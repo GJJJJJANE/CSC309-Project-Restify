@@ -35,7 +35,7 @@ function ListProperty({ property }) {
                 <Button variant="outline-dark" onClick={() => setShowConfirm(true)}>Delete</Button>
                 {showConfirm && (
                 <div>
-                    <p>Are you sure you want to delete this property?</p>
+                    <p style={{ "color" : "red" }}>Are you sure you want to delete this property?</p>
                     <Button variant="primary" onClick={handleDelete}>Yes</Button>
                     <Button variant="outline-dark" onClick={() => setShowConfirm(false)}>No</Button>
                 </div>
