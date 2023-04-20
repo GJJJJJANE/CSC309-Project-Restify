@@ -24,8 +24,6 @@ const PropertyDetailPage = () => {
     
     
     return (
-    <div>
-        <Navbar />
     <div className="container mt-10">
 
         
@@ -177,6 +175,7 @@ const PropertyDetailPage = () => {
 
     </div>
     </div>
+    </>
   );
 };
 
