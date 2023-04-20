@@ -13,13 +13,14 @@ const Reserve = ({ id }) => {
     const [host, setHost] = useState(0);
     const [property, setProperty] = useState("");
     const [property_id, setProperty_id] = useState("");
+    const [reservation_id, setReservation_id] = useState("");
 
     const handleComment = async () => {
-      await axios.get(`${endpoint}reservations/${id}/detail`, {headers : {Authorization : `Bearer ${token}`}})
+      await axios.get(`${endpoint}reservations/${reservation_id}/detail`, {headers : {Authorization : `Bearer ${token}`}})
       .then(response => {        
           if (response.status == 200){
               setGuest(response.data.guest);
-              setProperty_id(response.data.property);
+              // setProperty_id(response.data.property);
               setStart(response.data.start);
               setEnd(response.data.end);
           }
@@ -61,8 +62,12 @@ const Reserve = ({ id }) => {
               },
             })
             .then(response =>{
-              alert("You have submitted reservation. Please check in reservation list.");
+              setReservation_id(response.data.id)
+              console.log(response.data.id)
+              setProperty_id(response.data.property)
+              console.log(response.data.property)
               handleComment();
+              alert("You have submitted reservation. Please check in reservation list.");  
               console.log(response.data);
           });
           } catch (error) {
