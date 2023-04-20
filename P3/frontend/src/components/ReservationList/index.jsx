@@ -12,10 +12,6 @@ const ReservationList = ({ search, setSearch, reservations, view }) => {
         <h3>My Reservations</h3>
         </div>
     
-        <div class="col-md-3 p-2 text-center">
-            Showing 1 of 1
-        </div>
-    
         <div class="col-md-2">
             <label>
         Filter by State:
