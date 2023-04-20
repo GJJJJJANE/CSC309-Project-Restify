@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReservationList from "../../components/ReservationList";
 import Pagination from 'react-bootstrap/Pagination';
+import Navbar from "../../components/navbar";
 
 const Reserve_Guest = () => {
 
@@ -47,6 +48,7 @@ const Reserve_Guest = () => {
   }
 
     return <main>
+    <Navbar />
     <ReservationList search={search} reservations = {reservations} setSearch={setSearch}
   view = {view}/>
 <Pagination className="d-flex justify-content-center">{items}</Pagination>

@@ -28,7 +28,7 @@ function App() {
         <Route path="/reservations/hostview/" element={<Reserve_Host />} />
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/" element={<SearchPage />} />
         <Route path="/properties/:id" element={<PropertyDetailPage />} />
         <Route path="/comments/guest/:guestid/" element={<GuestCommentPage />} />
         {/* User URL */}

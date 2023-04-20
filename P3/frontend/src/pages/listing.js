@@ -5,6 +5,7 @@ import { CardDeck } from 'reactstrap';
 import { Col, Row} from "react-bootstrap";
 import ListProperty from "../components/listItem";
 import CardProperty from "../components/searchCard";
+import Navbar from "../components/navbar";
 
 
 function PropertyList() {
@@ -38,6 +39,10 @@ function PropertyList() {
   
 
     return (
+        <>
+        <Navbar />
+        <div class="row my-5"></div>
+
         <div className="container">
              
             <div className="row">
@@ -61,6 +66,7 @@ function PropertyList() {
                 <Pagination className="d-flex justify-content-center">{items}</Pagination>
             </div>
         </div>
+        </>
   );
 }
 
