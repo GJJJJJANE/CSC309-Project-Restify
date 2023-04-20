@@ -129,7 +129,7 @@ const GenerateComments = async ({ id, type }) => {
 
     } 
 
-    return;
+    return(<></>);
 }
 
 export default GenerateComments;
