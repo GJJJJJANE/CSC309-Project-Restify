@@ -49,11 +49,11 @@ const PropertyDetailPage = () => {
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img className="d-block w-100" src={require('../images/coverpage.jpeg')} alt="Second slide"/>
+                    <img className="d-block w-100" src={property.photo2} alt="Second slide"/>
                 </Carousel.Item>
 
                 <Carousel.Item>
-                    <img className="d-block w-100" src={require('../images/coverpage.jpeg')} alt="Third slide"/>
+                    <img className="d-block w-100" src={property.photo3} alt="Third slide"/>
                 </Carousel.Item>
             </Carousel>
         </div>
@@ -80,10 +80,11 @@ const PropertyDetailPage = () => {
         </div>
 
         <div className="row">
-            <div className="col-md-8 text-end g-4">
+            <div className="col-md-8 text-end">
                 <Reserve id={id}/>
             </div>
             <div className="col-md-4">
+                <br />
                 <h1>$ {property.price}</h1> /person/night
                 <h3>Available from </h3>
                 <input type="date" className="form-control" value={property.start_date} />
