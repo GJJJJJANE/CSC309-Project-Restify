@@ -25,6 +25,8 @@ const CreatePropertyForm = () => {
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
 
+    const [previewUrl, setPreviewUrl] = useState(null);
+
     const token = localStorage.getItem("access");
     
 
@@ -32,7 +34,7 @@ const CreatePropertyForm = () => {
         if (event.target.files && event.target.files[0]) {
             //setPhoto(URL.createObjectURL(event.target.files[0]));
             setPhoto(event.target.files[0]);
-
+            setPreviewUrl(URL.createObjectURL(event.target.files[0]));
         }
     };
 
@@ -124,6 +126,7 @@ const CreatePropertyForm = () => {
                     <div className ="row">
                         <div className ="col-md-12 imgUp" id="coverphoto">
                             <div className ="imagePreview" id="coverphoto"></div>
+                            {previewUrl && <img src={previewUrl} height={100} />}
                             <label className ="btn btn-outline-secondary">Upload<input type="file" className="uploadFile img" onChange={handleImage}/></label>
                         </div>
                     </div>
