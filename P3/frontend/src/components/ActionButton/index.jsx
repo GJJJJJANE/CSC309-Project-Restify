@@ -238,7 +238,6 @@ const ActionButton = ({ reservation, view }) => {
         </div>
         } else {
             return <div className="row m-2 g-3">
-                <a className="btn btn-outline-primary btn-block" href={`/comments/property/${property}/`} role="buttom">View Comments</a>
                 </div>
         }
     }
