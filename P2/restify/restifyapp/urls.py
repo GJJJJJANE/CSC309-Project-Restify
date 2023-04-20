@@ -18,6 +18,7 @@ urlpatterns = [
     path('reservations/<int:reservation_id>/pending/action/', views.PendingAction.as_view(), name="pending_action"),
     path('reservations/<int:reservation_id>/cancel/action/', views.CancellationAction.as_view(), name="cancel_action"),
     path('reservations/<reservation_id>/terminate/', views.Terminate.as_view(), name="terminate"),
+    path('reservations/<id>/detail/', views.Detail.as_view(), name="detail"),
 
     # comments
     path('comments/<int:guest_id>/Guestview/', views.ListGuestComment.as_view(), name="guestcomment_list"),

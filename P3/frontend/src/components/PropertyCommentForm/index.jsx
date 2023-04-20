@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import GenerateComments from "../generateComments";
 
 
 const PropertyCommentForm = ( {id, setCommented} ) => {
@@ -25,6 +26,7 @@ const PropertyCommentForm = ( {id, setCommented} ) => {
             .then(response =>{
               alert("You have submitted a comment")
               setCommented(true)
+              GenerateComments(reservation, 7);
               console.log(response.data);
           });
           } catch (error) {
