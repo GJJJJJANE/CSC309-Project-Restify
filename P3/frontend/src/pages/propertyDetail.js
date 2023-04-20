@@ -36,7 +36,7 @@ const PropertyDetailPage = () => {
                     <div className="card-body">
                         <h2 className="card-title">{property.title}</h2>
                         <p className="card-text">{property.location}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        <p className="card-text"><small className="text-muted">Last updated at {Date(property.modified)}</small></p>
                     </div>
                 </div>
             </div>
@@ -130,37 +130,40 @@ const PropertyDetailPage = () => {
 
         <div className="row mt-3 p-2">
             <div className="container">
-                <h5>Location</h5>
+                <h3>Location</h3>
                 <div className="row p-2">{property.location}</div>
             </div>
         </div> 
 
         <div className="row mt-3 p-2">
             <div className="container">
-                <h5>Things to know</h5>
+                <h3>Things to know</h3>
                 <div className="row row-cols-1 row-cols-md-3 mt-2 g-2">
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">House rules</h5>
+                        <br />
                         <p className="card-text">{property.house_rule}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Safety&Property</h5>
+                        <br />
                         <p className="card-text">{property.safety_rule}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Cancellation policy</h5>
+                        <br />
                         <p className="card-text">{property.cancellation_policy}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                        
                     </div>
                 </div>
 

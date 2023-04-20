@@ -25,7 +25,7 @@ function PropertyList() {
         .get(`http://127.0.0.1:8000/listing_all/?page=${currentPage}`, {headers : {Authorization : `Bearer ${token}`}})
         .then(response => {
             setProperties(response.data.results);
-            setTotalPages(Math.ceil(response.data.count / 6));
+            setTotalPages(Math.ceil(response.data.count / 4));
             setTotal(response.data.count);
         })
         .catch(error => console.error(error));
