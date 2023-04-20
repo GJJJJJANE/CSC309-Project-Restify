@@ -24,9 +24,13 @@ const PropertyDetailPage = () => {
     
     
     return (
+    <>
+    
+    <Navbar />
+        
     <div className="container mt-10">
 
-        <Navbar />
+        
 
         <div className="row my-5"></div>
 
@@ -181,6 +185,7 @@ const PropertyDetailPage = () => {
         <button className="btn btn-primary mt-5" type="button">Write My Own Review</button>
 
     </div>
+    </>
   );
 };
 
