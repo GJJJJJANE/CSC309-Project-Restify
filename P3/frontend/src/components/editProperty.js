@@ -86,7 +86,7 @@ const EditPropertyForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!title ) {
+        if (!title || !description || !roomdes || !location || !amen_e || !amen_i || !amen_o || !start || !end || !hrule || !srule || !cpolicy) {
           alert("Please fill in all fields.");
           return;
         }
