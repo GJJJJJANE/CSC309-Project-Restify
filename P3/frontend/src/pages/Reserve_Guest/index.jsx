@@ -15,7 +15,15 @@ const Reserve_Guest = () => {
 
       useEffect (() => {
         try {
-            const response = axios.get(`http://127.0.0.1:8000/reservations/guestview?state=${search}&page=${currentPage}`, {
+            var searchcode = ""
+            if (search == "Pending"){searchcode="pe"}
+            else if (search == "Approved") {searchcode="ap"}
+            else if (search == "Denied"){searchcode="de"}
+            else if (search == "Cancelled"){searchcode="ca"}
+            else if (search == "Requested Cancel"){searchcode="pc"}
+            else if (search == "Terminated"){searchcode="te"}
+
+            const response = axios.get(`http://127.0.0.1:8000/reservations/guestview?state=${searchcode}&page=${currentPage}`, {
               headers: {
                   "Access-Control-Allow-Origin": 'http://localhost:3000',
                   "Access-Control-Allow-Credentials": 'true',

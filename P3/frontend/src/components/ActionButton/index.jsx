@@ -225,7 +225,6 @@ const ActionButton = ({ reservation, view }) => {
     // Comment guest
     if (state === 'te' && view === 'host'){
         return <div className="row m-2 g-3">
-            <a className="btn btn-outline-primary btn-block" href={`/comments/guest/${guestid}/`} role="buttom">View Guest</a>
             <WriteGuestComment id = {guestid} />
         </div>
     }

@@ -54,8 +54,10 @@ const CommentDetailPage = () => {
             </div>
         </>
     
+    }
 
-    return <main>
+    return <>
+    <main>
 
     <Navbar />
     <div class="container mt-10">
@@ -86,9 +88,8 @@ const CommentDetailPage = () => {
 
     </div>
     </div>
-    </main>;
-
-
-}}
+    </main>
+    </>
+}
 
 export default CommentDetailPage
