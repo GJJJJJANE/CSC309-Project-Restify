@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom"
 
 import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 //import Multiselect from 'react-bootstrap-multiselect'
@@ -9,14 +10,15 @@ import { Form, Button, Container, Col, Row, ToggleButtonGroup, ToggleButton } fr
 const EditPropertyForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [photo, setPhoto] = useState("");
     const [roomdes, setRoomdes] = useState("");
     const [location, setLocation] = useState("");
     const [numGuests, setNumGuests] = useState(0);
     const [numBeds, setNumBeds] = useState(0);
     const [numBaths, setNumBaths] = useState(0);
-    const [amen_e, setAmen_e] = useState("");        /////
-    const [amen_i, setAmen_i] = useState("");    /////
-    const [amen_o, setAmen_o] = useState("");    /////
+    const [amen_e, setAmen_e] = useState("");        
+    const [amen_i, setAmen_i] = useState("");    
+    const [amen_o, setAmen_o] = useState("");    
     const [price, setPrice] = useState(0);
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
@@ -24,10 +26,12 @@ const EditPropertyForm = () => {
     const [srule, setSrule] = useState("");
     const [cpolicy, setCpolicy] = useState("");
     
+    const {id} = useParams()
+    const token = localStorage.getItem("access");
 
     useEffect(() => {
         // input property id
-        axios.get('http://127.0.0.1:8000/property/10/detail/')
+        axios.get(`http://127.0.0.1:8000/property/${id}/detail/`)
           .then(response => {
             setTitle(response.data.title);
             setDescription(response.data.description);
@@ -76,14 +80,14 @@ const EditPropertyForm = () => {
         propertyData.append("end_date", end);
         propertyData.append("price", price);
         
-        //images.forEach((image) => formData.append("images", image));
+        
         try {
-          const response = await axios.patch("http://localhost:8000/property/10/edit/", propertyData, {
+          const response = await axios.patch(`http://localhost:8000/property/${id}/edit/`, propertyData, {
             headers: {
                 "Access-Control-Allow-Origin": 'http://localhost:3000',
                 "Access-Control-Allow-Credentials": 'true',
                 "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMjY3NTg1LCJpYXQiOjE2ODEyNjcyODUsImp0aSI6IjhlNGFlNzZhNjRjZDQ4ZThhYWE2NjM2ZDU5N2Y2MTUzIiwidXNlcl9pZCI6NX0.1Js0nMeef2IdhNKHgU-YNn2Ngu6ippavx7LQHwOMR5A`
+                "Authorization": `Bearer ${token}`
             },
           });
           console.log(response.data);

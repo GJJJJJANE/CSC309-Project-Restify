@@ -25,7 +25,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/create" element={<Create />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/reservations/hostview/" element={<Reserve_Host />} />
         <Route path="/reservations/guestview/" element={<Reserve_Guest />} />
         <Route path="/list" element={<PropertyList />} />
